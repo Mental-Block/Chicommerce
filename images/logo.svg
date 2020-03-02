@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="132" height="58" viewBox="0 0 132 58">
+  <defs>
+    <clipPath id="clip-Artboard_1">
+      <rect width="132" height="58"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
+    <g id="Ellipse_109" data-name="Ellipse 109" transform="translate(0 5)" fill="#a05506" stroke="rgba(201,127,49,0.25)" stroke-width="0.2">
+      <ellipse cx="17.5" cy="24" rx="17.5" ry="24" stroke="none"/>
+      <ellipse cx="17.5" cy="24" rx="17.4" ry="23.9" fill="none"/>
+    </g>
+    <text id="Creative_Logo" data-name="Creative 
+Logo" transform="translate(37)" fill="#eeefea" font-size="24" font-family="PlayfairDisplay-BoldItalic, Playfair Display" font-weight="700" font-style="italic"><tspan x="0" y="26">Creative </tspan><tspan x="0" y="48">Logo</tspan></text>
+  </g>
+</svg>
