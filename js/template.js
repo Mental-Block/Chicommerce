@@ -1,17 +1,17 @@
 class templateLoader {
   constructor(site) {
     this.header = `
-    <header class="navigation-container">
+    <header id="navigation" class="navigation-container">
       <div class="logo-container">
         <img src="/images/Logo.svg" />
       </div>
-      <nav id="navigation">
-        <div class="nav-list-off">
-            <a class="nav-list-item active" href="/">Home</a>
-            <a class="nav-list-item" href="/about">About</a>
-            <a class="nav-list-item" href="/product">products</a>
-            <a class="nav-list-item" href="/gallery">Gallery</a>
-            <a class="nav-list-item" href="/contact">Contact</a>
+      <nav id="nav">
+        <div class="nav-list nav-list-off">
+            <a class="nav-list-item active" data-tag="home" href="/">Home</a>
+            <a class="nav-list-item" data-tag="about" href="/about">About</a>
+            <a class="nav-list-item" data-tag="products" href="/product">products</a>
+            <a class="nav-list-item" data-tag="gallery" href="/gallery">Gallery</a>
+            <a class="nav-list-item" data-tag="contact" href="/contact">Contact</a>
           </div>
           <div id="burger">
             <div class="burger-line"></div>
@@ -19,7 +19,6 @@ class templateLoader {
             <div class="burger-line"></div>
           </div>
         </nav>
-        
       </header> 
   `;
 
@@ -72,13 +71,26 @@ class templateLoader {
   <p>Website made and designed by <a target="_blank" rel="noopener noreferrer" href="https://aarontibben.netlify.com">Aaron Tibben<p>
 </footer>
 
-
         `;
-
-    this.navListShow();
+    this.navbar();
   }
-  navListShow() {
-    const navList = taino.el("nav-list", true);
-    const burger = taino.elid("burger");
+  navbar() {
+    setTimeout(() => {
+      const navContainer = document.getElementById("navigation");
+      const burger = document.getElementById("burger");
+      const navList = document.querySelector(".nav-list");
+
+      burger.addEventListener("click", () => {
+        navList.classList.toggle("nav-list-off");
+      });
+
+      if (window.innerWidth < 768) {
+        navContainer.classList.add("nav-add-black");
+        navList.classList.add("nav-add-black");
+      } else {
+        navContainer.classList.remove("nav-add-black");
+        navList.classList.remove("nav-add-black");
+      }
+    }, 10);
   }
 }

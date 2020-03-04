@@ -5,11 +5,10 @@ class taino {
     /*define taino global vars, mostly endpoints and public creds*/
     this.jspath = "/js";
     this.csspath = "/css";
-    this.header = ""; /*sitewide header defined in template.js or wherever*/
+    this.header = "";
     this.subscribe = "";
-    this.footer = ""; /*sitewide footer defined in template.js or wherever*/
+    this.footer = "";
     this.templatefile = "/template";
-
     /*define state variable and initial states*/
     this.state = {};
 
@@ -218,6 +217,13 @@ class taino {
       return document.querySelectorAll(s);
     } else {
       return document.querySelector(s);
+    }
+  }
+
+  static elc(x, getall) {
+    var s = x.trim();
+    if (s.indexOf(",") > -1 || s.indexOf(" ") > -1 || getall === true) {
+      return document.getElementsByClassName(s);
     }
   }
 
