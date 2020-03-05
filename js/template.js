@@ -1,5 +1,6 @@
 class templateLoader {
   constructor(site) {
+    this.navbar();
     this.header = `
     <header id="navigation" class="navigation-container">
       <div class="logo-container">
@@ -23,20 +24,22 @@ class templateLoader {
   `;
 
     this.subscribe = `
-      <section>
-        <h3>Want Exclusive Deals and Updates? Subscribe Today!</h3>
-        <p>Integer vel turpis ultricies, lacinia ligula id, lobortis augue. Vivamus porttitor dui id dictum efficitur. Phasellus vel interdum elit.</p>
+      <section id="subscribe">
+        <h2 class="header-title">Want Exclusive Deals and Updates? Subscribe Today!</h2>
+        <p class="sub-center">Integer vel turpis ultricies, lacinia ligula id, lobortis augue. Vivamus porttitor dui id dictum efficitur. Phasellus vel interdum elit.</p>
         <form method="POST" action="">
-          <label for="email"> Email
-            <input type="email" id="email" aria-describedby="email" placeholder="Email"/>
-          </label>
-          <button type="submit">Subscribe Today!</button>
+          <div class="form-control">
+            <label for="email"> Email
+              <input type="email" id="email" aria-describedby="email" placeholder="Email"/>
+            </label>
+          </div>
+          <button class="btn-base " type="submit">Subscribe Today!</button>
         </form>
       </section>
   `;
 
     this.footer = `
-      <footer>         
+      <footer id="footer">         
         <div>
           <h4>Phone number</h4>
           <ul>
@@ -72,7 +75,6 @@ class templateLoader {
 </footer>
 
         `;
-    this.navbar();
   }
   navbar() {
     setTimeout(() => {
