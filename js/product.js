@@ -33,7 +33,6 @@ class productLoader {
             </section>
         </main>        
         `;
-    taino.activeItem("products");
   }
 }
 
@@ -73,49 +72,6 @@ class productLoader {
           `;
   }
 }
-
-//       async function getCard() {
-//         try {
-//           let result = await fetch("/js/pages/productinfo.json");
-//           let data = await result.json();
-//           let products = data.items;
-//           products = products.map(item => {
-//             const { pricelabel, pagelink, disc, title, price } = item.fields;
-//             const { id } = item.sys;
-//             const image = item.fields.image.fields.file.url;
-//             return { id, pricelabel, pagelink, disc, title, price, image };
-//           });
-//           return products;
-//         } catch (error) {}
-//       }
-
-//   /*prints is not returned we instead get ....
-//       Promise
-//   __proto__: Promise
-//   [[PromiseStatus]]: "resolved"
-//   [[PromiseValue]]: "↵ "All the card data"
-//
-
-//       this.card = getCard().then(products => {
-//         let prints = "";
-//         products.forEach(product => {
-//           prints += `
-//               <div id="${product.id}" data-id="${product.id}" class="item ${product.pricelabel} col-md-6 col-lg-4">
-//                 <a href="${product.pagelink}">
-//                   <div class="card">
-//                     <div class="card-body">
-//                       <img class="card-img-top" src="${product.image}" />
-//                       <h6 class="card-title">$${product.price} ${product.title}</h6>
-//                       <p class="card-text">${product.disc}</p>
-//                     </div>
-//                   </div>
-//                 </a>
-//               </div>`;
-//         });
-//         return prints;
-//       });
-//    }
-//   }
 
 // import * as isotope from "../node_modules/isotope-layout/dist/isotope.pkgd";
 

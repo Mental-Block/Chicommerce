@@ -3,6 +3,7 @@
 class taino {
   constructor(routes) {
     /*define taino global vars, mostly endpoints and public creds*/
+    this.productInfo = "/productInformation.json";
     this.jspath = "/js";
     this.csspath = "/css";
     this.header = "";
@@ -309,7 +310,7 @@ let routes = {
   "/": "home",
   "/about": "about",
   "/product": "product",
-  "/singleproduct": "singleproduct",
+  "/product/products": "products",
   "/gallery": "gallery",
   "/signup": "signup",
   "/contact": "contact"

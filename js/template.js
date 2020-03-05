@@ -9,7 +9,7 @@ class templateLoader {
         <div class="nav-list nav-list-off">
             <a class="nav-list-item active" data-tag="home" href="/">Home</a>
             <a class="nav-list-item" data-tag="about" href="/about">About</a>
-            <a class="nav-list-item" data-tag="products" href="/product">products</a>
+            <a class="nav-list-item" data-tag="products" href="/product">Products</a>
             <a class="nav-list-item" data-tag="gallery" href="/gallery">Gallery</a>
             <a class="nav-list-item" data-tag="contact" href="/contact">Contact</a>
           </div>
@@ -83,6 +83,10 @@ class templateLoader {
       burger.addEventListener("click", () => {
         navList.classList.toggle("nav-list-off");
       });
+
+      window.onscroll = () => {
+        navContainer.classList.add("nav-add-black");
+      };
 
       if (window.innerWidth < 768) {
         navContainer.classList.add("nav-add-black");

@@ -9,23 +9,30 @@ class homeLoader {
       <main>
         <section id="landing-bg">
           <div class="center">
-            <h1>Free Run</h1>
-            <h2>Organic <span>Eggs</span></h2>
-            <a href="/prices">Order Now!</a>
+            <h1 class="landing-text landing-main">Free Run,</h1>
+            <h2 class="landing-text landing-sec">Organic <span class="brown">Eggs</span></h2>
+            <a href="/product"><button class="btn-base landing-btn">Order Now</button></a>
           </div>
         </section>
 
-        <section>
-          <div>
-            <img class="temp" src="/images/about.png" alt="chicken coop" >
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
-            <a href="/about">Learn More!</a>
+        <section id="about-info">
+          <div class="container">
+            <img class="img" src="/images/about.png" alt="chicken coop" >
+            <div class="about-info-space">
+              <p class="about-info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
+              <a href="/about"><button class="btn-base btn">Learn More</button></a>
+            </div>
           </div>
         </section>
 
-        <section>
-          <div>
-          <!-- cards insert here-->
+        <section id="product-info">
+          <div class="glider-contain">
+            <div class="glider">
+            <!-- Insert cards -->
+            </div>
+            <button role="button" aria-label="Previous" class="glider-prev">&#8249;</button>
+            <button role="button" aria-label="Next" class="glider-next">&#8250;</button>
+            <div role="tablist" class="dots"></div>
           </div>
         </section>
 
@@ -66,5 +73,80 @@ class homeLoader {
           </section>
         </main>
         `;
+    this.loadCarouselData();
+  }
+  async loadCarouselData() {
+    let products = await fetch("/productInfomation.json")
+      .then(response => response.json())
+      .then(async function(json) {
+        let products = json.items;
+        products = products.map(items => {
+          const {
+            id,
+            price,
+            pageLink,
+            description,
+            title,
+            image
+          } = items.fields;
+          return { id, price, pageLink, description, title, image };
+        });
+        return products;
+      });
+
+    let prints = "";
+    products.forEach(product => {
+      prints += `
+        <div data-id="${product.id}">
+            <div class="card">
+              <a href="${product.pageLink}">
+              <div class="card-body">
+                <img class="card-img-top" src="${product.image}" />
+                <h4>${product.title}</h4>
+                <h6 class="card-title">$${product.price}</h6>
+                <p class="card-text">${product.description}</p>
+              </div>
+              </a>
+            </div>
+        </div>`;
+    });
+
+    taino.el(".glider").innerHTML = prints;
+
+    new Glider(document.querySelector(".glider"), {
+      slidesToShow: 1,
+      draggable: true,
+      dots: ".dots",
+      arrows: {
+        prev: ".glider-prev",
+        next: ".glider-next"
+      },
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            duration: 0.25
+          }
+        },
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            duration: 0.25
+          }
+        },
+        {
+          breakpoint: 1440,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            duration: 0.25
+          }
+        }
+      ]
+    });
   }
 }
