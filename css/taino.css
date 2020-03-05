@@ -17,6 +17,7 @@
   --grey-bg-color: #121111;
   --red-bg-color: #15090a;
   --white: #eeefea;
+  --white-less: #eeefead3;
   --grey-text: #343a40;
   --straw-brown: #948468;
   --straw-brown25: #948468c4;
@@ -43,6 +44,7 @@ iframe {
 body {
   color: var(--white);
   font-family: var(--roboto);
+  background-color: black;
 }
 
 a {
@@ -104,7 +106,6 @@ a {
   font-family: var(--play-fair);
   font-style: italic;
   margin: 0.5rem 0;
-  text-shadow: 1px 1px 1px var(--black);
 }
 
 .nav-list-item:hover {
@@ -130,6 +131,10 @@ a {
 }
 
 @media only screen and (min-width: 768px) {
+  section {
+    padding: 4rem 2rem;
+  }
+
   #burger {
     display: none;
   }
@@ -153,8 +158,8 @@ a {
   margin-top: -77px;
   height: 100vh;
   max-height: 1875px;
-  padding: 30vh;
-  width: 100%;
+  max-width: 100%;
+  padding: 30vh 0;
   background: url(/images/landing.png) no-repeat center center;
   box-shadow: inset 0px 0px 0px 1000px var(--black75);
 }
@@ -239,12 +244,14 @@ a {
 
 #product-info {
   background: url(/images/wood.png);
+  min-height: 508px;
   box-shadow: inset 0px 0px 0px 1000px var(--black50);
+  position: relative;
 }
 
 .card {
   border-radius: 8px;
-  width: 320px;
+  max-width: 320px;
   margin: auto;
   padding: 1rem;
   background-color: var(--black50);
@@ -252,6 +259,36 @@ a {
 
 .card:hover {
   background-color: var(--black75);
+}
+
+.card-text {
+  width: 100%;
+  color: var(--white-less);
+  line-height: 1.35rem;
+}
+
+.card-tp-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+}
+
+.card-title {
+  color: var(--white);
+  font-weight: var(--med);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-price {
+  color: var(--green);
+  font-family: var(--play-fair);
+  font-style: italic;
+  font-size: var(--reg);
 }
 
 /* util */

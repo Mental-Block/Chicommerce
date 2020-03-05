@@ -30,16 +30,14 @@ class homeLoader {
             <div class="glider">
             <!-- Insert cards -->
             </div>
-            <button role="button" aria-label="Previous" class="glider-prev">&#8249;</button>
-            <button role="button" aria-label="Next" class="glider-next">&#8250;</button>
+            <button role="button" aria-label="Previous" class="glider-prev"></button>
+            <button role="button" aria-label="Next" class="glider-next"></button>
             <div role="tablist" class="dots"></div>
           </div>
         </section>
 
-        <section>
-          <a href="/gallery">
+        <section id="gallery-info">
             <!-- insert gallery images-->
-          </a>
         </section>
 
         <section>
@@ -73,6 +71,7 @@ class homeLoader {
           </section>
         </main>
         `;
+
     this.loadCarouselData();
   }
   async loadCarouselData() {
@@ -101,16 +100,17 @@ class homeLoader {
             <div class="card">
               <a href="${product.pageLink}">
               <div class="card-body">
-                <img class="card-img-top" src="${product.image}" />
-                <h4>${product.title}</h4>
-                <h6 class="card-title">$${product.price}</h6>
+                <img class="img card-img" src="${product.image}" />
+                <div class="card-tp-container">
+                  <h2 class="card-title">${product.title}</h2>
+                  <h4 class="card-price">$${product.price}</h4>
+                </div>
                 <p class="card-text">${product.description}</p>
               </div>
               </a>
             </div>
         </div>`;
     });
-
     taino.el(".glider").innerHTML = prints;
 
     new Glider(document.querySelector(".glider"), {
@@ -123,7 +123,7 @@ class homeLoader {
       },
       responsive: [
         {
-          breakpoint: 800,
+          breakpoint: 768,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 1,
@@ -131,7 +131,7 @@ class homeLoader {
           }
         },
         {
-          breakpoint: 1024,
+          breakpoint: 1100,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -148,5 +148,28 @@ class homeLoader {
         }
       ]
     });
+  }
+
+  loadGalleryPreviewImages() {
+    let prints = "";
+    products.forEach(product => {
+      prints += `
+        <div data-id="${product.id}">
+            <div class="card">
+              <a href="${product.pageLink}">
+              <div class="card-body">
+                <img class="img card-img" src="${product.image}" />
+                <div class="card-tp-container">
+                  <h2 class="card-title">${product.title}</h2>
+                  <h4 class="card-price">$${product.price}</h4>
+                </div>
+                <p class="card-text">${product.description}</p>
+              </div>
+              </a>
+            </div>
+        </div>`;
+    });
+    //<a href="/gallery"></a>
+    taino.el("").innerHTML = prints;
   }
 }
