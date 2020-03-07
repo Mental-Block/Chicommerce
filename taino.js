@@ -1,5 +1,4 @@
 "use strict";
-/*Run this baby: live-server --port=8080 --entry-file=index.html*/
 class taino {
   constructor(routes) {
     /*define taino global vars, mostly endpoints and public creds*/

@@ -11,7 +11,7 @@ class homeLoader {
           <div class="center">
             <h1 class="landing-text landing-main">Free Run,</h1>
             <h2 class="landing-text landing-sec">Organic <span class="brown">Eggs</span></h2>
-            <a href="/product"><button class="btn-base landing-btn">Order Now</button></a>
+            <a href="/product" class="btn-base landing-btn">Order Now</a>
           </div>
         </section>
 
@@ -19,22 +19,27 @@ class homeLoader {
           <div class="about-info-container">
             <img class="img" src="/images/about.png" alt="chicken coop" >
             <div class="about-info-space">
-              <p class="about-info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
-              <a href="/about"><button class="btn-base btn">Learn More</button></a>
+              <p class="text-base about-info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
+              <a class="btn-base btn" href="/about">Learn More</a>
             </div>
           </div>
         </section>
 
-        <section id="product-info">
-          <div class="glider-contain">
-            <div class="glider">
-            <!-- Insert cards -->
+      <section id="product-info">
+        <div class="glide">
+          <div class="glide__container">
+            <div class="glide__track" data-glide-el="track">
+              <div class="glide__slides">
+                <!-- insert cards -->
+              </div>
             </div>
-            <button role="button" aria-label="Previous" class="glider-prev"></button>
-            <button role="button" aria-label="Next" class="glider-next"></button>
-            <div role="tablist" class="dots"></div>
+            <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
         <section id="gallery-info">
             <!-- insert gallery images-->
@@ -77,6 +82,7 @@ class homeLoader {
     this.loadCarouselData();
     this.loadGalleryPreviewImages();
   }
+
   async loadCarouselData() {
     let products = await fetch("/productInfomation.json")
       .then(response => response.json())
@@ -99,7 +105,7 @@ class homeLoader {
     let prints = "";
     products.forEach(product => {
       prints += `
-        <div data-id="${product.id}">
+        <div class="glide__slide" data-id="${product.id}">
             <div class="card">
               <a href="${product.pageLink}">
               <div class="card-body">
@@ -114,43 +120,29 @@ class homeLoader {
             </div>
         </div>`;
     });
-    taino.el(".glider").innerHTML = prints;
+    taino.el(".glide__slides").innerHTML = prints;
 
-    new Glider(document.querySelector(".glider"), {
-      slidesToShow: 1,
-      draggable: true,
-      dots: ".dots",
-      arrows: {
-        prev: ".glider-prev",
-        next: ".glider-next"
-      },
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            duration: 0.25
-          }
+    let glide = new Glide(".glide", {
+      bound: true,
+      dragThreshold: 40,
+      startAt: 0,
+      perView: 4,
+      animationDuration: 1000,
+      gap: 16,
+      breakpoints: {
+        1680: {
+          perView: 3
         },
-        {
-          breakpoint: 1100,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            duration: 0.25
-          }
+        1240: {
+          perView: 2
         },
-        {
-          breakpoint: 1440,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            duration: 0.25
-          }
+        920: {
+          perView: 1
         }
-      ]
+      }
     });
+
+    glide.mount();
   }
 
   loadGalleryPreviewImages() {

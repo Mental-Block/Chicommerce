@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Mental-Block/Chicommerce#readme",
   "dependencies": {
-    "glider-js": "^1.7.1",
+    "@glidejs/glide": "^3.4.1",
     "isotope-layout": "^3.0.6"
   },
   "devDependencies": {
