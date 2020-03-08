@@ -11,6 +11,7 @@
   --reg: 400;
   --lighter-black-bg-color: #010103;
   --darker-black-bg-color: #000000;
+  --black-text: #000000;
   --black75: #000000b7;
   --black50: #00000079;
   --black25: #00000038;
@@ -119,7 +120,7 @@ a {
 }
 
 .active {
-  color: var(--green);
+  color: var(--green) !important;
 }
 
 #burger {
@@ -167,9 +168,8 @@ a {
 
 .sub-text {
   font-size: 1rem;
-  margin-top: -1.4rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
 }
 
 /* footer */
@@ -323,6 +323,49 @@ a {
   background-color: var(--black50);
 }
 
+.product-card {
+  margin: 0 auto;
+  border-radius: 8px;
+  max-width: 320px;
+  padding: 1rem;
+  background-color: var(--black50);
+}
+
+.product-card:hover {
+  background-color: var(--black75);
+}
+
+.product-card-text {
+  width: 100%;
+  color: var(--white-less);
+  line-height: 1.35rem;
+}
+
+.product-card-tp-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+}
+
+.product-card-title {
+  color: var(--white);
+  font-weight: var(--med);
+  font-size: 1.3rem;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card-price {
+  color: var(--green);
+  font-family: var(--play-fair);
+  font-style: italic;
+  font-size: 1rem;
+}
+
 #gallery-info {
   background-color: var(--darker-black-bg-color);
   justify-content: center;
@@ -370,6 +413,10 @@ a {
 
 #contact {
   background-color: var(--grey-bg-color);
+}
+
+#contact .header-title {
+  margin-bottom: 2rem;
 }
 
 #map {
@@ -429,6 +476,7 @@ label {
   cursor: pointer;
   border-radius: 4px;
   color: var(--white);
+  outline: none;
 }
 
 .btn {
@@ -444,57 +492,19 @@ label {
   font-family: var(--play-fair);
   text-align: center;
   font-size: 1.6rem;
-  margin-bottom: 2rem;
+}
+
+.header-title2 {
+  font-family: var(--roboto);
+  font-size: 1.6rem;
 }
 
 .btn:hover {
   background-color: var(--straw-brown25);
 }
 
-.card {
-  margin: 0 auto;
-  border-radius: 8px;
-  max-width: 320px;
-  padding: 1rem;
-  background-color: var(--black50);
-}
-
-.card:hover {
-  background-color: var(--black75);
-}
-
-.card-text {
-  width: 100%;
-  color: var(--white-less);
-  line-height: 1.35rem;
-}
-
-.card-tp-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0.75rem 0;
-}
-
-.card-title {
-  color: var(--white);
-  font-weight: var(--med);
-  font-size: 1.3rem;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.card-price {
-  color: var(--green);
-  font-family: var(--play-fair);
-  font-style: italic;
-  font-size: 1rem;
-}
-
 /* glide.js */
+
 .glide {
   position: relative;
   width: 100%;
@@ -543,10 +553,6 @@ label {
   -webkit-touch-callout: none;
   user-select: none;
 }
-.glide__bullets {
-  -webkit-touch-callout: none;
-  user-select: none;
-}
 .glide--rtl {
   direction: rtl;
 }
@@ -588,13 +594,13 @@ label {
   opacity: 0.33;
 }
 
-.glide--swipeable {
+#product-info .glide--swipeable {
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
 }
 
-.glide--dragging {
+#product-info .glide--dragging {
   cursor: grabbing;
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
@@ -613,7 +619,7 @@ label {
   }
 
   .form-control-sm:nth-child(2) {
-    padding-left: 10px;
+    padding-left: 12px;
   }
 }
 
@@ -668,7 +674,8 @@ label {
   #contact {
     padding-top: 3rem;
   }
-  .contact-title {
+
+  #contact .header-title {
     margin-bottom: 3rem;
   }
 

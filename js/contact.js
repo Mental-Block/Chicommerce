@@ -2,6 +2,7 @@ class contactLoader {
   constructor(site) {
     this.title = "Contact us about TainoJS";
     this.meta_desc = "Contact us about TainoJS";
+    taino.changeNavColor("contact");
     this.starthtml = `
     <main>
         <section id="information">

@@ -3,6 +3,7 @@ class taino {
   constructor(routes) {
     /*define taino global vars, mostly endpoints and public creds*/
     this.productInfo = "/productInformation.json";
+    this.testimonialInfo = "/testimonial.json";
     this.jspath = "/js";
     this.csspath = "/css";
     this.header = "";
@@ -274,6 +275,15 @@ class taino {
     }
   }
 
+  static changeNavColor(a) {
+    let navItem = taino.el(".nav-list-item", true);
+    let findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
+    for (let i = 0; i < navItem.length; i++) {
+      navItem[i].classList.remove("active");
+    }
+    findNavItem.classList.add("active");
+  }
+
   static sanitize(str) {
     let temp = document.createElement("div");
     temp.textContent = str;
@@ -281,21 +291,21 @@ class taino {
   }
 
   addmeta(name, content) {
-    var newmeta = document.createElement("meta");
+    let newmeta = document.createElement("meta");
     newmeta.name = name;
     newmeta.content = content;
     document.head.appendChild(newmeta);
   }
 
   removemeta(name) {
-    var oldmeta = taino.el("meta[name=" + name + "]");
+    let oldmeta = taino.el("meta[name=" + name + "]");
     if (oldmeta) {
       oldmeta.remove();
     }
   }
 
   static ismobile() {
-    var useragent = navigator.userAgent;
+    let useragent = navigator.userAgent;
     if (useragent.match(/Android|iPhone|iPad/i)) {
       return true;
     } else {
@@ -306,9 +316,9 @@ class taino {
 
 /*define routes*/
 let routes = {
-  "/": "home",
+  "/lol": "home",
   "/about": "about",
-  "/product": "product",
+  "/": "product",
   "/product/products": "products",
   "/gallery": "gallery",
   "/signup": "signup",

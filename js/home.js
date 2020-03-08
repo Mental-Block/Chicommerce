@@ -5,6 +5,7 @@ class homeLoader {
       "This is an e commerce/small business website made for fun";
     this.styling = `
     `;
+    taino.changeNavColor("home");
     this.starthtml = `
       <main>
         <section id="landing-bg">
@@ -27,7 +28,6 @@ class homeLoader {
 
       <section id="product-info">
         <div class="glide">
-          <div class="glide__container">
             <div class="glide__track" data-glide-el="track">
               <div class="glide__slides">
                 <!-- insert cards -->
@@ -36,7 +36,6 @@ class homeLoader {
             <div class="glide__arrows" data-glide-el="controls">
               <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
               <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-            </div>
           </div>
         </div>
       </section>
@@ -46,7 +45,7 @@ class homeLoader {
         </section>
 
         <section id="contact">
-            <h2 class="header-title contact-title">Need to get in touch?</h2>
+            <h2 class="header-title">Need to get in touch?</h2>
             <div class="contact-container">
               <div id="map">
                 <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" frameborder="0" allowfullscreen></iframe>
@@ -79,12 +78,12 @@ class homeLoader {
         </main>
         `;
 
-    this.loadCarouselData();
+    this.loadProductSliderData();
     this.loadGalleryPreviewImages();
   }
 
-  async loadCarouselData() {
-    let products = await fetch("/productInfomation.json")
+  async loadProductSliderData() {
+    let cardInformation = await fetch(site.productInfo)
       .then(response => response.json())
       .then(async function(json) {
         let products = json.items;
@@ -103,18 +102,18 @@ class homeLoader {
       });
 
     let prints = "";
-    products.forEach(product => {
+    cardInformation.forEach(product => {
       prints += `
         <div class="glide__slide" data-id="${product.id}">
-            <div class="card">
+            <div class="product-card">
               <a href="${product.pageLink}">
-              <div class="card-body">
+              <div class="product-card-body">
                 <img class="img card-img" src="${product.image}" />
-                <div class="card-tp-container">
-                  <h2 class="card-title">${product.title}</h2>
-                  <h4 class="card-price">$${product.price}</h4>
+                <div class="product-card-tp-container">
+                  <h3 class="product-card-title">${product.title}</h3>
+                  <h4 class="product-card-price">$${product.price}</h4>
                 </div>
-                <p class="card-text">${product.description}</p>
+                <p class="base-text product-card-text">${product.description}</p>
               </div>
               </a>
             </div>
@@ -124,6 +123,7 @@ class homeLoader {
 
     let glide = new Glide(".glide", {
       bound: true,
+      rewindDuration: 0,
       dragThreshold: 40,
       startAt: 0,
       perView: 4,

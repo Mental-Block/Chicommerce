@@ -1,6 +1,5 @@
 class templateLoader {
   constructor(site) {
-    this.navbar();
     this.header = `
     <header id="navigation" class="navigation-container">
       <div class="logo-container">
@@ -8,7 +7,7 @@ class templateLoader {
       </div>
       <nav id="nav">
         <div class="nav-list nav-list-off">
-            <a class="nav-list-item active" data-tag="home" href="/">Home</a>
+            <a class="nav-list-item" data-tag="home" href="/">Home</a>
             <a class="nav-list-item" data-tag="about" href="/about">About</a>
             <a class="nav-list-item" data-tag="products" href="/product">Products</a>
             <a class="nav-list-item" data-tag="gallery" href="/gallery">Gallery</a>
@@ -22,11 +21,12 @@ class templateLoader {
         </nav>
       </header> 
   `;
+    this.navbar();
 
     this.subscribe = `
       <section id="subscribe">
         <h2 class="header-title">Want Exclusive Deals and Updates?</h2>
-        <p class="sub-text">We mostly just want an email list so we can sell your information to facebook and google.</p>
+        <p class="sub-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. </p>
         <form class="email-form " method="POST" action="">
           <div class="sub-form-control">
               <label for="email">Email</label>
