@@ -2,8 +2,6 @@
 class taino {
   constructor(routes) {
     /*define taino global vars, mostly endpoints and public creds*/
-    this.productInfo = "/productInformation.json";
-    this.testimonialInfo = "/testimonial.json";
     this.jspath = "/js";
     this.csspath = "/css";
     this.header = "";
@@ -260,15 +258,14 @@ class taino {
 
   loadstyling(loader) {
     /*loads in styling from a component*/
-
     if (!this.cur.styling) {
       return;
     } else {
-      if (!taino.el("style.taino.mincss_" + loader)) {
+      if (!taino.el("style.tainocss_" + loader)) {
         let body = document.body;
         let style = document.createElement("style");
         style.type = "text/css";
-        style.classList.add("taino.mincss_" + loader);
+        style.classList.add("tainocss_" + loader);
         style.innerHTML = this.cur.styling;
         body.appendChild(style);
       }
@@ -278,6 +275,7 @@ class taino {
   static changeNavColor(a) {
     let navItem = taino.el(".nav-list-item", true);
     let findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
+
     for (let i = 0; i < navItem.length; i++) {
       navItem[i].classList.remove("active");
     }
@@ -316,10 +314,10 @@ class taino {
 
 /*define routes*/
 let routes = {
-  "/lol": "home",
+  "/": "home",
   "/about": "about",
-  "/": "product",
-  "/product/products": "products",
+  "/product": "product",
+  "/product/banana": "banana",
   "/gallery": "gallery",
   "/signup": "signup",
   "/contact": "contact"

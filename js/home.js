@@ -78,12 +78,12 @@ class homeLoader {
         </main>
         `;
 
-    this.loadProductSliderData();
-    this.loadGalleryPreviewImages();
+    this.loadData();
+    this.loadImages();
   }
 
-  async loadProductSliderData() {
-    let cardInformation = await fetch(site.productInfo)
+  async loadData() {
+    let cardInformation = await fetch("/productInformation.json")
       .then(response => response.json())
       .then(async function(json) {
         let products = json.items;
@@ -101,26 +101,11 @@ class homeLoader {
         return products;
       });
 
-    let prints = "";
-    cardInformation.forEach(product => {
-      prints += `
-        <div class="glide__slide" data-id="${product.id}">
-            <div class="product-card">
-              <a href="${product.pageLink}">
-              <div class="product-card-body">
-                <img class="img card-img" src="${product.image}" />
-                <div class="product-card-tp-container">
-                  <h3 class="product-card-title">${product.title}</h3>
-                  <h4 class="product-card-price">$${product.price}</h4>
-                </div>
-                <p class="base-text product-card-text">${product.description}</p>
-              </div>
-              </a>
-            </div>
-        </div>`;
-    });
-    taino.el(".glide__slides").innerHTML = prints;
+    this.printCards(cardInformation);
+    this.slider();
+  }
 
+  slider() {
     let glide = new Glide(".glide", {
       bound: true,
       rewindDuration: 0,
@@ -145,20 +130,45 @@ class homeLoader {
     glide.mount();
   }
 
-  loadGalleryPreviewImages() {
+  printCards(cardInformation) {
+    let prints = "";
+    cardInformation.forEach(product => {
+      prints += `
+        <div class="glide__slide" data-id="${product.id}">
+            <div class="product-card">
+              <a href="${product.pageLink}">
+              <div class="product-card-body">
+                <img class="img card-img" src="${product.image}" />
+                <div class="space-between product-card-tp-container">
+                  <h3 class="product-card-title">${product.title}</h3>
+                  <h4 class="product-card-price">${product.price}</h4>
+                </div>
+                <p class="base-text product-card-text">${product.description}</p>
+              </div>
+              </a>
+            </div>
+        </div>`;
+    });
+    taino.el(".glide__slides").innerHTML = prints;
+  }
+
+  loadImages() {
     let images = [];
-    images[0] = "/images/gallery.png";
-    images[1] = "/images/gallery1.png";
-    images[2] = "/images/gallery4.png";
-    images[3] = "/images/gallery3.png";
-    images[4] = "/images/gallery2.png";
+    for (let i = 0; i <= 4; i++) {
+      images[i] = "/images/gallery" + i + ".png";
+    }
+
+    this.setOne(images);
+  }
+
+  setOne(images) {
     setTimeout(() => {
       let prints = "";
 
       images.forEach(image => {
         prints += `
         <a class="gallery-info-a" href="/gallery">
-          <div class="gallery-info-container ">
+          <div class="gallery-info-container">
             <img class="img" src="${image}"/>
           </div>
         </a>

@@ -83,9 +83,9 @@ class templateLoader {
   }
   navbar() {
     setTimeout(() => {
-      const navContainer = document.getElementById("navigation");
-      const burger = document.getElementById("burger");
-      const navList = document.querySelector(".nav-list");
+      const navContainer = taino.elid("navigation");
+      const burger = taino.elid("burger");
+      const navList = taino.el(".nav-list");
 
       window.onscroll = () => {
         navContainer.classList.add("nav-add-black");
@@ -97,6 +97,7 @@ class templateLoader {
 
       burger.addEventListener("click", () => {
         navList.classList.toggle("nav-list-off");
+        navList.classList.add("nav-add-black");
       });
 
       if (window.innerWidth < 768) {
@@ -106,6 +107,6 @@ class templateLoader {
         navContainer.classList.remove("nav-add-black");
         navList.classList.remove("nav-add-black");
       }
-    }, 10);
+    }, 0);
   }
 }

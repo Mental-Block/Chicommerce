@@ -4,7 +4,7 @@
       "fields": {
         "id": 1,
         "title": "Dozen Eggs",
-        "price": 10.99,
+        "price": 15.99,
         "image": "/images/product.png",
         "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
         "pageLink": "/product/products"
@@ -44,7 +44,7 @@
       "fields": {
         "id": 5,
         "title": "Dozen Eggs",
-        "price": 3.99,
+        "price": 13.99,
         "image": "/images/product.png",
         "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
         "pageLink": "/product/products"

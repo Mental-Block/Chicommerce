@@ -9,13 +9,14 @@ class aboutLoader {
     .barn-text{font-size: 1.2rem; font-style: italic; margin: 1rem 2rem 0 2rem;}
     .barn-text:before, .barn-text:after {content:'" '; font-size: 1.5rem;}
     
+    #about, #about-one, #testimonial, #review {padding: 2rem;}
     #about, #testimonial {background-color: var(--red-bg-color);}
     #about-one, #review {background-color: var(--grey-bg-color)}
     #about .header-title2, #about-one .header-title2, #testimonial .header-title2 {text-align:center; margin-bottom: 2rem;}
+    
     .about-text{margin-top: 1rem;}
     
     .testimonial-card{background-color:var(--black75); margin: 0 auto; border-radius: 4px; max-width: 320px; height: 360px; padding: 1rem;}
-    .testimonial-card-body{}
     .testimonial-card-title{margin: 1rem 0; }
     .testimonial-card-text{ font-style: italic; }
     .testimonial-card-text:after, .testimonial-card-text:before  {content:' " '; font-size: 1.25rem;}
@@ -24,6 +25,7 @@ class aboutLoader {
     .form-add-quote{max-width: 500px;}
     
     @media only screen and (min-width: 768px) {
+      #about, #about-one, #testimonial, #review {padding: 4rem 2rem;}
       #about, #about-one, #testimonial {padding-top: 3rem;}
       #about .header-title2, #about-one .header-title2, #testimonial .header-title2 {margin-bottom: 3rem;}
     }
@@ -97,10 +99,11 @@ class aboutLoader {
             </section>
           </main>
         `;
-    this.loadTestimonialCarouselData();
+    this.loadData();
   }
-  async loadTestimonialCarouselData() {
-    let cardInformation = await fetch(site.testimonialInfo)
+
+  async loadData() {
+    let cardInformation = await fetch("/testimonial.json")
       .then(response => response.json())
       .then(async function(json) {
         let test = json.items;
@@ -111,21 +114,11 @@ class aboutLoader {
         return test;
       });
 
-    let prints = "";
-    cardInformation.forEach(test => {
-      prints += `
-          <div class="glide__slide" data-id="${test.id}">
-              <div class="testimonial-card">
-                <div class="testimonial-card-body">
-                  <h3 class="testimonial-card-title">${test.name}</h3>
-                  <p class="base-text testimonial-card-text">${test.description}</p>
-                </div>
-              </div>
-          </div>`;
-    });
+    this.printCards(cardInformation);
+    this.carousel();
+  }
 
-    taino.el(".glide__slides").innerHTML = prints;
-
+  carousel() {
     let glide = new Glide(".glide", {
       type: "carousel",
       swipeThreshold: false,
@@ -153,5 +146,21 @@ class aboutLoader {
     });
 
     glide.mount();
+  }
+
+  printCards(cardInformation) {
+    let prints = "";
+    cardInformation.forEach(test => {
+      prints += `
+          <div class="glide__slide" data-id="${test.id}">
+              <div class="testimonial-card">
+                <div class="testimonial-card-body">
+                  <h3 class="testimonial-card-title">${test.name}</h3>
+                  <p class="base-text testimonial-card-text">${test.description}</p>
+                </div>
+              </div>
+          </div>`;
+    });
+    taino.el(".glide__slides").innerHTML = prints;
   }
 }
