@@ -99,10 +99,10 @@ class aboutLoader {
             </section>
           </main>
         `;
-    this.loadData();
+    this.loadDataTest();
   }
 
-  async loadData() {
+  async loadDataTest() {
     let cardInformation = await fetch("/testimonial.json")
       .then(response => response.json())
       .then(async function(json) {

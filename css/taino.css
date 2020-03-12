@@ -28,6 +28,11 @@
   --roboto: "Roboto";
 }
 
+.lol {
+  justify-content: center;
+  align-items: center;
+}
+
 footer,
 section {
   max-width: 1920px;

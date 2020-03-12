@@ -317,7 +317,7 @@ let routes = {
   "/": "home",
   "/about": "about",
   "/product": "product",
-  "/product/banana": "banana",
+  "/product/products": "products",
   "/gallery": "gallery",
   "/signup": "signup",
   "/contact": "contact"

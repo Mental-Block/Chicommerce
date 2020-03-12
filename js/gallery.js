@@ -5,14 +5,17 @@ class galleryLoader {
 
     this.styling = `
     #gallery{background-color: var(--darker-black-bg-color); padding: 2rem 0;}
-    .img-center{margin: 0 auto; max-height: 300px;}
-    .modal {width: 100vw; hight: 100vh; background-color: var(black50); }
+    .img-slideshow{margin: 0 auto; max-height: 300px;}
+    #appendModal{position: relative;}
+    .modal-overlay {width: 100%; height: 100vh; background-color: var(--black75); 
+    position:absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; cursor:pointer; display: flex; justify-content:center; align-items:center;}
+    .modal-image {max-width: 100%; max-height: 100%;}
     `;
 
     taino.changeNavColor("gallery");
 
     this.starthtml = `
-      <main id="appendModal">
+      <main>
         <section id="gallery"> 
           <div class="glide">
             <div class="glide__track" data-glide-el="track">
@@ -30,6 +33,8 @@ class galleryLoader {
         <section id="gallery-images">
         <!--Insert Images Here-->
         </section>
+
+        <!--Insert Modal Here-->
       </main>
         `;
     this.loadImages();
@@ -38,7 +43,7 @@ class galleryLoader {
   loadImages() {
     let images = [];
     for (let i = 0; i <= 4; i++) {
-      images[i] = "/images/gallery" + i + ".png";
+      images[i] = `/images/gallery${i}.png`;
     }
 
     setTimeout(() => {
@@ -55,7 +60,7 @@ class galleryLoader {
     images.forEach(image => {
       prints += `
         <div class="gallery-image-container">
-          <img class="img modal" src="${image}"/>
+          <img class="img" src="${image}"/>
         </div>
       `;
     });
@@ -69,7 +74,7 @@ class galleryLoader {
     images.forEach(image => {
       prints += `
           <div class="glide__slide">
-              <img class="img img-center" src="${image}"/>
+              <img class="img img-slideshow" src="${image}"/>
           </div>
         `;
     });
@@ -95,24 +100,30 @@ class galleryLoader {
     for (let i = 0; i < container.length; i++) {
       container[i].addEventListener("click", () => {
         let image = images[i];
-        this.loadModal(image);
+        this.modal(image);
       });
     }
   }
 
-  loadModal(image) {
-    if (taino.el("modal")) {
-      return;
-    } else {
-      // taino
-      // .el("body")
-      // .insertAdjacentHTML(
-      //   "beforeend",
-      //   '<div class="puppyoverlay"></div><div class="puppymodal"></div>'
-      // );
+  modal(image) {
+    let topMargin = window.pageYOffset;
+    let div = document.createElement("div");
+    let appendModal = document.getElementById("tainomain");
 
-      taino.elid("appendModal").innerHTML =
-        '<img src="' + image + '" alt="Modal Image" />';
+    div.setAttribute("class", "modal-overlay");
+    div.style.top = `${topMargin}px`;
+    appendModal.append(div);
+
+    taino.el(
+      ".modal-overlay"
+    ).innerHTML = `<img class="modal-image" src= ${image} alt="Modal Image" />`;
+
+    div.addEventListener("click", removeModal);
+    window.addEventListener("scroll", removeModal);
+
+    function removeModal() {
+      appendModal.removeChild(div);
+      window.removeEventListener("scroll", removeModal);
     }
   }
 }

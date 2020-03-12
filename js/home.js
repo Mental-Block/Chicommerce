@@ -78,6 +78,7 @@ class homeLoader {
         </main>
         `;
 
+    this.navbarHome();
     this.loadData();
     this.loadImages();
   }
@@ -155,27 +156,37 @@ class homeLoader {
   loadImages() {
     let images = [];
     for (let i = 0; i <= 4; i++) {
-      images[i] = "/images/gallery" + i + ".png";
+      images[i] = `/images/gallery${i}.png`;
     }
 
-    this.setOne(images);
+    setTimeout(() => {
+      this.setOne(images);
+    }, 0);
   }
 
   setOne(images) {
-    setTimeout(() => {
-      let prints = "";
+    let prints = "";
 
-      images.forEach(image => {
-        prints += `
+    images.forEach(image => {
+      prints += `
         <a class="gallery-info-a" href="/gallery">
           <div class="gallery-info-container">
             <img class="img" src="${image}"/>
           </div>
         </a>
         `;
-      });
+    });
 
-      taino.elid("gallery-info").innerHTML = prints;
+    taino.elid("gallery-info").innerHTML = prints;
+  }
+
+  navbarHome() {
+    setTimeout(() => {
+      const navContainer = taino.elid("navigation");
+      const a = taino.el(".btn-base");
+      a.addEventListener("click", () => {
+        navContainer.classList.add("nav-add-black");
+      });
     }, 0);
   }
 }
