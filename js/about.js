@@ -36,8 +36,6 @@ class aboutLoader {
     }
     `;
 
-    taino.changeNavColor("about");
-
     this.starthtml = `
         <main>
            <section class="barn-bg">
@@ -99,11 +97,20 @@ class aboutLoader {
             </section>
           </main>
         `;
-    this.loadDataTest();
+    this.loadPageMethods();
   }
 
-  async loadDataTest() {
-    let cardInformation = await fetch("/testimonial.json")
+  loadPageMethods() {
+    taino.changeNavColor("about");
+
+    this.loadTestimonial().then(testimonialInformation => {
+      this.printTestimonalCards(testimonialInformation);
+      this.carousel();
+    });
+  }
+
+  async loadTestimonial() {
+    let testimonialInformation = await fetch(site.testimonalfile)
       .then(response => response.json())
       .then(async function(json) {
         let test = json.items;
@@ -113,9 +120,7 @@ class aboutLoader {
         });
         return test;
       });
-
-    this.printCards(cardInformation);
-    this.carousel();
+    return testimonialInformation;
   }
 
   carousel() {
@@ -148,9 +153,9 @@ class aboutLoader {
     glide.mount();
   }
 
-  printCards(cardInformation) {
+  printTestimonalCards(testimonialInformation) {
     let prints = "";
-    cardInformation.forEach(test => {
+    testimonialInformation.forEach(test => {
       prints += `
           <div class="glide__slide" data-id="${test.id}">
               <div class="testimonial-card">

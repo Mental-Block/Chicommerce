@@ -5,14 +5,13 @@ class homeLoader {
       "This is an e commerce/small business website made for fun";
     this.styling = `
     `;
-    taino.changeNavColor("home");
     this.starthtml = `
       <main>
         <section id="landing-bg">
           <div class="center">
             <h1 class="landing-text landing-main">Free Run,</h1>
             <h2 class="landing-text landing-sec">Organic <span class="brown">Eggs</span></h2>
-            <a href="/product" class="btn-base landing-btn">Order Now</a>
+            <a href="/products" class="btn-base landing-btn">Order Now</a>
           </div>
         </section>
 
@@ -78,35 +77,48 @@ class homeLoader {
         </main>
         `;
 
-    this.navbarHome();
-    this.loadData();
-    this.loadImages();
+    this.loadPageMethods();
   }
 
-  async loadData() {
-    let cardInformation = await fetch("/productInformation.json")
-      .then(response => response.json())
-      .then(async function(json) {
-        let products = json.items;
-        products = products.map(items => {
-          const {
-            id,
-            price,
-            pageLink,
-            description,
-            title,
-            image
-          } = items.fields;
-          return { id, price, pageLink, description, title, image };
-        });
-        return products;
-      });
+  loadPageMethods() {
+    taino.changeNavColor("home");
 
-    this.printCards(cardInformation);
-    this.slider();
+    taino.loadProducts().then(productInformation => {
+      taino.printProductCards(productInformation, taino.el(".glide__slides"));
+      taino.getCardId(productInformation);
+      this.slider();
+    });
+
+    taino.loadImages().then(images => {
+      this.printGalleryImages(images);
+    });
+  }
+
+  printGalleryImages(images) {
+    let prints = "";
+
+    images.forEach(scr => {
+      prints += `
+      <a class="gallery-info-a" href="/gallery">
+        <div class="gallery-info-container">
+          <img class="img" src="${scr}"/>
+        </div>
+      </a>
+      `;
+    });
+
+    taino.elid("gallery-info").innerHTML = prints;
+  }
+
+  addAsSlide() {
+    let item = taino.el(".item", true);
+    for (let i = 0; i < item.length; i++) {
+      item[i].classList.add("glide__slide");
+    }
   }
 
   slider() {
+    this.addAsSlide();
     let glide = new Glide(".glide", {
       bound: true,
       rewindDuration: 0,
@@ -129,64 +141,5 @@ class homeLoader {
     });
 
     glide.mount();
-  }
-
-  printCards(cardInformation) {
-    let prints = "";
-    cardInformation.forEach(product => {
-      prints += `
-        <div class="glide__slide" data-id="${product.id}">
-            <div class="product-card">
-              <a href="${product.pageLink}">
-              <div class="product-card-body">
-                <img class="img card-img" src="${product.image}" />
-                <div class="space-between product-card-tp-container">
-                  <h3 class="product-card-title">${product.title}</h3>
-                  <h4 class="product-card-price">${product.price}</h4>
-                </div>
-                <p class="base-text product-card-text">${product.description}</p>
-              </div>
-              </a>
-            </div>
-        </div>`;
-    });
-    taino.el(".glide__slides").innerHTML = prints;
-  }
-
-  loadImages() {
-    let images = [];
-    for (let i = 0; i <= 4; i++) {
-      images[i] = `/images/gallery${i}.png`;
-    }
-
-    setTimeout(() => {
-      this.setOne(images);
-    }, 0);
-  }
-
-  setOne(images) {
-    let prints = "";
-
-    images.forEach(image => {
-      prints += `
-        <a class="gallery-info-a" href="/gallery">
-          <div class="gallery-info-container">
-            <img class="img" src="${image}"/>
-          </div>
-        </a>
-        `;
-    });
-
-    taino.elid("gallery-info").innerHTML = prints;
-  }
-
-  navbarHome() {
-    setTimeout(() => {
-      const navContainer = taino.elid("navigation");
-      const a = taino.el(".btn-base");
-      a.addEventListener("click", () => {
-        navContainer.classList.add("nav-add-black");
-      });
-    }, 0);
   }
 }

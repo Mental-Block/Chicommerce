@@ -3,8 +3,6 @@ class contactLoader {
     this.title = "Contact";
     this.meta_desc = "Contact us for more information or questions";
 
-    taino.changeNavColor("contact");
-
     this.styling = `
     #information{color: var(--white); background-color: var(--red-bg-color); padding: 2rem;}
 
@@ -85,5 +83,10 @@ class contactLoader {
           </section>
 </main>
         `;
+
+    this.loadPageMethods();
+  }
+  loadPageMethods() {
+    taino.changeNavColor("contact");
   }
 }

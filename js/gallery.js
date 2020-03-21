@@ -4,15 +4,14 @@ class galleryLoader {
     this.meta_desc = "Yes, we have pictures of our abused animals.";
 
     this.styling = `
-    #gallery{background-color: var(--darker-black-bg-color); padding: 2rem 0;}
+    #gallery{ background-color: var(--darker-black-bg-color); padding: 2rem 0;}
+    #gallery .glide{max-width: 1200px; margin: 0 auto;}
     .img-slideshow{margin: 0 auto; max-height: 300px;}
     #appendModal{position: relative;}
     .modal-overlay {width: 100%; height: 100vh; background-color: var(--black75); 
     position:absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; cursor:pointer; display: flex; justify-content:center; align-items:center;}
     .modal-image {max-width: 100%; max-height: 100%;}
     `;
-
-    taino.changeNavColor("gallery");
 
     this.starthtml = `
       <main>
@@ -37,30 +36,26 @@ class galleryLoader {
         <!--Insert Modal Here-->
       </main>
         `;
-    this.loadImages();
+    this.loadPageMethods();
   }
 
-  loadImages() {
-    let images = [];
-    for (let i = 0; i <= 4; i++) {
-      images[i] = `/images/gallery${i}.png`;
-    }
+  loadPageMethods() {
+    taino.changeNavColor("gallery");
 
-    setTimeout(() => {
-      this.setOne(images);
-      this.setTwo(images);
+    taino.loadImages().then(images => {
+      this.printGalleryImages(images);
       this.modalPopUp(images);
-      this.slideShow();
-    }, 0);
+      this.slideShow(images);
+    });
   }
 
-  setOne(images) {
+  printGalleryImages(images) {
     let prints = "";
 
-    images.forEach(image => {
+    images.forEach(scr => {
       prints += `
         <div class="gallery-image-container">
-          <img class="img" src="${image}"/>
+          <img class="img" src="${scr}"/>
         </div>
       `;
     });
@@ -68,13 +63,13 @@ class galleryLoader {
     taino.elid("gallery-images").innerHTML = prints;
   }
 
-  setTwo(images) {
+  addAsSlide(images) {
     let prints = "";
 
-    images.forEach(image => {
+    images.forEach(scr => {
       prints += `
           <div class="glide__slide">
-              <img class="img img-slideshow" src="${image}"/>
+              <img class="img img-slideshow" src="${scr}"/>
           </div>
         `;
     });
@@ -82,7 +77,8 @@ class galleryLoader {
     taino.el(".glide__slides").innerHTML = prints;
   }
 
-  slideShow() {
+  slideShow(images) {
+    this.addAsSlide(images);
     let glide = new Glide(".glide", {
       bound: true,
       rewindDuration: 1000,

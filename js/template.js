@@ -1,7 +1,7 @@
 class templateLoader {
   constructor(site) {
     this.header = `
-    <header id="navigation" class="navigation-container">
+    <header id="navigation" class="navigation-container nav-add-black">
       <div class="logo-container">
         <img src="/images/Logo.svg" />
       </div>
@@ -9,7 +9,7 @@ class templateLoader {
         <div class="nav-list nav-list-off">
             <a class="nav-list-item" data-tag="home" href="/">Home</a>
             <a class="nav-list-item" data-tag="about" href="/about">About</a>
-            <a class="nav-list-item" data-tag="products" href="/product">Products</a>
+            <a class="nav-list-item" data-tag="products" href="/products">Products</a>
             <a class="nav-list-item" data-tag="gallery" href="/gallery">Gallery</a>
             <a class="nav-list-item" data-tag="contact" href="/contact">Contact</a>
           </div>
@@ -21,7 +21,6 @@ class templateLoader {
         </nav>
       </header> 
   `;
-    this.navbar();
 
     this.subscribe = `
       <section id="subscribe">
@@ -80,6 +79,8 @@ class templateLoader {
 </footer>
 
         `;
+
+    this.navbar();
   }
   navbar() {
     setTimeout(() => {
@@ -91,22 +92,11 @@ class templateLoader {
         navContainer.classList.add("nav-add-black");
       };
 
-      navList.addEventListener("click", () => {
-        navContainer.classList.add("nav-add-black");
-      });
-
       burger.addEventListener("click", () => {
         navList.classList.toggle("nav-list-off");
         navList.classList.add("nav-add-black");
-      });
-
-      if (window.innerWidth < 768) {
         navContainer.classList.add("nav-add-black");
-        navList.classList.add("nav-add-black");
-      } else {
-        navContainer.classList.remove("nav-add-black");
-        navList.classList.remove("nav-add-black");
-      }
+      });
     }, 0);
   }
 }

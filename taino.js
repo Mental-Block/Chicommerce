@@ -2,17 +2,20 @@
 class taino {
   constructor(routes) {
     /*define taino global vars, mostly endpoints and public creds*/
+    this.productfile = "/productInformation.json";
+    this.testimonalfile = "/testimonial.json";
     this.jspath = "/js";
     this.csspath = "/css";
     this.header = "";
     this.subscribe = "";
     this.footer = "";
     this.templatefile = "/template";
-    /*define state variable and initial states*/
-    this.state = {};
 
     /*define current location object*/
     this.cur = {};
+
+    /*define initial state*/
+    this.state = {};
 
     this.routes = Object.keys(routes)
       .sort(function(a, b) {
@@ -28,10 +31,9 @@ class taino {
       });
     this.routevars = [];
 
-    this.components = new Map();
-
     /*on browser load, identify current location object*/
     this.currentpage = this.getcurrent(window.location.pathname);
+
     this.main = window.document.body; /*defaults to body if no id is set*/
     if (document.getElementById("tainomain") != null) {
       this.main.content = document.getElementById("tainomain");
@@ -120,6 +122,21 @@ class taino {
     return curr;
   }
 
+  route(path) {
+    for (var i = 0, l = this.routes.length; i < l; i++) {
+      var found = path.match(this.routes[i].path);
+      if (found) {
+        window.history.pushState(
+          { html: this.main.innerHTML, pageTitle: this.cur.title },
+          "",
+          path
+        );
+        this.update();
+        break;
+      }
+    }
+  }
+
   loadtemplate() {
     if (taino.el("body > header").length > 0) {
       taino.el("body > header")[0].remove();
@@ -153,6 +170,7 @@ class taino {
     this.main.setAttribute("class", this.currentpage.replace(/\//gi, ""));
     var loader = this.currentpage.substr(1).replace(/\//gi, "_") + "Loader";
     var hashforanchor = window.location.hash.substr(1);
+
     if (this.cur.constructor.name && this.cur.constructor.name === loader) {
       this.cur = this.createLoader(
         loader
@@ -193,41 +211,6 @@ class taino {
       this.loadcontent();
       //window.scrollTo(0, 0);
     });
-  }
-
-  route(path) {
-    for (var i = 0, l = this.routes.length; i < l; i++) {
-      var found = path.match(this.routes[i].path);
-      if (found) {
-        window.history.pushState(
-          { html: this.main.innerHTML, pageTitle: this.cur.title },
-          "",
-          path
-        );
-        this.update();
-        break;
-      }
-    }
-  }
-
-  static el(x, getall) {
-    var s = x.trim();
-    if (s.indexOf(",") > -1 || s.indexOf(" ") > -1 || getall === true) {
-      return document.querySelectorAll(s);
-    } else {
-      return document.querySelector(s);
-    }
-  }
-
-  static elc(x, getall) {
-    var s = x.trim();
-    if (s.indexOf(",") > -1 || s.indexOf(" ") > -1 || getall === true) {
-      return document.getElementsByClassName(s);
-    }
-  }
-
-  static elid(x) {
-    return document.getElementById(x);
   }
 
   defaultlisteners() {
@@ -272,22 +255,6 @@ class taino {
     }
   }
 
-  static changeNavColor(a) {
-    let navItem = taino.el(".nav-list-item", true);
-    let findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
-
-    for (let i = 0; i < navItem.length; i++) {
-      navItem[i].classList.remove("active");
-    }
-    findNavItem.classList.add("active");
-  }
-
-  static sanitize(str) {
-    let temp = document.createElement("div");
-    temp.textContent = str;
-    return temp.innerHTML;
-  }
-
   addmeta(name, content) {
     let newmeta = document.createElement("meta");
     newmeta.name = name;
@@ -300,6 +267,103 @@ class taino {
     if (oldmeta) {
       oldmeta.remove();
     }
+  }
+
+  static async loadProducts() {
+    let productInformation = await fetch(site.productfile)
+      .then(response => response.json())
+      .then(async function(json) {
+        let products = json.items;
+        products = products.map(items => {
+          const { id, price, description, title, image } = items.fields;
+          return { id, price, description, title, image };
+        });
+        return products;
+      });
+    return productInformation;
+  }
+
+  static async loadImages() {
+    let images = [];
+
+    for (let i = 0; i <= 4; i++) {
+      await fetch(`/images/gallery${i}.png`).then(res => {
+        let getUrl = res.url;
+        images[i] = getUrl.substring(21);
+      });
+    }
+    return images;
+  }
+
+  static getCardId(productInformation) {
+    const card = taino.el(".product-card", true);
+    for (let i = 0; i < card.length; i++) {
+      card[i].addEventListener("click", () => {
+        site.state.id = productInformation[i].id;
+      });
+    }
+  }
+
+  static printProductCards(productInformation, appendToDOM) {
+    let print = "";
+    productInformation.forEach(product => {
+      print += `
+        <div class="item" data-id="${product.id}">
+            <div class="product-card">
+              <a href="/products/${product.title
+                .toLowerCase()
+                .replace(/ /g, "")}">
+              <div class="product-card-body">
+                <img class="img card-img" src="${product.image}" />
+                <div class="space-between">
+                  <h3 class="product-card-title">${product.title}</h3>
+                  <h4 class="product-card-price">${product.price}</h4>
+                </div>
+                <p class="base-text product-card-text">${
+                  product.description
+                }</p>
+              </div>
+              </a>
+            </div>
+        </div>`;
+    });
+    appendToDOM.innerHTML = print;
+  }
+
+  static el(x, getall) {
+    var s = x.trim();
+    if (s.indexOf(",") > -1 || s.indexOf(" ") > -1 || getall === true) {
+      return document.querySelectorAll(s);
+    } else {
+      return document.querySelector(s);
+    }
+  }
+
+  static elid(x) {
+    return document.getElementById(x);
+  }
+
+  static changeNavColor(a) {
+    const navContainer = taino.elid("navigation");
+    const navItem = taino.el(".nav-list-item", true);
+    const findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
+
+    if (a === routes["/"]) {
+      navContainer.classList.remove("nav-add-black");
+    } else {
+      navContainer.classList.add("nav-add-black");
+    }
+
+    for (let i = 0; i < navItem.length; i++) {
+      navItem[i].classList.remove("active");
+    }
+    findNavItem.classList.add("active");
+  }
+
+  static sanitize(str) {
+    let temp = document.createElement("div");
+    temp.textContent = str;
+    return temp.innerHTML;
   }
 
   static ismobile() {
@@ -315,11 +379,11 @@ class taino {
 /*define routes*/
 let routes = {
   "/": "home",
+  "/home": "home",
   "/about": "about",
-  "/product": "product",
-  "/product/products": "products",
+  "/products": "products",
+  "/products/:product": "product",
   "/gallery": "gallery",
-  "/signup": "signup",
   "/contact": "contact"
 };
 
