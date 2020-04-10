@@ -14,7 +14,6 @@ class contactLoader {
     `;
 
     this.starthtml = `
-    <main>
         <section id="information">
             <h2 class="header-title">Have any questions or need to get in touch?</h2>
         <div class="information-container-main">
@@ -81,12 +80,15 @@ class contactLoader {
                 </form>
               </div>
           </section>
-</main>
         `;
 
     this.loadPageMethods();
   }
   loadPageMethods() {
     taino.changeNavColor("contact");
+
+    setTimeout(() => {
+      taino.cart();
+    }, 0)
   }
 }

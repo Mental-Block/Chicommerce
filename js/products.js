@@ -52,6 +52,10 @@ class productsLoader {
       taino.getCardId(productInformation);
       this.loadIso();
     });
+
+    setTimeout(() => {
+      taino.cart();
+    }, 0)
   }
 
   loadIso() {

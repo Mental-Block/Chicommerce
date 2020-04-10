@@ -37,7 +37,6 @@ class aboutLoader {
     `;
 
     this.starthtml = `
-        <main>
            <section class="barn-bg">
             <div class="center">
               <h2 class="barn-header">Our Mission</h2>
@@ -95,7 +94,6 @@ class aboutLoader {
                   </form>
                 </div>
             </section>
-          </main>
         `;
     this.loadPageMethods();
   }
@@ -107,12 +105,16 @@ class aboutLoader {
       this.printTestimonalCards(testimonialInformation);
       this.carousel();
     });
+
+    setTimeout(() => {
+      taino.cart();
+    }, 0)
   }
 
   async loadTestimonial() {
     let testimonialInformation = await fetch(site.testimonalfile)
       .then(response => response.json())
-      .then(async function(json) {
+      .then(async function (json) {
         let test = json.items;
         test = test.map(items => {
           const { id, name, description } = items.fields;

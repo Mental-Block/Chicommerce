@@ -14,7 +14,6 @@ class galleryLoader {
     `;
 
     this.starthtml = `
-      <main>
         <section id="gallery"> 
           <div class="glide">
             <div class="glide__track" data-glide-el="track">
@@ -32,9 +31,6 @@ class galleryLoader {
         <section id="gallery-images">
         <!--Insert Images Here-->
         </section>
-
-        <!--Insert Modal Here-->
-      </main>
         `;
     this.loadPageMethods();
   }
@@ -47,6 +43,10 @@ class galleryLoader {
       this.modalPopUp(images);
       this.slideShow(images);
     });
+
+    setTimeout(() => {
+      taino.cart();
+    }, 0)
   }
 
   printGalleryImages(images) {
@@ -63,7 +63,7 @@ class galleryLoader {
     taino.elid("gallery-images").innerHTML = prints;
   }
 
-  addAsSlide(images) {
+  slideShow(images) {
     let prints = "";
 
     images.forEach(scr => {
@@ -75,10 +75,7 @@ class galleryLoader {
     });
 
     taino.el(".glide__slides").innerHTML = prints;
-  }
 
-  slideShow(images) {
-    this.addAsSlide(images);
     let glide = new Glide(".glide", {
       bound: true,
       rewindDuration: 1000,

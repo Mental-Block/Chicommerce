@@ -5,8 +5,16 @@
         "id": 1,
         "title": "Dozen Eggs",
         "price": 15.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/about.png",
+          "/images/about.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -14,8 +22,16 @@
         "id": 2,
         "title": "Banana",
         "price": 8.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -23,8 +39,16 @@
         "id": 3,
         "title": "Pickle",
         "price": 4.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -32,8 +56,16 @@
         "id": 4,
         "title": "Donut",
         "price": 1.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -41,8 +73,16 @@
         "id": 5,
         "title": "Squash",
         "price": 13.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -50,8 +90,16 @@
         "id": 6,
         "title": "Turtle",
         "price": 21.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -59,8 +107,16 @@
         "id": 7,
         "title": "Pineapple",
         "price": 11.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -68,8 +124,16 @@
         "id": 8,
         "title": "Brown Egg",
         "price": 19.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -77,8 +141,16 @@
         "id": 9,
         "title": "White Egg",
         "price": 10.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     },
     {
@@ -86,8 +158,16 @@
         "id": 10,
         "title": "Green Egg",
         "price": 0.99,
-        "image": "/images/product.png",
-        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum."
+        "mainImage": "/images/product.png",
+        "description": "Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum.",
+        "images": [
+          "/images/product.png",
+          "/images/product.png",
+          "/images/about.png",
+          "/images/product.png",
+          "/images/wood.png",
+          "/images/product.png"
+        ]
       }
     }
   ]

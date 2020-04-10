@@ -80,6 +80,7 @@ class templateLoader {
 
         `;
 
+
     this.navbar();
   }
   navbar() {

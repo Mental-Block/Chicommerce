@@ -6,7 +6,6 @@ class homeLoader {
     this.styling = `
     `;
     this.starthtml = `
-      <main>
         <section id="landing-bg">
           <div class="center">
             <h1 class="landing-text landing-main">Free Run,</h1>
@@ -67,14 +66,13 @@ class homeLoader {
                   </div>
                   <div class="form-control">
                     <label for="message">Message</label>
-                      <textarea  type="text" name="message" id="message" cols="30" rows="10" placeholder="Message" aria-describedby="message"></textarea>
+                      <textarea type="text" name="message" id="message" cols="30" rows="10" placeholder="Message" aria-describedby="message"></textarea>
                       <span class="helper-text"></span>
                     </div>
                   <button class="btn-base btn" type="submit">Submit</button>
                 </form>
               </div>
           </section>
-        </main>
         `;
 
     this.loadPageMethods();
@@ -83,21 +81,25 @@ class homeLoader {
   loadPageMethods() {
     taino.changeNavColor("home");
 
-    taino.loadProducts().then(productInformation => {
+    taino.loadProducts().then((productInformation) => {
       taino.printProductCards(productInformation, taino.el(".glide__slides"));
       taino.getCardId(productInformation);
       this.slider();
     });
 
-    taino.loadImages().then(images => {
+    taino.loadImages().then((images) => {
       this.printGalleryImages(images);
     });
+
+    setTimeout(() => {
+      taino.cart();
+    }, 0)
   }
 
   printGalleryImages(images) {
     let prints = "";
 
-    images.forEach(scr => {
+    images.forEach((scr) => {
       prints += `
       <a class="gallery-info-a" href="/gallery">
         <div class="gallery-info-container">
@@ -110,34 +112,31 @@ class homeLoader {
     taino.elid("gallery-info").innerHTML = prints;
   }
 
-  addAsSlide() {
+  slider() {
     let item = taino.el(".item", true);
     for (let i = 0; i < item.length; i++) {
       item[i].classList.add("glide__slide");
     }
-  }
 
-  slider() {
-    this.addAsSlide();
     let glide = new Glide(".glide", {
       bound: true,
       rewindDuration: 0,
       dragThreshold: 40,
       startAt: 0,
       perView: 4,
-      animationDuration: 1000,
+      animationDuration: 500,
       gap: 16,
       breakpoints: {
         1680: {
-          perView: 3
+          perView: 3,
         },
         1240: {
-          perView: 2
+          perView: 2,
         },
         920: {
-          perView: 1
-        }
-      }
+          perView: 1,
+        },
+      },
     });
 
     glide.mount();

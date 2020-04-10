@@ -18,15 +18,15 @@ class taino {
     this.state = {};
 
     this.routes = Object.keys(routes)
-      .sort(function(a, b) {
+      .sort(function (a, b) {
         return b.length - a.length;
       })
-      .map(function(path) {
+      .map(function (path) {
         return {
           path: new RegExp(
             "^" + path.replace(/:[^\s/]+/g, "([\\w%+-]+)") + "$"
           ),
-          module: routes[path]
+          module: routes[path],
         };
       });
     this.routevars = [];
@@ -44,21 +44,21 @@ class taino {
       this.main.content = document.getElementById("tainomain");
     }
     //beforebegin, afterbegin, afterend
-    window.addEventListener("popstate", event => {
+    window.addEventListener("popstate", (event) => {
       this.update();
     });
 
-    window.addEventListener("DOMNodeInserted", event => {
+    window.addEventListener("DOMNodeInserted", (event) => {
       this.defaultlisteners(); /* detect A tags in newly inserted nodes*/
     });
 
     var resizeTimer;
-    window.addEventListener("resize", event => {
+    window.addEventListener("resize", (event) => {
       var t = this;
       if (typeof resizeTimer != "undefined") {
         clearTimeout(resizeTimer);
       }
-      resizeTimer = setTimeout(function() {
+      resizeTimer = setTimeout(function () {
         if (taino.ismobile() === false) {
           t.loadtemplate();
           t.update();
@@ -210,6 +210,9 @@ class taino {
     this.loadScript(this.jspath + this.currentpage + ".js").then(() => {
       this.loadcontent();
       //window.scrollTo(0, 0);
+
+
+
     });
   }
 
@@ -224,7 +227,7 @@ class taino {
         continue;
       }
       let linkhost = as[i].hostname;
-      as[i].addEventListener("click", e => {
+      as[i].addEventListener("click", (e) => {
         e.preventDefault();
         let href = as[i].href;
         let pathName = new URL(href);
@@ -271,12 +274,12 @@ class taino {
 
   static async loadProducts() {
     let productInformation = await fetch(site.productfile)
-      .then(response => response.json())
-      .then(async function(json) {
-        let products = json.items;
-        products = products.map(items => {
-          const { id, price, description, title, image } = items.fields;
-          return { id, price, description, title, image };
+      .then((response) => response.json())
+      .then(async function (json) {
+        let products = await json.items;
+        products = products.map((items) => {
+          const { id, price, description, title, mainImage } = items.fields;
+          return { id, price, description, title, mainImage };
         });
         return products;
       });
@@ -287,7 +290,7 @@ class taino {
     let images = [];
 
     for (let i = 0; i <= 4; i++) {
-      await fetch(`/images/gallery${i}.png`).then(res => {
+      await fetch(`/images/gallery${i}.png`).then((res) => {
         let getUrl = res.url;
         images[i] = getUrl.substring(21);
       });
@@ -306,22 +309,22 @@ class taino {
 
   static printProductCards(productInformation, appendToDOM) {
     let print = "";
-    productInformation.forEach(product => {
+    productInformation.forEach((product) => {
       print += `
         <div class="item" data-id="${product.id}">
             <div class="product-card">
               <a href="/products/${product.title
-                .toLowerCase()
-                .replace(/ /g, "")}">
+          .toLowerCase()
+          .replace(/ /g, "")}">
               <div class="product-card-body">
-                <img class="img card-img" src="${product.image}" />
+                <img class="img card-img" src="${product.mainImage}" />
                 <div class="space-between">
                   <h3 class="product-card-title">${product.title}</h3>
                   <h4 class="product-card-price">${product.price}</h4>
                 </div>
                 <p class="base-text product-card-text">${
-                  product.description
-                }</p>
+        product.description
+        }</p>
               </div>
               </a>
             </div>
@@ -348,7 +351,7 @@ class taino {
     const navItem = taino.el(".nav-list-item", true);
     const findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
 
-    if (a === routes["/"]) {
+    if (a === routes["/"] && window.innerWidth > 768) {
       navContainer.classList.remove("nav-add-black");
     } else {
       navContainer.classList.add("nav-add-black");
@@ -374,6 +377,13 @@ class taino {
       return false;
     }
   }
+
+  static cart() {
+    if (site.state.cart === true) {
+      taino.elid("tainomain")
+        .insertAdjacentHTML("beforeend", '<div class="cart"></div>');
+    }
+  }
 }
 
 /*define routes*/
@@ -384,7 +394,7 @@ let routes = {
   "/products": "products",
   "/products/:product": "product",
   "/gallery": "gallery",
-  "/contact": "contact"
+  "/contact": "contact",
 };
 
 const site = new taino(routes);
