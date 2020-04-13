@@ -85,15 +85,12 @@ class homeLoader {
       taino.printProductCards(productInformation, taino.el(".glide__slides"));
       taino.getCardId(productInformation);
       this.slider();
+      taino.cart();
     });
 
     taino.loadImages().then((images) => {
       this.printGalleryImages(images);
     });
-
-    setTimeout(() => {
-      taino.cart();
-    }, 0)
   }
 
   printGalleryImages(images) {

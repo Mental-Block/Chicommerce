@@ -42,11 +42,8 @@ class galleryLoader {
       this.printGalleryImages(images);
       this.modalPopUp(images);
       this.slideShow(images);
-    });
-
-    setTimeout(() => {
       taino.cart();
-    }, 0)
+    });
   }
 
   printGalleryImages(images) {

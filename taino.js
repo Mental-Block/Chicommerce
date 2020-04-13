@@ -278,8 +278,8 @@ class taino {
       .then(async function (json) {
         let products = await json.items;
         products = products.map((items) => {
-          const { id, price, description, title, mainImage } = items.fields;
-          return { id, price, description, title, mainImage };
+          const { id, price, description, title, mainImage, images } = items.fields;
+          return { id, price, description, title, mainImage, images };
         });
         return products;
       });
@@ -288,13 +288,9 @@ class taino {
 
   static async loadImages() {
     let images = [];
-
     for (let i = 0; i <= 4; i++) {
-      await fetch(`/images/gallery${i}.png`).then((res) => {
-        let getUrl = res.url;
-        images[i] = getUrl.substring(21);
-      });
-    }
+      images[i] = `/images/gallery${i}.png`;
+    };
     return images;
   }
 
@@ -302,9 +298,13 @@ class taino {
     const card = taino.el(".product-card", true);
     for (let i = 0; i < card.length; i++) {
       card[i].addEventListener("click", () => {
-        site.state.id = productInformation[i].id;
+        site.state.cardId = productInformation[i].id;
       });
     }
+  }
+
+  static disableCardId(id) {
+    site.state.disabledCards.push(id);
   }
 
   static printProductCards(productInformation, appendToDOM) {
@@ -379,9 +379,65 @@ class taino {
   }
 
   static cart() {
-    if (site.state.cart === true) {
-      taino.elid("tainomain")
-        .insertAdjacentHTML("beforeend", '<div class="cart"></div>');
+    if (site.state.cartOn === true) {
+      const cartSlide = () => {
+        let slide = `
+            <div id="cart-slide">
+              <div id="cart-arrow"></div>
+            </div>
+            
+          `;
+        taino.elid("tainomain").insertAdjacentHTML("beforeend", slide);
+      }
+
+      const cartIcon = () => {
+        let icon = `<div id="cart"></div>`
+        taino.elid("tainomain").insertAdjacentHTML("beforeend", icon);
+      }
+
+      cartIcon();
+      cartSlide();
+
+      const slide = taino.elid("cart-slide")
+      const arrow = taino.elid("cart-arrow")
+      const icon = taino.elid("cart")
+
+      icon.addEventListener("click", () => {
+        slide.style.transform = "translate(0px)"
+        icon.style.visibility = "hidden"
+        icon.style.transition = "visibility 0s, opacity 1s ease-in"
+        icon.style.opacity = "0"
+      })
+
+      arrow.addEventListener("click", () => {
+        slide.style.transform = "translate(320px)"
+        icon.style.visibility = "visible"
+        icon.style.opacity = "1"
+      })
+
+      site.state.disabledCards.forEach(num => {
+        prints += `
+          <p></p>
+        `
+      })
+
+      taino.elid("cart-slide").insertAdjacentHTML("beforeend", prints);
+
+
+    }
+
+
+
+
+
+
+  }
+
+  static cartRemove() {
+    let cartFns = {
+      removeTitle: () => { },
+      removeQuantity: () => { },
+      removeTotal: () => { }
     }
   }
 }

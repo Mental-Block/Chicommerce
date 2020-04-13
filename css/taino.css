@@ -481,7 +481,6 @@ label {
   display: none;
 }
 
-/* util */
 .space-between {
   display: flex;
   align-items: center;
@@ -532,19 +531,56 @@ label {
   font-size: 1.6rem;
 }
 
-.cart {
+#cart {
   position: fixed;
   width: 42px;
   height: 42px;
   top: 50%;
   right: 16px;
+  transform: translateY(52px);
   background: var(--green) url("/images/shoppingcart.svg") no-repeat center center;
   z-index: 1;
+  transition: 250ms ease-in;
   border-radius: 80px; 
   cursor: pointer;
   overflow: hidden;
-  border: 1px solid var(--green25);
+  border: 1px solid var(--green25) ;
+}
 
+#cart:hover{
+  background: var(--green25) url("/images/shoppingcart.svg") no-repeat center center;
+}
+
+#cart-slide{
+  position: fixed;
+  z-index: 4;
+  top: 77px;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  height: 100%;
+  transition: ease-in 400ms;
+  transform: translateX(320px);
+  animation-fill-mode: forwards;
+  background-color: var(--black75);
+}
+
+#cart-arrow{
+  opacity: 0.75;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: ease-in 350ms;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background: url(/images/left.svg) no-repeat center;
+}
+
+#cart-arrow:hover{
+  opacity: 1;
+  transform: translateY(-50%) rotate(180deg);
+  cursor: pointer;
 }
 
 /* glide.js */
@@ -607,6 +643,7 @@ label {
   display: block;
   top: 50%;
   z-index: 2;
+  /* opacity: 0.75; */
   box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
   text-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   opacity: 1;

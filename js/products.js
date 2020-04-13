@@ -19,7 +19,6 @@ class productsLoader {
     `;
 
     this.starthtml = `
-        <main>
             <section id="products"> 
               <div class="product-container">
                 <h2 class="header-title">Products</h2>   
@@ -39,23 +38,26 @@ class productsLoader {
                   </div>
               </div>
             </section>
-        </main>        
         `;
     this.loadPageMethods();
   }
 
   loadPageMethods() {
     taino.changeNavColor("products");
-
     taino.loadProducts().then(productInformation => {
+      if (site.state.disabledCards) {
+        taino.disableCardId(site.state.cardId);
+        productInformation = productInformation.filter(item => !site.state.disabledCards.includes(item.id))
+      }
+      if (productInformation == 0) {
+        let background = taino.elid("products");
+      }
+
       taino.printProductCards(productInformation, taino.el(".grid"));
       taino.getCardId(productInformation);
       this.loadIso();
-    });
-
-    setTimeout(() => {
       taino.cart();
-    }, 0)
+    });
   }
 
   loadIso() {
@@ -96,5 +98,9 @@ class productsLoader {
       filterValue = filterFns[filterValue] || filterValue;
       iso.arrange({ filter: filterValue });
     });
+  }
+
+  backgroundChange() {
+
   }
 }

@@ -102,13 +102,9 @@ class aboutLoader {
     taino.changeNavColor("about");
 
     this.loadTestimonial().then(testimonialInformation => {
-      this.printTestimonalCards(testimonialInformation);
-      this.carousel();
-    });
-
-    setTimeout(() => {
+      this.carousel(testimonialInformation);
       taino.cart();
-    }, 0)
+    });
   }
 
   async loadTestimonial() {
@@ -125,7 +121,21 @@ class aboutLoader {
     return testimonialInformation;
   }
 
-  carousel() {
+  carousel(testimonialInformation) {
+    let prints = "";
+    testimonialInformation.forEach(test => {
+      prints += `
+          <div class="glide__slide" data-id="${test.id}">
+              <div class="testimonial-card">
+                <div class="testimonial-card-body">
+                  <h3 class="testimonial-card-title">${test.name}</h3>
+                  <p class="base-text testimonial-card-text">${test.description}</p>
+                </div>
+              </div>
+          </div>`;
+    });
+    taino.el(".glide__slides").innerHTML = prints;
+
     let glide = new Glide(".glide", {
       type: "carousel",
       swipeThreshold: false,
@@ -153,21 +163,5 @@ class aboutLoader {
     });
 
     glide.mount();
-  }
-
-  printTestimonalCards(testimonialInformation) {
-    let prints = "";
-    testimonialInformation.forEach(test => {
-      prints += `
-          <div class="glide__slide" data-id="${test.id}">
-              <div class="testimonial-card">
-                <div class="testimonial-card-body">
-                  <h3 class="testimonial-card-title">${test.name}</h3>
-                  <p class="base-text testimonial-card-text">${test.description}</p>
-                </div>
-              </div>
-          </div>`;
-    });
-    taino.el(".glide__slides").innerHTML = prints;
   }
 }

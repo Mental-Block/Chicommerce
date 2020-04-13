@@ -4,6 +4,8 @@ class productLoader {
     #product {background-color: var(--straw-brown); padding: 2rem;}
     #product .glide {max-width: 400px; margin: 0 auto 4px auto;}
     #product .slide {width: 100%;}
+    #product .glide__arrow--right, #product .glide__arrow--left{opacity:0.75;}
+    #product .glide__arrow--right:hover, #product .glide__arrow--left:hover{opacity:1;} 
     #product .glide__arrow--right {right:1rem;}
     #product .glide__arrow--left {left:1rem;}
 
@@ -53,8 +55,6 @@ class productLoader {
                       </div>
                   </div>
                 </div>
-                  
-                  <div class="info"></div>
               </section>    
           `;
 
@@ -64,50 +64,38 @@ class productLoader {
   loadPageMethods() {
     taino.changeNavColor("products");
 
-    this.loadProduct().then((product) => {
+    taino.loadProducts().then(list => {
+      let product = list.filter((item) => item.id === site.state.cardId);
+      product = product[0];
       this.loadProductInformation(product);
       this.loadFirstSlider(product);
       this.loadSecondSlider(product);
-      this.button();
-    });
-
-    setTimeout(() => {
+      this.cartAddButton(product);
       taino.cart();
-    }, 0)
+    });
   }
 
   loadProductInformation(product) {
     let print = `
         <h1 class="product-title">${product.title}</h1>
         <p class="product-description">${product.description}</p>
-        <form action="/products" method="post">
+        <form action="" method="post">
           <input type="numeric" id="quantity" aria-describedby="quantity" value="0" placeholder="0"/>
           <button type="submit" class="btn-base product-btn">Add To Cart</button>
         </form>
     `;
-
-    taino.el(".info").innerHTML = print;
+    if (!taino.el(".info")) {
+      taino.elid("product").insertAdjacentHTML("beforeend", '<div class="info"></div>');
+      taino.el(".info").innerHTML = print;
+    }
   }
 
-  button() {
+  cartAddButton(product) {
     let btn = taino.el(".product-btn");
 
-    btn.addEventListener("click", () => {
-      site.state.cart = true;
-
-
-
-      let quantity = taino.elid("quantity").value;
-      let itemName = taino.el(".product-title").innerText;
-      if (quantity > 0) {
-        if (!site.state.cartInv) {
-          site.state.cartInv = [];
-        }
-        site.state.cartInv.push(itemName);
-        site.state.cartInv = [...new Set(site.state.cartInv)];
-        console.log(site.state.cartInv)
-      }
-
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.cartAdd(product);
     });
   }
 
@@ -163,20 +151,40 @@ class productLoader {
     glideTwo.mount();
   }
 
-  async loadProduct() {
-    let productInformation = await fetch(site.productfile)
-      .then((response) => response.json())
-      .then(async function (json) {
-        let products = await json.items;
-        products = products
-          .map((items) => {
-            const { id, price, description, title, images } = items.fields;
-            return { id, price, description, title, images };
-          })
-          .filter((items) => items.id === site.state.id);
+  cartAdd(product) {
+    let tempQuantity = taino.elid("quantity").value
 
-        return products[0];
-      });
-    return productInformation;
+    let cartFns = {
+      addTitle: (title) => {
+        site.state.cartInv.push(title);
+      },
+      addQuantity: (quantity) => {
+        site.state.cartQuantity.push(quantity);
+      },
+      addTotal: (price, quantity) => {
+        site.state.cartTotal += price * quantity;
+        site.state.cartTotal = parseFloat(site.state.cartTotal.toFixed(2));
+      }
+    }
+
+    if (tempQuantity >= 1 && tempQuantity <= 10) {
+      if (!site.state.cartOn) {
+        let e = site.state;
+        e.cartInv = [];
+        e.cartQuantity = [];
+        e.disabledCards = [];
+        e.cartTotal = 0;
+        e.cartOn = true;
+      }
+
+      cartFns.addTitle(product.title)
+      cartFns.addQuantity(tempQuantity)
+      cartFns.addTotal(product.price, tempQuantity)
+      site.route("/products")
+    }
   }
+
+
+
+
 }
