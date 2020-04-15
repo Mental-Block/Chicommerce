@@ -43,20 +43,17 @@ class productsLoader {
   }
 
   loadPageMethods() {
+
+
     taino.changeNavColor("products");
     taino.loadProducts().then(productInformation => {
-      if (site.state.disabledCards) {
-        taino.disableCardId(site.state.cardId);
-        productInformation = productInformation.filter(item => !site.state.disabledCards.includes(item.id))
+      if (site.state.disableCard) {
+        productInformation = productInformation.filter(item => !site.state.disableCard.includes(item.id))
       }
-      if (productInformation == 0) {
-        let background = taino.elid("products");
-      }
-
       taino.printProductCards(productInformation, taino.el(".grid"));
       taino.getCardId(productInformation);
-      this.loadIso();
       taino.cart();
+      this.loadIso();
     });
   }
 
@@ -98,9 +95,5 @@ class productsLoader {
       filterValue = filterFns[filterValue] || filterValue;
       iso.arrange({ filter: filterValue });
     });
-  }
-
-  backgroundChange() {
-
   }
 }

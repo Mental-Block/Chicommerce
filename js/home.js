@@ -116,6 +116,7 @@ class homeLoader {
     }
 
     let glide = new Glide(".glide", {
+      type: "carousel",
       bound: true,
       rewindDuration: 0,
       dragThreshold: 40,

@@ -65,8 +65,9 @@ class productLoader {
     taino.changeNavColor("products");
 
     taino.loadProducts().then(list => {
-      let product = list.filter((item) => item.id === site.state.cardId);
+      let product = list.filter((item) => item.id === site.state.tempId);
       product = product[0];
+
       this.loadProductInformation(product);
       this.loadFirstSlider(product);
       this.loadSecondSlider(product);
@@ -75,10 +76,10 @@ class productLoader {
     });
   }
 
-  loadProductInformation(product) {
+  loadProductInformation({ title, description }) {
     let print = `
-        <h1 class="product-title">${product.title}</h1>
-        <p class="product-description">${product.description}</p>
+        <h1 class="product-title">${title}</h1>
+        <p class="product-description">${description}</p>
         <form action="" method="post">
           <input type="numeric" id="quantity" aria-describedby="quantity" value="0" placeholder="0"/>
           <button type="submit" class="btn-base product-btn">Add To Cart</button>
@@ -90,19 +91,19 @@ class productLoader {
     }
   }
 
-  cartAddButton(product) {
+  cartAddButton({ title, id, price, mainImage }) {
     let btn = taino.el(".product-btn");
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      this.cartAdd(product);
+      this.cartAdd({ title, id, price, mainImage });
     });
   }
 
-  loadFirstSlider(product) {
+  loadFirstSlider({ images }) {
     let print = ``;
 
-    product.images.forEach((image) => {
+    images.forEach((image) => {
       print += `
           <div class="glide_slide">
             <img class="img" src="${image}" />
@@ -125,10 +126,10 @@ class productLoader {
     glideOne.mount();
   }
 
-  loadSecondSlider(product) {
+  loadSecondSlider({ images }) {
     let print = ``;
 
-    product.images.forEach((image) => {
+    images.forEach((image) => {
       print += `
           <div class="glide_slide">
             <img class="img" src="${image}" />
@@ -151,40 +152,19 @@ class productLoader {
     glideTwo.mount();
   }
 
-  cartAdd(product) {
-    let tempQuantity = taino.elid("quantity").value
-
-    let cartFns = {
-      addTitle: (title) => {
-        site.state.cartInv.push(title);
-      },
-      addQuantity: (quantity) => {
-        site.state.cartQuantity.push(quantity);
-      },
-      addTotal: (price, quantity) => {
-        site.state.cartTotal += price * quantity;
-        site.state.cartTotal = parseFloat(site.state.cartTotal.toFixed(2));
-      }
-    }
+  cartAdd({ title, id, price, mainImage }) {
+    let tempQuantity = taino.elid("quantity").value;
+    tempQuantity = parseInt(tempQuantity);
 
     if (tempQuantity >= 1 && tempQuantity <= 10) {
-      if (!site.state.cartOn) {
-        let e = site.state;
-        e.cartInv = [];
-        e.cartQuantity = [];
-        e.disabledCards = [];
-        e.cartTotal = 0;
-        e.cartOn = true;
+      if (!site.state.cartOn || site.state.cartOn === false) {
+        site.state.cartOn = true;
+        site.state.disableCard = [];
+        site.state.cart = []
       }
-
-      cartFns.addTitle(product.title)
-      cartFns.addQuantity(tempQuantity)
-      cartFns.addTotal(product.price, tempQuantity)
+      site.state.disableCard.push(id)
+      site.state.cart.push({ title, id, price, mainImage, quantity: tempQuantity });
       site.route("/products")
     }
   }
-
-
-
-
 }

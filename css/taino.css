@@ -558,11 +558,30 @@ label {
   right: 0;
   bottom: 0;
   width: 320px;
-  height: 100%;
   transition: ease-in 400ms;
   transform: translateX(320px);
   animation-fill-mode: forwards;
   background-color: var(--black75);
+  overflow-y: scroll;
+    scrollbar-width: 0px; /* Firefox */
+    -ms-overflow-style: 0px;  /* Internet Explorer 10+ */
+}
+
+.cart-slide-grab{
+    cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab; 
+}
+
+.cart-slide-grabbing{
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+#cart-slide::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
 }
 
 #cart-arrow{

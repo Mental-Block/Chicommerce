@@ -298,14 +298,11 @@ class taino {
     const card = taino.el(".product-card", true);
     for (let i = 0; i < card.length; i++) {
       card[i].addEventListener("click", () => {
-        site.state.cardId = productInformation[i].id;
+        site.state.tempId = productInformation[i].id;
       });
     }
   }
 
-  static disableCardId(id) {
-    site.state.disabledCards.push(id);
-  }
 
   static printProductCards(productInformation, appendToDOM) {
     let print = "";
@@ -380,21 +377,26 @@ class taino {
 
   static cart() {
     if (site.state.cartOn === true) {
+      if (!site.state.cart[0]) {
+        site.state.cartOn = false
+      }
       const cartSlide = () => {
         let slide = `
             <div id="cart-slide">
               <div id="cart-arrow"></div>
+              <div class="cart-container">
+              
+              </div>
+              <button class="btn btn-base">Clear Cart</button>
             </div>
             
           `;
         taino.elid("tainomain").insertAdjacentHTML("beforeend", slide);
       }
-
       const cartIcon = () => {
         let icon = `<div id="cart"></div>`
         taino.elid("tainomain").insertAdjacentHTML("beforeend", icon);
       }
-
       cartIcon();
       cartSlide();
 
@@ -415,29 +417,32 @@ class taino {
         icon.style.opacity = "1"
       })
 
-      site.state.disabledCards.forEach(num => {
+      slide.addEventListener("mousedown", () => {
+        slide.classList.add("cart-slide-grabbing");
+        slide.classList.remove("cart-slide-grab");
+      })
+
+      slide.addEventListener("mouseup", () => {
+        slide.classList.add("cart-slide-grab");
+        slide.classList.remove("cart-slide-grabbing");
+      })
+
+
+      let prints = "";
+
+      site.state.cart.forEach(product => {
         prints += `
-          <p></p>
+        <div>
+            <p>${product.title}</p>
+            <img class="img card-img" src="${product.mainImage}" />
+            <p>${product.price}</p>
+            <p>${product.quantity}</p>
+            <button class="btn-base">remove</button>
+          </div>
         `
       })
 
-      taino.elid("cart-slide").insertAdjacentHTML("beforeend", prints);
-
-
-    }
-
-
-
-
-
-
-  }
-
-  static cartRemove() {
-    let cartFns = {
-      removeTitle: () => { },
-      removeQuantity: () => { },
-      removeTotal: () => { }
+      taino.el(".cart-container").insertAdjacentHTML("beforeend", prints);
     }
   }
 }
