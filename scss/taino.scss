@@ -1,0 +1,23 @@
+
+//Utilities
+@import "utilities/googlefonts.scss";
+@import "utilities/var.scss";
+@import "utilities/mixin.scss";
+
+//Global
+@import "global.scss";
+
+//Vendors
+@import "vendor/glide.scss";
+
+//Componets - other
+@import "componets/other/button.scss";
+@import "componets/other/misc.scss";
+
+//Componets - template
+@import "componets/template/nav.scss";
+@import "componets/template/subscribe.scss";
+@import "componets/template/footer.scss";
+
+// Componets - pages
+@import "componets/pages/home.scss"

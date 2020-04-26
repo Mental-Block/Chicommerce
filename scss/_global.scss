@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  footer,
+  header,
+  section {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  
+  section{
+    position: relative;
+  }
+  
+  body {
+    color: var(--white);
+    font-family: var(--roboto);
+    background-color: var(--grey-text);
+  }
+  
+  a {
+    text-decoration: none;
+  }

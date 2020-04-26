@@ -1,0 +1,42 @@
+#subscribe {
+    padding: 2rem;
+    background-color: var(--red-bg-color);
+    text-align: center;
+  }
+
+.subscribe{
+  &-text{
+    font-size: 1rem;
+  }
+  &-title{
+    font-size: 1.5rem;
+    line-height: 3rem;
+    font-family: var(--play-fair);
+  }
+  &-form{
+    margin: 0 auto;
+    max-width: 320px;
+    padding: 1.25rem 0 0 0;
+
+    &-label{
+      font-weight: var(--med);
+      font-size: 1rem;
+      position: relative;
+      top: 2px;
+    }
+
+    &-input[type="email"]{
+      margin: 0;
+      max-width: 100%;
+      width: 270px;
+      border-radius: 6px;
+      line-height: 1.8rem;
+      border: 4px solid black;
+      font-family: var(--roboto);
+      font-size: 0.8rem;
+      color: var(--black-text);
+      padding-left: 0.5rem;
+    }
+  }
+}
+

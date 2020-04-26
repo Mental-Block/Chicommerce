@@ -1,7 +1,7 @@
 class templateLoader {
   constructor(site) {
     this.header = `
-    <header id="navigation" class="navigation-container nav-add-black">
+    <header id="navigation" class="nav-container nav-add-black">
       <div class="logo-container">
         <img src="/images/Logo.svg" />
       </div>
@@ -24,47 +24,47 @@ class templateLoader {
 
     this.subscribe = `
       <section id="subscribe">
-        <h2 class="header-title">Want Exclusive Deals and Updates?</h2>
-        <p class="sub-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. </p>
-        <form class="email-form " method="POST" action="">
-          <div class="sub-form-control">
-              <label for="email">Email</label>
-              <input type="email" id="email" aria-describedby="email" placeholder="Email"/>
+        <h2 class="subscribe-title"> Want Exclusive Deals and Updates?</h2>
+        <p class="subscribe-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. </p>
+        <form  class="subscribe-form" method="POST" action="">
+          <div class="subscribe-container">
+              <label for="email" class="subscribe-form-label">Email: </label>
+              <input class="subscribe-form-input" type="email" id="email" aria-describedby="email" placeholder="JohnDoe@gmail.com"/>
               <span class="helper-text"></span>
           </div>
-          <button class="btn-base sub-btn" type="submit">Subscribe Today!</button>
+          <button class="btn-red" type="submit">Subscribe Today!</button>
         </form>
       </section>
   `;
 
     this.footer = `
       <footer id="footer"> 
-        <div class="footer-container-main">
-          <div class="footer-container">
-            <h4 class="footer-group-title">Phone number</h4>
-            <ul class="footer-list-group">
+        <div class="footer-container">
+          <div class="footer-container-sec">
+            <h4 class="footer-title">Phone number</h4>
+            <ul class="footer-group">
                 <li>USA: 1 (643) 594-4322</li>
                 <li>Mexico: 1 (323) 865-2049</li>
                 <li>Canada: 1 (069) 123-654</li>
             </ul>
           </div>
-          <div class="footer-container">
-            <h4 class="footer-group-title">Email</h4>
-            <ul class="footer-list-group">
+          <div class="footer-container-sec">
+            <h4 class="footer-title">Email</h4>
+            <ul class="footer-group">
                 <li>ChickenEggs@gmail.com</li>
                 <li>CreativeLogo@gmail.com</li>
             </ul>
           </div>
-          <div class="footer-container">
-            <h4 class="footer-group-title">Adress</h4>
-            <ul class="footer-list-group">
+          <div class="footer-container-sec">
+            <h4 class="footer-title">Adress</h4>
+            <ul class="footer-group">
               <li>3186 Th Avenue,</li>
               <li>Kugaaruk, X0E 1K0</li>
             </ul>
           </div>
-          <div class="footer-container">
-            <h4 class="footer-group-title">Follow us on</h4>
-            <div class="icons">
+          <div class="footer-container-sec">
+            <h4 class="footer-title">Follow us on</h4>
+            <div class="footer-icons">
               <a href="http://facebook.com" target="_blank" rel="noopener noreferrer"><img src="/images/facebook.svg" alt="facebook"/></a>
               <a href="http://twitter.com" target="_blank" rel="noopener noreferrer"><img src="/images/twitter.svg" alt="twitter"/></a>
               <a href="http://linkedin.com" target="_blank" rel="noopener noreferrer"><img src="/images/linkedin.svg" alt="linkedin"/></a>
@@ -74,7 +74,7 @@ class templateLoader {
           </div>
         </div>
         <div class="footer-bottom">
-          <p class="footer-bottom-text">Website made and designed by <a class="footer-bottom-link" target="_blank" rel="noopener noreferrer" href="https://aarontibben.netlify.com">Aaron Tibben</a><p>
+          <p class="footer-bottom-text">Website made and designed by <a class="footer-bottom-link" target="_blank" rel="noopener noreferrer" href="https://aarontibben.netlify.com">Aaron Tibben</a></p>
         </div>
 </footer>
 

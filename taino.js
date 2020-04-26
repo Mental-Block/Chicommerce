@@ -315,7 +315,7 @@ class taino {
           .replace(/ /g, "")}">
               <div class="product-card-body">
                 <img class="img card-img" src="${product.mainImage}" />
-                <div class="space-between">
+                <div class="product-card-container">
                   <h3 class="product-card-title">${product.title}</h3>
                   <h4 class="product-card-price">${product.price}</h4>
                 </div>
@@ -348,7 +348,7 @@ class taino {
     const navItem = taino.el(".nav-list-item", true);
     const findNavItem = taino.el(".nav-list-item[data-tag=" + a + "]");
 
-    if (a === routes["/"] && window.innerWidth > 768) {
+    if (a === routes["/"] && window.innerWidth > 768 && site.state.cartOn != true) {
       navContainer.classList.remove("nav-add-black");
     } else {
       navContainer.classList.add("nav-add-black");
@@ -377,72 +377,121 @@ class taino {
 
   static cart() {
     if (site.state.cartOn === true) {
-      if (!site.state.cart[0]) {
+      if (site.state.cart.length === 0) {
         site.state.cartOn = false
+        return;
+      }
+      if (!site.state.cartOpen) {
+        site.state.cartOpen = false
+      }
+
+      const cartIcon = () => {
+        let icon = `<div id="cart"></div>`
+        taino.elid("tainomain").insertAdjacentHTML("beforeend", icon);
       }
       const cartSlide = () => {
         let slide = `
-            <div id="cart-slide">
+            <div id="cart-slide" class="dragscroll">
               <div id="cart-arrow"></div>
-              <div class="cart-container">
-              
+              <div class="cart-container"></div>
+              <div class="cart-total-clear">
+                <p class="total"></p>
+                <button id="clear-all-btn" class="btn btn-base">Clear Cart</button>
               </div>
-              <button class="btn btn-base">Clear Cart</button>
+              <a href="#" class="btn-base btn-check-out green-btn">Check Out</a>
             </div>
             
           `;
         taino.elid("tainomain").insertAdjacentHTML("beforeend", slide);
       }
-      const cartIcon = () => {
-        let icon = `<div id="cart"></div>`
-        taino.elid("tainomain").insertAdjacentHTML("beforeend", icon);
-      }
-      cartIcon();
-      cartSlide();
 
-      const slide = taino.elid("cart-slide")
-      const arrow = taino.elid("cart-arrow")
-      const icon = taino.elid("cart")
+      const cartFns = {
+        closeCart: () => {
+          slide.style.transform = "translate(320px)"
+          icon.style.visibility = "visible"
+          icon.style.opacity = "1"
+          site.state.cartOpen = false
+        },
+        openCart: () => {
+          slide.style.transform = "translate(0px)"
+          icon.style.visibility = "hidden"
+          icon.style.transition = "visibility 0s, opacity 1s ease-in"
+          icon.style.opacity = "0"
+          site.state.cartOpen = true
+        },
+        addTotal: () => {
+          let totalDOM = taino.el(".total");
+          let tempTotal = 0;
+          site.state.cart.forEach(product => {
+            tempTotal += product.quantity * product.price;
+          })
+          tempTotal = parseFloat(tempTotal.toFixed(2));
+          totalDOM.innerText = `Total: $${tempTotal}`;
+        },
+        removeItem: () => {
+          let id = taino.el(".cart-item").getAttribute("data-id");
+          let item = taino.el(".cart-item");
+          let index = site.state.disableCard.findIndex(index => {
+            return index == id;
+          })
+          item.parentNode.removeChild(item);
+          site.state.cart.splice(index, 1)
+          site.state.disableCard.splice(index, 1);
+          site.update();
+        },
+        clearCart: () => {
+          const item = taino.el(".cart-container");
+          item.parentNode.removeChild(item);
+          site.state.cart.length = 0;
+          site.state.disableCard.length = 0;
+          site.update();
+        },
+        addItem: () => {
+          let prints = "";
 
-      icon.addEventListener("click", () => {
-        slide.style.transform = "translate(0px)"
-        icon.style.visibility = "hidden"
-        icon.style.transition = "visibility 0s, opacity 1s ease-in"
-        icon.style.opacity = "0"
-      })
-
-      arrow.addEventListener("click", () => {
-        slide.style.transform = "translate(320px)"
-        icon.style.visibility = "visible"
-        icon.style.opacity = "1"
-      })
-
-      slide.addEventListener("mousedown", () => {
-        slide.classList.add("cart-slide-grabbing");
-        slide.classList.remove("cart-slide-grab");
-      })
-
-      slide.addEventListener("mouseup", () => {
-        slide.classList.add("cart-slide-grab");
-        slide.classList.remove("cart-slide-grabbing");
-      })
-
-
-      let prints = "";
-
-      site.state.cart.forEach(product => {
-        prints += `
-        <div>
-            <p>${product.title}</p>
-            <img class="img card-img" src="${product.mainImage}" />
-            <p>${product.price}</p>
-            <p>${product.quantity}</p>
-            <button class="btn-base">remove</button>
+          site.state.cart.forEach(product => {
+            prints += `
+        <div class="cart-item" data-id="${product.id}">
+          <ul class="cart-info">
+            <li class="cart-title">${product.title}</li>
+            <li class="cart-price">${product.price}</li>
+            <li class="quantity">Quantity: ${product.quantity}</li>
+            <button class="btn-base clear-item-btn">remove</button>
+          </ul>
+            <img class="img cart-img" src="${product.mainImage}" />
           </div>
         `
-      })
+          })
 
-      taino.el(".cart-container").insertAdjacentHTML("beforeend", prints);
+          taino.el(".cart-container").insertAdjacentHTML("beforeend", prints);
+        }
+      }
+
+      cartIcon();
+      cartSlide();
+      cartFns.addItem();
+      cartFns.addTotal();
+
+      const icon = taino.elid("cart")
+      const slide = taino.elid("cart-slide")
+      const arrow = taino.elid("cart-arrow")
+      const btnClearAll = taino.elid("clear-all-btn");
+      const btnClearItem = taino.el(".clear-item-btn", true);
+
+      if (site.state.cartOpen === true) {
+        cartFns.openCart()
+      }
+      else {
+        cartFns.closeCart()
+      }
+
+      icon.addEventListener("click", cartFns.openCart);
+      arrow.addEventListener("click", cartFns.closeCart);
+      btnClearAll.addEventListener("click", cartFns.clearCart);
+      for (let i = 0; i < btnClearItem.length; i++) {
+        btnClearItem[i].addEventListener("click", cartFns.removeItem)
+      }
+
     }
   }
 }

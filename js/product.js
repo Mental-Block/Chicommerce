@@ -11,9 +11,6 @@ class productLoader {
 
     #quantity{width:40px !important; height:40px !important; text-align: center; display:block; margin-bottom: 0.8rem;}
 
-    .product-btn {background-color: var(--green); border: 4px solid var(--green); padding: 0.5rem; font-weight: var(--reg); font-size: 1.15rem; display:block;}
-    .product-btn:hover {background-color: var(--green25);}
-
     .product-title{font-size: 1.8rem; margin: 0.6rem 0;}
     .product-description{ margin: 0.75rem 0;}
 
@@ -82,7 +79,7 @@ class productLoader {
         <p class="product-description">${description}</p>
         <form action="" method="post">
           <input type="numeric" id="quantity" aria-describedby="quantity" value="0" placeholder="0"/>
-          <button type="submit" class="btn-base product-btn">Add To Cart</button>
+          <button type="submit" class="btn-base green-btn">Add To Cart</button>
         </form>
     `;
     if (!taino.el(".info")) {
@@ -92,7 +89,7 @@ class productLoader {
   }
 
   cartAddButton({ title, id, price, mainImage }) {
-    let btn = taino.el(".product-btn");
+    let btn = taino.el(".green-btn ");
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -114,6 +111,7 @@ class productLoader {
     taino.el(".glide__slides__one").innerHTML = print;
 
     let glideOne = new Glide(".glide__one", {
+      keyboard: false,
       bound: true,
       rewindDuration: 1000,
       dragThreshold: 40,
@@ -140,6 +138,7 @@ class productLoader {
     taino.el(".glide__slides__two").innerHTML = print;
 
     let glideTwo = new Glide(".glide__two", {
+      keyboard: false,
       bound: true,
       rewindDuration: 1000,
       dragThreshold: 40,

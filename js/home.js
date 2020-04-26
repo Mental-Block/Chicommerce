@@ -3,28 +3,26 @@ class homeLoader {
     this.title = "Home";
     this.meta_desc =
       "This is an e commerce/small business website made for fun";
-    this.styling = `
-    `;
     this.starthtml = `
-        <section id="landing-bg">
-          <div class="center">
-            <h1 class="landing-text landing-main">Free Run,</h1>
-            <h2 class="landing-text landing-sec">Organic <span class="brown">Eggs</span></h2>
-            <a href="/products" class="btn-base landing-btn">Order Now</a>
+        <section id="landing">
+          <div class="landing">
+            <h1 class="landing-title">Free Run,</h1>
+            <h2 class="landing-title-green">Organic <span class="landing-title-brown">Eggs</span></h2>
+            <a href="/products" class="btn-main">Order Now</a>
           </div>
         </section>
 
-        <section id="about-info">
-          <div class="about-info-container">
+        <section id="landing-about">
+          <div class="landing-about-container">
             <img class="img" src="/images/about.png" alt="chicken coop" >
-            <div class="about-info-space">
-              <p class="text-base about-info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
-              <a class="btn-base btn" href="/about">Learn More</a>
+            <div class="landing-about-container-sec">
+              <p class="landing-about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis.</p>
+              <a class="btn-brown" href="/about">Learn More</a>
             </div>
           </div>
         </section>
 
-      <section id="product-info">
+      <section id="landing-product">
         <div class="glide">
             <div class="glide__track" data-glide-el="track">
               <div class="glide__slides">
@@ -38,7 +36,7 @@ class homeLoader {
         </div>
       </section>
 
-        <section id="gallery-info">
+        <section id="landing-gallery">
             <!-- insert gallery images-->
         </section>
 
@@ -106,7 +104,7 @@ class homeLoader {
       `;
     });
 
-    taino.elid("gallery-info").innerHTML = prints;
+    taino.elid("landing-gallery").innerHTML = prints;
   }
 
   slider() {
