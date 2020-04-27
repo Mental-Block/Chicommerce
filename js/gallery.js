@@ -4,13 +4,12 @@ class galleryLoader {
     this.meta_desc = "Yes, we have pictures of our abused animals.";
 
     this.styling = `
-    #gallery{ background-color: var(--darker-black-bg-color); padding: 2rem 0;}
-    #gallery .glide{max-width: 1200px; margin: 0 auto;}
-    .img-slideshow{margin: 0 auto; max-height: 300px;}
-    #appendModal{position: relative;}
-    .modal-overlay {width: 100%; height: 100vh; background-color: var(--black75); 
-    position:absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; cursor:pointer; display: flex; justify-content:center; align-items:center;}
-    .modal-image {max-width: 100%; max-height: 100%;}
+    #gallery { background-color: var(--darker-black-bg-color); padding: 2rem 0; }
+    #gallery .glide { max-width: 1200px; margin: 0 auto; }
+    .img-slideshow { margin: 0 auto; max-height: 300px; }
+    #appendModal { position: relative; }
+    .modal-overlay { width: 100%; height: 100vh; background-color: var(--black75); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; cursor: pointer; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+    .modal-image { max-width: 100%; max-height: 100%; }
     `;
 
     this.starthtml = `
@@ -29,7 +28,9 @@ class galleryLoader {
         </section>
 
         <section id="gallery-images">
+          <div class="gallery-container">
         <!--Insert Images Here-->
+          </div>
         </section>
         `;
     this.loadPageMethods();
@@ -51,13 +52,13 @@ class galleryLoader {
 
     images.forEach(scr => {
       prints += `
-        <div class="gallery-image-container">
-          <img class="img" src="${scr}"/>
+        <div class="gallery-container-sec gallery-container-third">
+          <img class="img gallery-img" src="${scr}"/>
         </div>
       `;
     });
 
-    taino.elid("gallery-images").innerHTML = prints;
+    taino.el(".gallery-container").innerHTML = prints;
   }
 
   slideShow(images) {
@@ -86,7 +87,7 @@ class galleryLoader {
   }
 
   modalPopUp(images) {
-    let container = taino.el(".gallery-image-container", true);
+    let container = taino.el(".gallery-container-sec", true);
     for (let i = 0; i < container.length; i++) {
       container[i].addEventListener("click", () => {
         let image = images[i];

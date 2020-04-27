@@ -62,5 +62,20 @@
   }
 }
 
+@media only screen and (min-width: 768px) {
+  #burger {
+    display: none;
+  }
+  
+  .nav{
+      &-list {
+      width: 360px;
+      position: initial;
+      padding: 0 0.5rem;
+      @include flex-center-space;
+      flex-direction: row;
+    }
+  }
+}
   
   

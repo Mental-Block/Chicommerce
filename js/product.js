@@ -79,7 +79,7 @@ class productLoader {
         <p class="product-description">${description}</p>
         <form action="" method="post">
           <input type="numeric" id="quantity" aria-describedby="quantity" value="0" placeholder="0"/>
-          <button type="submit" class="btn-base green-btn">Add To Cart</button>
+          <button type="submit" class="btn-green">Add To Cart</button>
         </form>
     `;
     if (!taino.el(".info")) {
@@ -89,7 +89,7 @@ class productLoader {
   }
 
   cartAddButton({ title, id, price, mainImage }) {
-    let btn = taino.el(".green-btn ");
+    let btn = taino.el(".btn-green");
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();

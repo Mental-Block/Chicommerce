@@ -130,3 +130,9 @@
       cursor: -webkit-grabbing;
   }
 }
+
+@media only screen and (max-width: 550px) {
+  .glide__arrows {
+    display: none;
+  }
+}

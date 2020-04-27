@@ -272,63 +272,7 @@ class taino {
     }
   }
 
-  static async loadProducts() {
-    let productInformation = await fetch(site.productfile)
-      .then((response) => response.json())
-      .then(async function (json) {
-        let products = await json.items;
-        products = products.map((items) => {
-          const { id, price, description, title, mainImage, images } = items.fields;
-          return { id, price, description, title, mainImage, images };
-        });
-        return products;
-      });
-    return productInformation;
-  }
 
-  static async loadImages() {
-    let images = [];
-    for (let i = 0; i <= 4; i++) {
-      images[i] = `/images/gallery${i}.png`;
-    };
-    return images;
-  }
-
-  static getCardId(productInformation) {
-    const card = taino.el(".product-card", true);
-    for (let i = 0; i < card.length; i++) {
-      card[i].addEventListener("click", () => {
-        site.state.tempId = productInformation[i].id;
-      });
-    }
-  }
-
-
-  static printProductCards(productInformation, appendToDOM) {
-    let print = "";
-    productInformation.forEach((product) => {
-      print += `
-        <div class="item" data-id="${product.id}">
-            <div class="product-card">
-              <a href="/products/${product.title
-          .toLowerCase()
-          .replace(/ /g, "")}">
-              <div class="product-card-body">
-                <img class="img card-img" src="${product.mainImage}" />
-                <div class="product-card-container">
-                  <h3 class="product-card-title">${product.title}</h3>
-                  <h4 class="product-card-price">${product.price}</h4>
-                </div>
-                <p class="base-text product-card-text">${
-        product.description
-        }</p>
-              </div>
-              </a>
-            </div>
-        </div>`;
-    });
-    appendToDOM.innerHTML = print;
-  }
 
   static el(x, getall) {
     var s = x.trim();
@@ -375,6 +319,98 @@ class taino {
     }
   }
 
+  static async loadProducts() {
+    let productInformation = await fetch(site.productfile)
+      .then((response) => response.json())
+      .then(async function (json) {
+        let products = await json.items;
+        products = products.map((items) => {
+          const { id, price, description, title, mainImage, images } = items.fields;
+          return { id, price, description, title, mainImage, images };
+        });
+        return products;
+      });
+    return productInformation;
+  }
+
+  static async loadImages() {
+    let images = [];
+    for (let i = 0; i <= 4; i++) {
+      images[i] = `/images/gallery${i}.png`;
+    };
+    return images;
+  }
+
+  static getCardId(productInformation) {
+    const card = taino.el(".product-card", true);
+    for (let i = 0; i < card.length; i++) {
+      card[i].addEventListener("click", () => {
+        site.state.tempId = productInformation[i].id;
+      });
+    }
+  }
+
+  static printProductCards(productInformation, appendToDOM) {
+    let print = "";
+    productInformation.forEach((product) => {
+      print += `
+        <div class="item" data-id="${product.id}">
+            <div class="product-card">
+              <a href="/products/${product.title
+          .toLowerCase()
+          .replace(/ /g, "")}">
+              <div class="product-card-body">
+                <img class="img card-img" src="${product.mainImage}" />
+                <div class="product-card-container">
+                  <h3 class="product-card-title">${product.title}</h3>
+                  <h4 class="product-card-price">${product.price}</h4>
+                </div>
+                <p class="base-text product-card-text">${
+        product.description
+        }</p>
+              </div>
+              </a>
+            </div>
+        </div>`;
+    });
+    appendToDOM.innerHTML = print;
+  }
+
+  static contactForm(appendToDOM) {
+    let prints = `
+      <div class="contact-container">
+        <div id="map">
+          <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <form class="contact-form">
+            <div class="contact-form-control contact-form-control-sm">
+                <label class="sr-only" for="name">Name</label>
+                <input class="contact-form-input" type="text" id="name" placeholder="Name" value=""/>
+                <span class="helper-text"></span>
+            </div>
+            <div class="contact-form-control contact-form-control-sm">
+                <label class="sr-only" for="contactEmail">Email</label>
+                <input class="contact-form-input" type="email" id="contactEmail" aria-describedby="contactEmail" placeholder="Email"/>
+                <span class="helper-text"></span>
+            </div>
+            <div class="contact-form-control">
+                <label class="sr-only" for="subject">Subject</label>
+                <input class="contact-form-input" type="text" id="subject" placeholder="Subject" aria-describedby="subject"/>
+                <span class="helper-text"></span>
+            </div>
+            <div class="contact-form-control">
+                <label class="sr-only" for="message">Message</label>
+                <textarea class="contact-form-input" type="text" name="message" id="message" placeholder="Message" aria-describedby="message"></textarea>
+                <span class="helper-text"></span>
+            </div>
+                <button class="btn-brown" type="submit">Submit</button>
+          </form>
+        </div>
+    `;
+
+    appendToDOM.insertAdjacentHTML("beforeend", prints);
+  }
+
   static cart() {
     if (site.state.cartOn === true) {
       if (site.state.cart.length === 0) {
@@ -386,23 +422,23 @@ class taino {
       }
 
       const cartIcon = () => {
-        let icon = `<div id="cart"></div>`
-        taino.elid("tainomain").insertAdjacentHTML("beforeend", icon);
+        let prints = `<div id="cart"></div>`
+        taino.elid("tainomain").insertAdjacentHTML("beforeend", prints);
       }
       const cartSlide = () => {
-        let slide = `
+        let prints = `
             <div id="cart-slide" class="dragscroll">
               <div id="cart-arrow"></div>
               <div class="cart-container"></div>
               <div class="cart-total-clear">
                 <p class="total"></p>
-                <button id="clear-all-btn" class="btn btn-base">Clear Cart</button>
+                <button id="clear-all-btn" class="btn-main">Clear Cart</button>
               </div>
               <a href="#" class="btn-base btn-check-out green-btn">Check Out</a>
             </div>
             
           `;
-        taino.elid("tainomain").insertAdjacentHTML("beforeend", slide);
+        taino.elid("tainomain").insertAdjacentHTML("beforeend", prints);
       }
 
       const cartFns = {

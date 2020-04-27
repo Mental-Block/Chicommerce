@@ -13,6 +13,7 @@
 //Componets - other
 @import "componets/other/button.scss";
 @import "componets/other/misc.scss";
+@import "componets/other/cart.scss";
 
 //Componets - template
 @import "componets/template/nav.scss";
@@ -20,4 +21,6 @@
 @import "componets/template/footer.scss";
 
 // Componets - pages
+/* All other pages css will be dynamically loaded to have a faster 
+run time but we'll cache the home page as it's the default*/
 @import "componets/pages/home.scss"

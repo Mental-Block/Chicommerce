@@ -37,39 +37,13 @@ class homeLoader {
       </section>
 
         <section id="landing-gallery">
+          <div class="gallery-container">
             <!-- insert gallery images-->
+          </div>
         </section>
 
         <section id="contact">
-            <h2 class="header-title">Need to get in touch?</h2>
-            <div class="contact-container">
-              <div id="map">
-                <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" frameborder="0" allowfullscreen></iframe>
-              </div>
-                <form class="contact-form">
-                  <div class="form-control form-control-sm">
-                    <label for="name">Name</label>
-                      <input type="text" id="name" placeholder="Name" value=""/>
-                      <span class="helper-text"></span>
-                  </div>
-                  <div class="form-control form-control-sm">
-                    <label for="contactEmail">Email</label>
-                      <input type="email" id="contactEmail" aria-describedby="contactEmail" placeholder="Email"/>
-                      <span class="helper-text"></span>
-                  </div>
-                  <div class="form-control">
-                    <label for="subject">Subject</label>
-                      <input type="text" id="subject" placeholder="Subject" aria-describedby="subject"/>
-                      <span class="helper-text"></span>
-                  </div>
-                  <div class="form-control">
-                    <label for="message">Message</label>
-                      <textarea type="text" name="message" id="message" cols="30" rows="10" placeholder="Message" aria-describedby="message"></textarea>
-                      <span class="helper-text"></span>
-                    </div>
-                  <button class="btn-base btn" type="submit">Submit</button>
-                </form>
-              </div>
+          <h2 class="contact-title">Need to get in touch?</h2>
           </section>
         `;
 
@@ -82,13 +56,20 @@ class homeLoader {
     taino.loadProducts().then((productInformation) => {
       taino.printProductCards(productInformation, taino.el(".glide__slides"));
       taino.getCardId(productInformation);
+
       this.slider();
+      taino.contactForm(taino.elid("contact"));
       taino.cart();
     });
 
     taino.loadImages().then((images) => {
       this.printGalleryImages(images);
     });
+
+    setTimeout(() => {
+
+    }, 0)
+
   }
 
   printGalleryImages(images) {
@@ -96,15 +77,15 @@ class homeLoader {
 
     images.forEach((scr) => {
       prints += `
-      <a class="gallery-info-a" href="/gallery">
-        <div class="gallery-info-container">
-          <img class="img" src="${scr}"/>
+      <a href="/gallery">
+        <div class="gallery-container-sec">
+          <img class="img gallery-img" src="${scr}"/>
         </div>
       </a>
       `;
     });
 
-    taino.elid("landing-gallery").innerHTML = prints;
+    taino.el(".gallery-container").innerHTML = prints;
   }
 
   slider() {

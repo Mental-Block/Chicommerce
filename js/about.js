@@ -3,66 +3,69 @@ class aboutLoader {
     this.title = "About";
     this.meta_desc = "Our story on how we became egg farmers";
     this.styling = `
-    .barn-bg{background:url("/images/backgroundbarn.png") no-repeat center center; text-align: center; width: 100%; position:relative; padding: 20vh 0;}
-    .barn-bg::after {position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; background-color: var(--black75);}
-    .barn-header{font-family: var(--play-fair); font-size: 3rem;}
-    .barn-text{font-size: 1.2rem; font-style: italic; margin: 1rem 2rem 0 2rem;}
-    .barn-text:before, .barn-text:after {content:'" '; font-size: 1.5rem;}
+    #barn { background: url("/images/backgroundbarn.png") no-repeat center center; text-align: center; width: 100%; position: relative; padding: 20vh 0; }
+    #barn::after { position: absolute; top: 0; left: 0; right: 0; bottom: 0; content: ""; background-color: var(--black75); }
     
-    #about, #about-one, #testimonial, #review {padding: 2rem;}
-    #about, #testimonial {background-color: var(--red-bg-color);}
-    #about-one, #review {background-color: var(--grey-bg-color)}
-    #about .header-title2, #about-one .header-title2, #testimonial .header-title2 {text-align:center; margin-bottom: 2rem;}
+    .barn-center { text-align: center; position: relative; z-index: 1; }
+    .barn-header { font-family: var(--play-fair); font-size: 3rem; }
+    .barn-text { font-size: 1.2rem; font-style: italic; margin: 1rem 2rem 0 2rem; }
+    .barn-text:before, .barn-text:after { content: '" '; font-size: 1.5rem; }
+
+    #about, #about-one, #testimonial, #review { padding: 2rem; }
+    #about, #testimonial { background-color: var(--red-bg-color); }
+    #about-one, #review { background-color: var(--grey-bg-color); }
+
+    .about-title { text-align: center; margin-bottom: 2rem; line-height: auto; }
+    .about-text { margin-top: 1rem; line-height: 1.5rem; }
+
+    .testimonial-card { background-color: var(--black75); margin: 0 auto; border-radius: 4px; max-width: 320px; height: 360px; padding: 1rem 1.25rem; }
+    .testimonial-card-title { margin: 1rem 0; font-size: 1.25rem; }
+    .testimonial-card-text { font-style: italic; }
+    .testimonial-card-text:after, .testimonial-card-text:before { content: ' " '; font-size: 1.25rem; }
     
-    .about-text{margin-top: 1rem;}
+    .about-container { max-width: 500px; margin: 0 auto; }
+
+    .review-container { max-width: 360px; margin: 0 auto; }
+    .review-form-control { margin: 1rem 0; display: block; }
+    .review-form-input { background-color: #ffffff; font-family: var(--roboto); padding: 0.5rem; font-weight: var(--med); border: none; resize: none; width: 100%; }
+    .review-form-input:nth-child(1) { margin-top: 0; }
+    .review-form textarea { height: 240px; }
     
-    .testimonial-card{background-color:var(--black75); margin: 0 auto; border-radius: 4px; max-width: 320px; height: 360px; padding: 1rem;}
-    .testimonial-card-title{margin: 1rem 0; }
-    .testimonial-card-text{ font-style: italic; }
-    .testimonial-card-text:after, .testimonial-card-text:before  {content:' " '; font-size: 1.25rem;}
+    @media only screen and (min-width: 768px) { #about, #about-one, #testimonial, #review { padding: 4rem 2rem; }
+      #about, #about-one, #testimonial { padding-top: 3rem; }
+      .about-title { margin-bottom: 3rem; } }
     
-    .review-container, .about-container {max-width:500px; margin: 0 auto;}
-    .form-add-quote{max-width: 500px;}
-    
-    @media only screen and (min-width: 768px) {
-      #about, #about-one, #testimonial, #review {padding: 4rem 2rem;}
-      #about, #about-one, #testimonial {padding-top: 3rem;}
-      #about .header-title2, #about-one .header-title2, #testimonial .header-title2 {margin-bottom: 3rem;}
-    }
-    
-    @media only screen and (min-width: 1120px) {
-      .about-container { max-width: 1050px; display: flex;}
-      .about-text{margin: 0 0 0 1rem;}
-    }
+    @media only screen and (min-width: 1120px) { .about-container { max-width: 1050px; display: -webkit-box; display: -ms-flexbox; display: flex; }
+      .about-text { margin: 0 0 0 1rem; } }
     `;
 
     this.starthtml = `
-           <section class="barn-bg">
-            <div class="center">
+           <section id="barn">
+            <div class="barn-center">
               <h2 class="barn-header">Our Mission</h2>
                <p class="barn-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc.</p>
             </div>
           </section>
 
               <section id="about">
-                <h2 class="header-title2">Header Title</h2>
+                <h2 class="about-title">Header Title</h2>
                 <div class="about-container">
                   <img class="img" src="/images/aboutpage.png" alt="chickens coming out of the chicken coop"/>
-                  <p class="text-base about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis. Sed sed tempor odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis.</p>
+                  <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis. Sed sed tempor odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis.</p>
                 </div>
              </section>
 
             <section id="about-one">
-              <h2 class="header-title2">Another Header Title</h2>
+              <h2 class="about-title">Another Header Title</h2>
               <div class="about-container">
                 <img class="img" src="/images/oldbarn.png" alt="The an old red barn from the 1970's that housed the chickens">
-                <p class="text-base about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis. Sed sed tempor odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis.</p>
+                <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis rhoncus. Nullam euismod nunc ultricies lorem lacinia, elementum semper nulla elementum. Mauris accumsan ante sit amet velit commodo, dignissim posuere diam lacinia. Sed mattis at justo gravida lobortis. Sed sed tempor odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. Pellentesque nunc nibh, fringilla nec ex et, porttitor ultrices arcu. Suspendisse tempor, sem id porta laoreet, tellus mauris scelerisque urna, ac pellentesque dui massa at justo. Aenean nisl nisi, pharetra non tellus eget, iaculis porttitor arcu. Sed pharetra iaculis.</p>
               </div>
             </section>
             
           <section id="testimonial">
             <div class="glide">
-            <h2 class="header-title2">Testimonials</h2>
+            <h2 class="about-title">Testimonials</h2>
               <div class="glide__track" data-glide-el="track">
                 <div class="glide__slides">
                 <!-- insert cards -->
@@ -73,24 +76,19 @@ class aboutLoader {
 
             <section id="review">
               <div class="review-container">
-                <h2 class="header-title2" >Add Your Own Review<h2> 
-                <form class="form-add-quote">
-                  <div class="form-control">
-                    <label for="reviewname">Name</label>
-                      <input type="text" id="reviewname" placeholder="Name" value=""/>
+                <h2 class="about-title" >Add Your Own Review</h2> 
+                <form class="review-form">
+                  <div class="review-form-control">
+                    <label class="sr-only" for="reviewName">Name</label>
+                      <input class="review-form-input" type="text" id="reviewName" placeholder="Name" value=""/>
                       <span class="helper-text"></span>
                   </div>
-                  <div class="form-control">
-                    <label for="reviewEmail">Email</label>
-                      <input type="email" id="reviewEmail" aria-describedby="reviewEmail" placeholder="Email"/>
-                      <span class="helper-text"></span>
-                  </div>
-                  <div class="form-control">
-                    <label for="reviewmessage">Message</label>
-                      <textarea  type="text" name="reviewmessage" id="reviewmessage" cols="30" rows="10" placeholder="Message" aria-describedby="message"></textarea>
+                  <div class="review-form-control">
+                    <label class="sr-only" for="reviewMessage">Message</label>
+                      <textarea class="review-form-input" type="text" name="reviewMessage" id="reviewmessage" placeholder="Message" aria-describedby="message"></textarea>
                       <span class="helper-text"></span>
                     </div>
-                  <button class="btn-base btn" type="submit">Add Quote</button>
+                  <button class="btn-brown" type="submit">Add Quote</button>
                   </form>
                 </div>
             </section>

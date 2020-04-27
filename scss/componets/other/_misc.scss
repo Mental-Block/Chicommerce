@@ -9,8 +9,13 @@
   height: auto;
   }
 
+  .sr-only{
+    display: none;
+  }
+
   .product {
     &-card{
+      transition: ease-in 250ms;
       margin: 0 auto;
       border-radius: 8px;
       background-color: var(--black50);
@@ -60,4 +65,4 @@
       background-color: var(--black75);
     }
   }
-  
+
