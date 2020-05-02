@@ -1,10 +1,8 @@
-#subscribe {
-    padding: 2rem;
-    background-color: var(--red-bg-color);
-    text-align: center;
-  }
-
 .subscribe{
+  @extend .section-default-padding-p2;
+  background-color: var(--red-bg-color);
+  text-align: center;
+
   &-text{
     font-size: 1rem;
   }
@@ -40,11 +38,8 @@
 }
 
 @media only screen and (min-width: 768px) {
-  #subscribe{
-    padding: 4rem 2rem;
-  }
-
   .subscribe{
+    padding: 4rem 2rem;
     &-form{
       @include flex-center-center;
       flex-direction: row;

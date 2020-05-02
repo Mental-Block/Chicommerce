@@ -1,4 +1,4 @@
-@mixin flex-center-center {
+.flex-center-center {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -7,18 +7,27 @@
     flex-direction: column;
 }
 
-@mixin flex-center-space {
+.flex-center-space {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-@mixin flex-center-end{
+.flex-center-end{
     display: flex;
     align-content: center;
     justify-content: flex-end;
 }
 
-@mixin section-default-padding-p4{
-    padding: 4rem 2rem;
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+}
+
+.section-default-padding-p2{
+    padding: 2rem;
 }

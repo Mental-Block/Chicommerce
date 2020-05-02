@@ -1,23 +1,23 @@
 class productLoader {
   constructor(site) {
     this.styling = `
-    #product {background-color: var(--straw-brown); padding: 2rem;}
-    #product .glide {max-width: 400px; margin: 0 auto 4px auto;}
-    #product .slide {width: 100%;}
-    #product .glide__arrow--right, #product .glide__arrow--left{opacity:0.75;}
-    #product .glide__arrow--right:hover, #product .glide__arrow--left:hover{opacity:1;} 
-    #product .glide__arrow--right {right:1rem;}
-    #product .glide__arrow--left {left:1rem;}
+    .product-main {background-color: var(--straw-brown); padding: 2rem; position: relative;}
+    .product-main .glide {max-width: 400px; margin: 0 auto 4px auto;}
+    .product-main .slide {width: 100%;}
+    .product-main .glide__arrow--right, #product .glide__arrow--left{opacity:0.75;}
+    .product-main .glide__arrow--right:hover, #product .glide__arrow--left:hover{opacity:1;} 
+    .product-main .glide__arrow--right {right:1rem;}
+    .product-main .glide__arrow--left {left:1rem;}
 
     #quantity{width:40px !important; height:40px !important; text-align: center; display:block; margin-bottom: 0.8rem;}
 
-    .product-title{font-size: 1.8rem; margin: 0.6rem 0;}
+    .product-title{font-size: 1.8rem; margin: 0  0 0.6rem 0;}
     .product-description{ margin: 0.75rem 0;}
 
-    .info{max-width: 400px; width: 100%; margin: 0 auto;}
+    .info{max-width: 400px; width: 100%; margin: auto; padding: auto;}
 
     @media only screen and (min-width: 768px) {
-      #product{padding: 4rem 2rem; display:flex; align-items:center; justify-content:center;}
+      .product-main{padding: 4rem 2rem; display:flex; align-items:center; justify-content:center;}
       .info{margin: 0 0 0 1rem;}
     }
     `;
@@ -30,7 +30,7 @@ class productLoader {
     this.title = `Product - ${this.route}`;
     this.meta_desc = `The ${this.route} product page`;
     this.starthtml = `
-              <section id="product">
+              <section id="product" class="product-main">
                 <div class="slides">
                   <div class="glide glide__one">
                       <div class="glide__track" data-glide-el="track">
@@ -60,9 +60,8 @@ class productLoader {
 
   loadPageMethods() {
     taino.changeNavColor("products");
-
     taino.loadProducts().then(list => {
-      let product = list.filter((item) => item.id === site.state.tempId);
+      let product = list.filter(item => item.id === site.state.tempId);
       product = product[0];
 
       this.loadProductInformation(product);
@@ -93,7 +92,7 @@ class productLoader {
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      this.cartAdd({ title, id, price, mainImage });
+      this.cartAdd(title, id, price, mainImage);
     });
   }
 
@@ -151,11 +150,11 @@ class productLoader {
     glideTwo.mount();
   }
 
-  cartAdd({ title, id, price, mainImage }) {
+  cartAdd(title, id, price, mainImage) {
     let tempQuantity = taino.elid("quantity").value;
     tempQuantity = parseInt(tempQuantity);
 
-    if (tempQuantity >= 1 && tempQuantity <= 10) {
+    if (tempQuantity >= 1) {
       if (!site.state.cartOn || site.state.cartOn === false) {
         site.state.cartOn = true;
         site.state.disableCard = [];

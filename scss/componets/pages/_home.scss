@@ -1,80 +1,65 @@
-  #landing{
-    @include flex-center-center;
-    text-align: center;
-    position: relative;
-    margin-top: -80px;
-    width: 100%;
-    height: 100vh;
-    max-height: 1875px;
-    padding: 30vh 0;
-    background: url(/images/landing.png) no-repeat center center;
-  }
-  
-  #landing::after {
-    @include overlay;
-    background-color: var(--black75);
-  }
-  
-  #landing-about {
-    padding: 2rem;
-    background-color: var(--red-bg-color);
-  }
-
-  #landing-product{
-    background: url(/images/wood.png);
-    position: relative;
-    padding: 2rem 0;
-  }
-
-  #landing-product::after {
-    @include overlay;
-    background-color: var(--black50);
-  }
-
-  #landing-gallery, 
-  #gallery-images {
-    padding: 2rem;
-    background-color: var(--darker-black-bg-color);
-  }
-
-  #contact {
-    padding: 2rem;
-    background-color: var(--grey-bg-color);
-  }
-  
-  .landing{
+.landing{
+  @extend .flex-center-center;
+  text-align: center;
+  margin-top: -80px;
+  width: 100%;
+  height: 100vh;
+  max-height: 1875px;
+  padding: 30vh 0;
+  background: url(/images/landing.png) no-repeat center center;
+    
+    &-container{
       position: relative;
       z-index: 1;
       font-size: 2rem;
       text-shadow: 1px 1px 1px var(--black75);
+    }
 
-      &-title{
-        margin-left: 0.1rem;
-        font-family: var(--play-fair);
-        font-style: italic;
+    &-title{
+      margin-left: 0.1rem;
+      font-family: var(--play-fair);
+      font-style: italic;
 
-        &-brown{
-            font-style: normal;
-            color: var(--egg-brown);
-        }
-
-        &-green{
-            font-style: normal;
-            color: var(--green);
-        }
+      &-brown{
+          font-style: normal;
+          color: var(--egg-brown);
       }
 
-      &-about{
-        &-container{
-          max-width: 500px;
-          margin: 0 auto;
-        }
+      &-green{
+          font-style: normal;
+          color: var(--green);
+      }
+    }
 
-        &-text{
-          line-height: 1.5rem;
-          margin: 1rem 0;
-        }
-      }   
+    &-about{
+      @extend .section-default-padding-p2;
+      background-color: var(--red-bg-color);
+
+      &-container{
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      &-text{
+        line-height: 1.5rem;
+        margin: 1rem 0;
+      }
+    }
+
+    &-product{
+      background: url(/images/wood.png);
+      padding: 2rem 0;
+    }
+
+    &-product::after{
+      @extend .overlay;
+      background-color: var(--black50);
+    }
+  }
+
+  .landing::after{
+    @extend .overlay;
+    background-color: var(--black75);
   }
 
   .gallery{
@@ -94,8 +79,8 @@
       }
 
       &-sec::after{
-        @include flex-center-center;
-        @include overlay;
+        @extend .flex-center-center;
+        @extend .overlay;
         content: "View Gallery";
         cursor: pointer;
         font-weight: var(--med);
@@ -122,6 +107,11 @@
       vertical-align: top;
     }
   }
+
+.gallery-main{
+  @extend .section-default-padding-p2;
+  background-color: var(--darker-black-bg-color);
+}
 
 .contact{
   &-title{
@@ -155,6 +145,11 @@
   }
 }
 
+.contact-main{
+  @extend .section-default-padding-p2;
+  background-color: var(--grey-bg-color);
+}
+
 .google-map, #map{
   width: 100%;
   height: 350px;
@@ -173,34 +168,28 @@
 }
 
 @media only screen and (min-width: 768px) {
-  #landing-product {
+  .landing-product{
     padding: 4rem 0;
   }
 
-  #contact {
-    padding: 3rem 2rem 4rem 2rem;
-  }
-
-  #landing-gallery,
-  #landing-about,
-  #gallery-images {
+  .gallery-main,
+  .landing-about{
     padding: 4rem 2rem;
   }
 
-  .contact{
-    textarea {
-      height: 200px;
-    }
+  .contact-main{
+    padding: 3rem 2rem 4rem 2rem;
+  }
 
+  .contact{
     &-title {
       margin-bottom: 3rem;
     }
 
     &-container{
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center-center;
+      flex-direction: row;
       max-width: 1200px;
     }
 
@@ -212,6 +201,9 @@
           margin-top: 0px;
         }
       }
+    }
+    textarea {
+      height: 200px;
     }
   }
   
@@ -234,14 +226,16 @@
 }
 
 @media only screen and (min-width: 920px) {
-  #landing-product {
-    padding: 4rem 8rem;
-    
-    .glide__arrow--left {
-      left: -6rem;
-    }
-    .glide__arrow--right {
-      right: -6rem;
+  .landing{
+    &-product {
+      padding: 4rem 8rem;
+      
+      .glide__arrow--left {
+        left: -6rem;
+      }
+      .glide__arrow--right {
+        right: -6rem;
+      }
     }
   }
 }

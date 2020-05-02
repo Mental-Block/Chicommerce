@@ -4,11 +4,11 @@ class contactLoader {
         this.meta_desc = "Contact us for more information or questions";
 
         this.styling = `
-        #information { color: var(--white); background-color: var(--red-bg-color); padding: 2rem; }
-        #information .about-title { text-align: center; }
+        .information { color: var(--white); background-color: var(--red-bg-color); padding: 2rem; }
+        .information .about-title {font-size: 1.5rem; text-align: center; }
 
         @media only screen and (min-width: 768px) { #information { padding: 4rem 2rem 3rem 2rem; }
-            #information .about-title { margin-bottom: 3rem; }
+            .information .about-title { margin-bottom: 3rem; }
             .contact-fix { padding-top: 4rem !important; } }
             .information-container { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
             .information-container-sec { width: 100%; margin: 1rem 0; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-line-pack: center; align-content: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; justify-items: center; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
@@ -20,7 +20,7 @@ class contactLoader {
     `;
 
         this.starthtml = `
-        <section id="information">
+        <section id="information" class="information">
             <h2 class="about-title">Have any questions or need to get in touch?</h2>
         <div class="information-container">
           <div class="information-container-sec">
@@ -56,7 +56,7 @@ class contactLoader {
         </div>
     </section>
     
-    <section id="contact" class="contact-fix">
+    <section id="contact" class="contact-main contact-fix">
             <!--Insert form -->
     </section>
         `;

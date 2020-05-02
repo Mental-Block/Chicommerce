@@ -4,15 +4,15 @@ class homeLoader {
     this.meta_desc =
       "This is an e commerce/small business website made for fun";
     this.starthtml = `
-        <section id="landing">
-          <div class="landing">
+        <section id="landing" class="landing">
+          <div class="landing-container">
             <h1 class="landing-title">Free Run,</h1>
             <h2 class="landing-title-green">Organic <span class="landing-title-brown">Eggs</span></h2>
             <a href="/products" class="btn-main">Order Now</a>
           </div>
         </section>
 
-        <section id="landing-about">
+        <section id="landing-about" class="landing-about">
           <div class="landing-about-container">
             <img class="img" src="/images/about.png" alt="chicken coop" >
             <div class="landing-about-container-sec">
@@ -22,7 +22,7 @@ class homeLoader {
           </div>
         </section>
 
-      <section id="landing-product">
+      <section id="landing-product" class="landing-product">
         <div class="glide">
             <div class="glide__track" data-glide-el="track">
               <div class="glide__slides">
@@ -36,13 +36,13 @@ class homeLoader {
         </div>
       </section>
 
-        <section id="landing-gallery">
+        <section id="landing-gallery" class="gallery-main">
           <div class="gallery-container">
             <!-- insert gallery images-->
           </div>
         </section>
 
-        <section id="contact">
+        <section id="landing-contact" class="contact-main">
           <h2 class="contact-title">Need to get in touch?</h2>
           </section>
         `;
@@ -53,23 +53,20 @@ class homeLoader {
   loadPageMethods() {
     taino.changeNavColor("home");
 
-    taino.loadProducts().then((productInformation) => {
-      taino.printProductCards(productInformation, taino.el(".glide__slides"));
-      taino.getCardId(productInformation);
-
-      this.slider();
-      taino.contactForm(taino.elid("contact"));
+    taino.loadProducts().then((product) => {
+      if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
+      if (product.length === 0) return taino.outOfProducts(taino.elid("landing-product"));
+      taino.printProductCards(product, taino.el(".glide__slides"));
+      taino.getId(taino.el(".item", true));
+      taino.contactForm(taino.elid("landing-contact"));
+      taino.loadSlider();
       taino.cart();
+
     });
 
     taino.loadImages().then((images) => {
       this.printGalleryImages(images);
     });
-
-    setTimeout(() => {
-
-    }, 0)
-
   }
 
   printGalleryImages(images) {
@@ -86,36 +83,5 @@ class homeLoader {
     });
 
     taino.el(".gallery-container").innerHTML = prints;
-  }
-
-  slider() {
-    let item = taino.el(".item", true);
-    for (let i = 0; i < item.length; i++) {
-      item[i].classList.add("glide__slide");
-    }
-
-    let glide = new Glide(".glide", {
-      type: "carousel",
-      bound: true,
-      rewindDuration: 0,
-      dragThreshold: 40,
-      startAt: 0,
-      perView: 4,
-      animationDuration: 500,
-      gap: 16,
-      breakpoints: {
-        1680: {
-          perView: 3,
-        },
-        1240: {
-          perView: 2,
-        },
-        920: {
-          perView: 1,
-        },
-      },
-    });
-
-    glide.mount();
   }
 }

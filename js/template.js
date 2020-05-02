@@ -3,17 +3,17 @@ class templateLoader {
     this.header = `
     <header id="navigation" class="nav-container nav-add-black">
       <div class="logo-container">
-        <img src="/images/Logo.svg" />
+        <img src="/images/Logo.svg"/>
       </div>
-      <nav id="nav">
-        <div class="nav-list nav-list-off">
+      <nav id="nav" class="nav">
+        <div id="nav-list" class="nav-list nav-list-off">
             <a class="nav-list-item" data-tag="home" href="/">Home</a>
             <a class="nav-list-item" data-tag="about" href="/about">About</a>
             <a class="nav-list-item" data-tag="products" href="/products">Products</a>
             <a class="nav-list-item" data-tag="gallery" href="/gallery">Gallery</a>
             <a class="nav-list-item" data-tag="contact" href="/contact">Contact</a>
           </div>
-          <div id="burger">
+          <div id="burger" class="burger">
             <div class="burger-line"></div>
             <div class="burger-line"></div>
             <div class="burger-line"></div>
@@ -23,7 +23,7 @@ class templateLoader {
   `;
 
     this.subscribe = `
-      <section id="subscribe">
+      <section id="subscribe" class="subscribe">
         <h2 class="subscribe-title"> Want Exclusive Deals and Updates?</h2>
         <p class="subscribe-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. </p>
         <form  class="subscribe-form" method="POST" action="">
@@ -38,7 +38,7 @@ class templateLoader {
   `;
 
     this.footer = `
-      <footer id="footer"> 
+      <footer id="footer" class="footer"> 
         <div class="footer-container">
           <div class="footer-container-sec">
             <h4 class="footer-title">Phone number</h4>
@@ -87,7 +87,7 @@ class templateLoader {
     setTimeout(() => {
       const navContainer = taino.elid("navigation");
       const burger = taino.elid("burger");
-      const navList = taino.el(".nav-list");
+      const navList = taino.elid("nav-list");
 
       window.onscroll = () => {
         navContainer.classList.add("nav-add-black");

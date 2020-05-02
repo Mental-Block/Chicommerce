@@ -4,8 +4,8 @@ class galleryLoader {
     this.meta_desc = "Yes, we have pictures of our abused animals.";
 
     this.styling = `
-    #gallery { background-color: var(--darker-black-bg-color); padding: 2rem 0; }
-    #gallery .glide { max-width: 1200px; margin: 0 auto; }
+    .gallery-images {background-color: var(--darker-black-bg-color); padding: 2rem 0; }
+    .gallery-images .glide { max-width: 1200px; margin: 0 auto; }
     .img-slideshow { margin: 0 auto; max-height: 300px; }
     #appendModal { position: relative; }
     .modal-overlay { width: 100%; height: 100vh; background-color: var(--black75); position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; cursor: pointer; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
@@ -13,7 +13,7 @@ class galleryLoader {
     `;
 
     this.starthtml = `
-        <section id="gallery"> 
+        <section id="gallery-images" class="gallery-images"> 
           <div class="glide">
             <div class="glide__track" data-glide-el="track">
               <div class="glide__slides">
@@ -27,7 +27,7 @@ class galleryLoader {
             </div>
         </section>
 
-        <section id="gallery-images">
+        <section id="gallery" class="gallery-main">
           <div class="gallery-container">
         <!--Insert Images Here-->
           </div>

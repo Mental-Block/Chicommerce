@@ -1,4 +1,4 @@
- @mixin btn-base {
+.btn-base {
     display: inline-block;
     transition: 250ms ease-in;
     cursor: pointer;
@@ -6,17 +6,16 @@
     outline: none;  
 }
 
-@mixin btn-normal {
+.btn-normal {
   font-weight: var(--reg);
   padding: 0.5rem;
   font-size: 1.15rem;
-  display: inline-block;
   color: var(--white);
 }
 
 .btn{
   &-red {
-    @include btn-base;
+    @extend .btn-base;
     background: none;
     margin-top: 0.8rem;
     margin-left: 4px;
@@ -33,8 +32,8 @@
   }
 
   &-brown{
-    @include btn-base;
-    @include btn-normal;
+    @extend .btn-base;
+    @extend .btn-normal;
     background-color: var(--straw-brown);
     border: 4px solid var(--straw-brown25);
   }
@@ -44,8 +43,8 @@
   }
 
   &-green{
-    @include btn-base;
-    @include btn-normal;
+    @extend .btn-base;
+    @extend .btn-normal;
     background-color: var(--green);
     border: 4px solid var(--green25);
   }
@@ -54,8 +53,53 @@
     background-color: var(--green25);
   }
 
+  &-checkOut{
+    @extend .btn-base;
+    @extend .btn-normal;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--green);
+    border: 4px solid var(--green25);
+    color: var(--black-text);
+  }
+
+  &-checkOut:hover{
+    transition: 250ms ease-in;
+    color: var(--white);
+    background-color: var(--green25);
+    .cart-svg{
+      transition: 250ms ease-in;
+      fill: var(--white);
+    }
+  }
+
+  &-clear{
+    &-cart{
+      @extend .btn-base;
+      @extend .btn-normal;
+      color: var(--white-less);
+      background: none;
+    }
+    &-cart:hover{
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+    &-item{
+      @extend .btn-base;
+      color: var(--white-less);
+      background: none;
+      padding: 0.25rem;
+      font-size: 0.9rem;
+      line-height: 1.25rem;
+      margin: 0.25rem 0;
+    }
+    &-item:hover{
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+  }
   &-main{
-    @include btn-base;
+    @extend .btn-base;
     color: var(--white);
     margin: 1rem auto 0rem auto;
     padding: 0.75rem 1rem;

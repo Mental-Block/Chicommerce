@@ -3,6 +3,7 @@
 @import "utilities/googlefonts.scss";
 @import "utilities/var.scss";
 @import "utilities/mixin.scss";
+@import "utilities/extend.scss";
 
 //Global
 @import "global.scss";
@@ -14,13 +15,14 @@
 @import "componets/other/button.scss";
 @import "componets/other/misc.scss";
 @import "componets/other/cart.scss";
+@import "componets/other/cards.scss";
 
 //Componets - template
 @import "componets/template/nav.scss";
 @import "componets/template/subscribe.scss";
 @import "componets/template/footer.scss";
 
-// Componets - pages
-/* All other pages css will be dynamically loaded to have a faster 
+// Componets - page
+/* All other pages css will be loaded with javascript page to have a faster 
 run time but we'll cache the home page as it's the default*/
 @import "componets/pages/home.scss"
