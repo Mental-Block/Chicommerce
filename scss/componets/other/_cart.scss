@@ -35,21 +35,14 @@
       transition: ease-in 400ms;
       background-color: fade-out($color: #000000, $amount: 0.2);
       overflow-y: scroll;
-      scrollbar-width: 0px; /* Firefox */
-      -ms-overflow-style: 0px;  /* Internet Explorer 10+ */
-      &-grab{
-        cursor: grab;
-        cursor: -moz-grab;
-        cursor: -webkit-grab; 
-      }
-
-      &-grabbing{
-        cursor: grabbing;
-        cursor: -moz-grabbing;
-        cursor: -webkit-grabbing;
-      }
       &-open{
         transform: translate(0px);
+      }
+      &-grabbing:active{
+        cursor: grabbing;
+      }
+      &-grab{
+        cursor: grab;
       }
     }
     
@@ -80,10 +73,7 @@
       width: 165px;
     }
 
-    &-slide::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
+    
 
     &-arrow{
       opacity: 0.75;
@@ -119,3 +109,4 @@
   .cart:hover{
     background: var(--green25) url("/images/shoppingcart.svg") no-repeat center center;
   }
+

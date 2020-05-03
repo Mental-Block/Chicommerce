@@ -61,15 +61,21 @@
     background-color: var(--green);
     border: 4px solid var(--green25);
     color: var(--black-text);
+    transition: 250ms ease-in;
+    .cart-svg{
+      transition: fill 250ms ease-in;
+      fill: var(--black-text);
+    }
   }
 
-  &-checkOut:hover{
-    transition: 250ms ease-in;
+  &-checkOut:hover {
+    
     color: var(--white);
     background-color: var(--green25);
+
     .cart-svg{
-      transition: 250ms ease-in;
-      fill: var(--white);
+    
+    fill: var(--white);
     }
   }
 

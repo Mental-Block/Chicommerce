@@ -448,7 +448,7 @@ class taino {
           const cart = `<div id="cart" class="cart"></div>`
 
           const slide = `
-            <aside id="cart-slide" class="cart-slide dragscroll">
+            <aside id="cart-slide" class="cart-slide">
               <div id="cart-arrow" class="cart-arrow"></div>
               <div class="cart-container">
                 <!-- insert cart items -->
@@ -577,6 +577,38 @@ class taino {
               taino.getId(taino.el(".item", true));
             });
           }
+        },
+        dragSlider: () => {
+          slide.classList.add('cart-slide-grab');
+          let isDown = false;
+          let startY;
+          let scrollTop;
+
+          console.log("im on");
+          slide.addEventListener('mousedown', (event) => {
+            isDown = true;
+            slide.classList.add('cart-slide-grabbing');
+            slide.classList.add('cart-slide-grab');
+            startY = event.pageY - slide.offsetTop;
+            scrollTop = slide.scrollTop;
+          });
+          slide.addEventListener('mousemove', (event) => {
+            if (!isDown) return;
+            event.preventDefault();
+            const y = event.pageY - slide.offsetTop;
+            const walk = (y - startY) * 1;
+            console.log(slide.scrollTop = scrollTop - walk);
+
+          });
+          slide.addEventListener('mouseleave', () => {
+            slide.classList.remove('cart-slide-grabbing');
+            slide.classList.remove('cart-slide-grab');
+            isDown = false;
+          });
+          slide.addEventListener('mouseup', () => {
+            slide.classList.remove('cart-slide-grabbing');
+            isDown = false;
+          });
         }
       }
 
@@ -595,6 +627,7 @@ class taino {
       cartFns.addTotal();
 
       if (site.state.cartOpen === false) cartFns.closeCart(), cartFns.openCart()
+      if (container.offsetHeight + 150 > slide.offsetHeight) cartFns.dragSlider();
 
       icon.addEventListener("click", cartFns.closeCart);
       arrow.addEventListener("click", cartFns.openCart);
