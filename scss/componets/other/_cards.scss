@@ -47,4 +47,14 @@
     &-card:hover{
       background-color: var(--black75);
     }
+
+    &-out{
+      padding: 5rem 2rem;
+      font-size: 1.75rem;
+      text-align: center;
+      &-no-padding{
+        padding: 6rem 0 !important;
+      }
+    }
+
   }

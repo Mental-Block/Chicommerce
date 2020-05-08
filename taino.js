@@ -272,7 +272,14 @@ class taino {
     }
   }
 
-
+  static ismobile() {
+    var useragent = navigator.userAgent;
+    if (useragent.match(/Android|iPhone|iPad/i)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   static el(x, getall) {
     var s = x.trim();
@@ -286,6 +293,14 @@ class taino {
   static elid(x) {
     return document.getElementById(x);
   }
+
+  static sanitize(str) {
+    let temp = document.createElement("div");
+    temp.textContent = str;
+    return temp.innerHTML;
+  }
+
+
 
   static changeNavColor(a) {
     const navContainer = taino.elid("navigation");
@@ -302,21 +317,6 @@ class taino {
       navItem[i].classList.remove("active");
     }
     findNavItem.classList.add("active");
-  }
-
-  static sanitize(str) {
-    let temp = document.createElement("div");
-    temp.textContent = str;
-    return temp.innerHTML;
-  }
-
-  static ismobile() {
-    let useragent = navigator.userAgent;
-    if (useragent.match(/Android|iPhone|iPad/i)) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   static async loadProducts() {
@@ -357,9 +357,7 @@ class taino {
       prints += `
         <div class="item" data-id="${product.id}">
             <div class="product-card">
-              <a href="/products/${product.title
-          .toLowerCase()
-          .replace(/ /g, "")}">
+              <a href="/products/${product.title.replace(/ /g, "").toLowerCase()}">
               <div class="product-card-body">
                 <img class="img card-img" src="${product.mainImage}" />
                 <div class="product-card-container">
@@ -381,45 +379,195 @@ class taino {
         <div id="map">
           <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" frameborder="0" allowfullscreen></iframe>
         </div>
-        <form class="contact-form">
+        <form id="contact-form" class="contact-form" method="POST" action="">
             <div class="contact-form-control contact-form-control-sm">
-                <label class="sr-only" for="name">Name</label>
-                <input class="contact-form-input" type="text" id="name" placeholder="Name" value=""/>
+                <label class="sr-only" for="contact-name">Name</label>
+                <input class="contact-form-input" type="text" id="contact-name" placeholder="Name" value=""/>
                 <span class="helper-text"></span>
             </div>
             <div class="contact-form-control contact-form-control-sm">
-                <label class="sr-only" for="contactEmail">Email</label>
-                <input class="contact-form-input" type="email" id="contactEmail" aria-describedby="contactEmail" placeholder="Email"/>
+                <label class="sr-only" for="contact-email">Email</label>
+                <input class="contact-form-input" type="email" id="contact-email" aria-describedby="contactEmail" placeholder="Email"/>
                 <span class="helper-text"></span>
             </div>
             <div class="contact-form-control">
-                <label class="sr-only" for="subject">Subject</label>
-                <input class="contact-form-input" type="text" id="subject" placeholder="Subject" aria-describedby="subject"/>
+                <label class="sr-only" for="contact-subject">Subject</label>
+                <input class="contact-form-input" type="text" id="contact-subject" placeholder="Subject" aria-describedby="subject"/>
                 <span class="helper-text"></span>
             </div>
             <div class="contact-form-control">
-                <label class="sr-only" for="message">Message</label>
-                <textarea class="contact-form-input" type="text" name="message" id="message" placeholder="Message" aria-describedby="message"></textarea>
+                <label class="sr-only" for="contact-message">Message</label>
+                <textarea class="contact-form-input" type="text" name="message" id="contact-message" placeholder="Message" aria-describedby="message"></textarea>
                 <span class="helper-text"></span>
             </div>
-                <button class="btn-brown" type="submit">Submit</button>
+                <button id="contact-submit" class="btn-brown">Submit</button>
           </form>
         </div>
     `;
 
     appendToDOM.insertAdjacentHTML("beforeend", prints);
+
+    function validateContactForm() {
+      const form = taino.elid("contact-form")
+      const name = taino.elid("contact-name")
+      const email = taino.elid("contact-email")
+      const message = taino.elid("contact-message")
+      const subject = taino.elid("contact-subject")
+      //const helperText = taino.el(".contact-main .helper-text");
+
+      const formFns = {
+        validateName: () => {
+          if (formFns.empty(name)) return;
+          if (formFns.letters(name)) return;
+          if (formFns.StrLength(name, 20)) return;
+          return true;
+        },
+        validateEmail: () => {
+          if (formFns.empty(email)) return;
+          if (formFns.validEmail(email)) return;
+          return true;
+        },
+        validateMessage: () => {
+          if (formFns.empty(message)) return;
+          if (formFns.StrLength(message, 1000)) return;
+          return true;
+        },
+        validateSubject: () => {
+          if (formFns.empty(subject)) return;
+          if (formFns.letters(subject)) return;
+          if (formFns.StrLength(subject, 40)) return;
+          return true;
+        },
+        empty: input => {
+          let message = "fill in the box";
+          if (input.value === "" || input.value.trim() === "") {
+            formFns.setInvalidate(input, message);
+            return true
+          } else {
+            formFns.setValidate(input)
+            return false
+          }
+        },
+        letters: input => {
+          let regex = /^[A-Za-z]+$/;
+          let removeWhiteSpace = /\s/g;
+          let message = "use letters only"
+
+          if (input.value.replace(removeWhiteSpace, '').match(regex)) {
+            formFns.setValidate(input)
+            return false
+          }
+          else {
+            formFns.setInvalidate(input, message);
+            return true
+          }
+        },
+        validEmail: input => {
+          let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          let message = "Not a valid email adress"
+          if (input.value.match(regex)) {
+            formFns.setValidate(input)
+            return false
+          } else {
+            formFns.setInvalidate(input, message);
+            return true
+          }
+        },
+        StrLength: (input, number) => {
+          let message = `Too many characters, please keep it under ${number}`
+          if (input.value.length < number) {
+            formFns.setValidate(input)
+            return true
+          } else {
+            formFns.setInvalidate(input, message);
+            return false
+          }
+        },
+        setValidate: input => {
+          input.nextElementSibling.innerHTML = "";
+          // input.style.border = "4px solid green"
+        },
+        setInvalidate: (input, message) => {
+          input.nextElementSibling.innerHTML = message;
+          // input.style.border = "4px solid red"
+        },
+      }
+
+      name.addEventListener("focusout", formFns.validateName);
+      email.addEventListener("focusout", formFns.validateEmail);
+      message.addEventListener("focusout", formFns.validateMessage);
+      subject.addEventListener("focusout", formFns.validateSubject);
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        if (
+          formFns.validateName() === true &&
+          formFns.validateEmail() === true &&
+          formFns.validateSubject() === true &&
+          formFns.validateMessage() === true
+        ) {
+          // Do A BUNCH OF STUFF TO SHOW USER PROCESS WENT THROUGH
+        }
+      });
+    }
+
+    validateContactForm();
   }
 
-  static loadSlider() {
+  static slider() {
+    let slider = `
+    <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <div class="glide__slides">
+        <!-- insert cards -->
+      </div>
+        </div>
+    <div class="glide__arrows" data-glide-el="controls">
+      <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+      <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+        </div>
+      </div>
+    `;
+
+    taino.elid("landing-product").innerHTML = slider;
+  }
+
+  static products() {
+    if (taino.el(".product-out-no-padding")) taino.el(".product-out-no-padding").classList.remove("products-out-no-padding");
+
+    let products = `
+    <div class="products-container">
+      <h2 class="products-title">Products</h2>   
+          <div id="filters" class="button-group">
+              <button class="btn-brown active" data-filter="*">
+                  All Products
+              </button>
+              <button class="btn-brown" data-filter="numberLessThan10">
+                  Low Price
+              </button>
+              <button class="btn-brown" data-filter="numberGreaterThan10">
+                  High Price
+              </button>
+        </div>
+        <div class="grid">
+
+        </div>
+    </div>
+      `;
+
+    taino.elid("products").innerHTML = products;
+  }
+
+  static glide() {
+    // adding cards as a glide_slide
     let item = taino.el(".item", true);
     for (let i = 0; i < item.length; i++) {
       item[i].classList.add("glide__slide");
     }
 
-    let glide = new Glide(".glide", {
-      type: "carousel",
+    new Glide(".glide", {
+      type: "slider",
       bound: true,
-      rewindDuration: 0,
+      rewindDuration: 800,
       dragThreshold: 40,
       startAt: 0,
       perView: 4,
@@ -436,9 +584,7 @@ class taino {
           perView: 1,
         },
       },
-    });
-
-    glide.mount();
+    }).mount();
   }
 
   static cart() {
@@ -448,6 +594,7 @@ class taino {
           const cart = `<div id="cart" class="cart"></div>`
 
           const slide = `
+            
             <aside id="cart-slide" class="cart-slide">
               <div id="cart-arrow" class="cart-arrow"></div>
               <div class="cart-container">
@@ -458,7 +605,7 @@ class taino {
                 <button id="clear-cart" class="btn-clear-cart">Clear Cart</button>
               </div>
               <div class="cart-btn-container">
-                <a href="#" class="btn-checkOut">
+                <a href="/checkout" class="btn-checkOut">
                 <?xml version="1.0" ?>
                 <svg height="20px" version="1.1" viewBox="4 0 20 20" width="30px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title/>
@@ -532,6 +679,7 @@ class taino {
           container.removeChild(event.target.parentElement.parentElement);
           site.state.cart.splice(index, 1)
           site.state.disableCard.splice(index, 1)
+          cartFns.addTotal();
 
           if (site.state.cart.length === 0) {
             site.state.cartOn = false;
@@ -541,8 +689,10 @@ class taino {
           if (site.currentpage === "/products") {
             taino.loadProducts().then(product => {
               product = product.filter(item => !site.state.disableCard.includes(item.id))
+              if (product.length === 0) taino.outOfProducts(taino.elid("products"))
+              taino.products()
               taino.printProductCards(product, taino.el(".grid"));
-              taino.loadIso();
+              taino.iso();
               taino.getId(taino.el(".item", true));
             });
           }
@@ -550,8 +700,10 @@ class taino {
           if (site.currentpage === "/" || site.currentpage === "/home") {
             taino.loadProducts().then(product => {
               product = product.filter(item => !site.state.disableCard.includes(item.id))
-              taino.printProductCards(product, taino.el(".glide__slides"));
+              if (product.length === 0) taino.outOfProducts(taino.elid("landing-product"))
               taino.slider();
+              taino.printProductCards(product, taino.el(".glide__slides"));
+              taino.glide();
               taino.getId(taino.el(".item", true));
             });
           }
@@ -564,51 +716,54 @@ class taino {
 
           if (site.currentpage === "/products") {
             taino.loadProducts().then(product => {
+              taino.products()
               taino.printProductCards(product, taino.el(".grid"));
-              taino.loadIso();
+              taino.iso();
               taino.getId(taino.el(".item", true));
             });
           }
 
           if (site.currentpage === "/" || site.currentpage === "/home") {
             taino.loadProducts().then(product => {
-              taino.printProductCards(product, taino.el(".glide__slides"));
               taino.slider();
+              taino.printProductCards(product, taino.el(".glide__slides"));
+              taino.glide();
               taino.getId(taino.el(".item", true));
             });
           }
         },
         dragSlider: () => {
-          slide.classList.add('cart-slide-grab');
           let isDown = false;
           let startY;
           let scrollTop;
 
-          console.log("im on");
-          slide.addEventListener('mousedown', (event) => {
-            isDown = true;
-            slide.classList.add('cart-slide-grabbing');
-            slide.classList.add('cart-slide-grab');
-            startY = event.pageY - slide.offsetTop;
-            scrollTop = slide.scrollTop;
-          });
-          slide.addEventListener('mousemove', (event) => {
+          const mouseUp = () => {
+            isDown = false;
+          }
+
+          const mouseMove = (event) => {
             if (!isDown) return;
             event.preventDefault();
             const y = event.pageY - slide.offsetTop;
             const walk = (y - startY) * 1;
-            console.log(slide.scrollTop = scrollTop - walk);
+            slide.scrollTop = scrollTop - walk;
+          }
 
-          });
-          slide.addEventListener('mouseleave', () => {
-            slide.classList.remove('cart-slide-grabbing');
-            slide.classList.remove('cart-slide-grab');
+          const mouseDown = (event) => {
+            isDown = true;
+            startY = event.pageY - slide.offsetTop;
+            scrollTop = slide.scrollTop;
+          }
+
+          const mouseLeave = () => {
             isDown = false;
-          });
-          slide.addEventListener('mouseup', () => {
-            slide.classList.remove('cart-slide-grabbing');
-            isDown = false;
-          });
+          }
+
+          slide.addEventListener('mousedown', (event) => mouseDown(event))
+          slide.addEventListener('mousemove', (event) => mouseMove(event));
+          slide.addEventListener('mouseleave', mouseLeave);
+          slide.addEventListener('mouseup', mouseUp);
+
         }
       }
 
@@ -625,9 +780,15 @@ class taino {
       const totalDOM = taino.el(".cart-total");
 
       cartFns.addTotal();
-
       if (site.state.cartOpen === false) cartFns.closeCart(), cartFns.openCart()
-      if (container.offsetHeight + 150 > slide.offsetHeight) cartFns.dragSlider();
+      if (container.offsetHeight + 150 > slide.offsetHeight) {
+        cartFns.dragSlider();
+        slide.classList.add('cart-slide-grabbing');
+        slide.classList.add('cart-slide-grab');
+      } else {
+        slide.classList.remove('cart-slide-grabbing');
+        slide.classList.remove('cart-slide-grab');
+      }
 
       icon.addEventListener("click", cartFns.closeCart);
       arrow.addEventListener("click", cartFns.openCart);
@@ -641,7 +802,7 @@ class taino {
     }
   }
 
-  static loadIso() {
+  static iso() {
     let iso = new Isotope(".products-container", {
       itemSelector: ".item",
       masonry: {
@@ -683,11 +844,10 @@ class taino {
 
   static outOfProducts(appendToDOM) {
     const prints = `
-      <div>
-        <h1 class="flex-center-center">Sorry, we have no more products</h1>
-      </div>
-    `;
+        <h1 class="product-out">Sorry, we have no more products</h1>
+      `;
 
+    appendToDOM.classList.add("product-out-no-padding");
     appendToDOM.innerHTML = prints;
   }
 }
@@ -701,6 +861,7 @@ let routes = {
   "/products/:product": "product",
   "/gallery": "gallery",
   "/contact": "contact",
+  "/checkout": "checkout"
 };
 
 const site = new taino(routes);

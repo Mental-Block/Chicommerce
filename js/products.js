@@ -7,7 +7,6 @@ class productsLoader {
     .products-main .product-card { max-width: 304px; margin: 0.5rem; -webkit-transition: 250ms ease-in; transition: 250ms ease-in; }
     .products-main .product-card::after:hover { background-color: var(--black50); }
     .products-main .btn-brown:hover { color: var(--green); }
-    .products-main .flex-center-center{margin:4rem 0;}
     
     .products-container { margin: 0 auto; }
     .products-title { margin: 0.5rem; text-align: start; font-size: 1.675rem; }
@@ -18,25 +17,7 @@ class productsLoader {
     `;
 
     this.starthtml = `
-            <section id="products" class="products-main"> 
-              <div class="products-container">
-                <h2 class="products-title">Products</h2>   
-                    <div id="filters" class="button-group">
-                        <button class="btn-brown active" data-filter="*">
-                            All Products
-                        </button>
-                        <button class="btn-brown" data-filter="numberLessThan10">
-                            Low Price
-                        </button>
-                        <button class="btn-brown" data-filter="numberGreaterThan10">
-                            High Price
-                        </button>
-                  </div>
-                  <div class="grid">
-
-                  </div>
-              </div>
-            </section>
+            <section id="products" class="products-main"></section>
         `;
     this.loadPageMethods();
   }
@@ -45,10 +26,14 @@ class productsLoader {
     taino.changeNavColor("products");
     taino.loadProducts().then(product => {
       if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
-      if (product.length === 0) return taino.outOfProducts(taino.el(".grid"));
-      taino.printProductCards(product, taino.el(".grid"));
-      taino.getId(taino.el(".item", true));
-      taino.loadIso();
+      if (product.length === 0) taino.outOfProducts(taino.elid("products"))
+      else {
+        taino.products();
+        taino.printProductCards(product, taino.el(".grid"));
+        taino.getId(taino.el(".item", true));
+        taino.iso();
+      }
+
       taino.cart();
     });
   }

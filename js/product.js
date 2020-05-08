@@ -109,18 +109,15 @@ class productLoader {
 
     taino.el(".glide__slides__one").innerHTML = print;
 
-    let glideOne = new Glide(".glide__one", {
+    new Glide(".glide__one", {
       keyboard: false,
-      bound: true,
       rewindDuration: 1000,
       dragThreshold: 40,
       startAt: 0,
       perView: 1,
       animationDuration: 500,
       gap: 4,
-    });
-
-    glideOne.mount();
+    }).mount();
   }
 
   loadSecondSlider({ images }) {
@@ -138,7 +135,6 @@ class productLoader {
 
     let glideTwo = new Glide(".glide__two", {
       keyboard: false,
-      bound: true,
       rewindDuration: 1000,
       dragThreshold: 40,
       startAt: 0,
@@ -160,9 +156,12 @@ class productLoader {
         site.state.disableCard = [];
         site.state.cart = []
       }
-      site.state.disableCard.push(id)
-      site.state.cart.push({ title, id, price, mainImage, quantity: tempQuantity });
-      site.route("/products")
+
+      if (site.state.disableCard.includes(id) !== true) {
+        site.state.disableCard.push(id)
+        site.state.cart.push({ title, id, price, mainImage, quantity: tempQuantity });
+        site.route("/products")
+      }
     }
   }
 }

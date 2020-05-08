@@ -35,6 +35,7 @@
       transition: ease-in 400ms;
       background-color: fade-out($color: #000000, $amount: 0.2);
       overflow-y: scroll;
+      overflow: hidden;
       &-open{
         transform: translate(0px);
       }
@@ -45,6 +46,7 @@
         cursor: grab;
       }
     }
+
     
     &-container{
       width: 300px;
@@ -55,6 +57,7 @@
     &-btn-container{
       @extend .cart-container;
       @extend .flex-center-center;
+      padding-bottom: 2rem;
     }
 
     &-total{
@@ -76,12 +79,11 @@
     
 
     &-arrow{
-      opacity: 0.75;
-      position: absolute;
+      position: fixed;
       top: 50%;
-      transform: translateY(-50%);
-      transition: ease-in 350ms;
       left: 0;
+      opacity: 0.75;
+      transition: ease-in 350ms;
       width: 32px;
       height: 32px;
       background: url(/images/left.svg) no-repeat center;
@@ -89,7 +91,7 @@
 
     &-arrow:hover{
       opacity: 1;
-      transform: translateY(-50%) rotate(180deg);
+      transform: rotate(180deg);
       cursor: pointer;
     }
 

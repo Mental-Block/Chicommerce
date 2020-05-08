@@ -49,11 +49,7 @@
     &-product{
       background: url(/images/wood.png);
       padding: 2rem 0;
-    }
-
-    &-product::after{
-      @extend .overlay;
-      background-color: var(--black50);
+      box-shadow:inset 0 0 0 2000px var(--black50);
     }
   }
 

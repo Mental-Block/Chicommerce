@@ -23,17 +23,9 @@ class homeLoader {
         </section>
 
       <section id="landing-product" class="landing-product">
-        <div class="glide">
-            <div class="glide__track" data-glide-el="track">
-              <div class="glide__slides">
-                <!-- insert cards -->
-              </div>
-            </div>
-            <div class="glide__arrows" data-glide-el="controls">
-              <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-              <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-          </div>
-        </div>
+         <!-- insert glide --> 
+            <!-- insert cards -->
+        <!-- insert glide --> 
       </section>
 
         <section id="landing-gallery" class="gallery-main">
@@ -55,11 +47,15 @@ class homeLoader {
 
     taino.loadProducts().then((product) => {
       if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
-      if (product.length === 0) return taino.outOfProducts(taino.elid("landing-product"));
-      taino.printProductCards(product, taino.el(".glide__slides"));
-      taino.getId(taino.el(".item", true));
-      taino.contactForm(taino.elid("landing-contact"));
-      taino.loadSlider();
+      if (product.length === 0) taino.outOfProducts(taino.elid("landing-product"))
+      else {
+        taino.slider();
+        taino.printProductCards(product, taino.el(".glide__slides"));
+        taino.glide();
+        taino.getId(taino.el(".item", true));
+      }
+
+      taino.contactForm(taino.elid("landing-contact"))
       taino.cart();
 
     });
@@ -84,4 +80,6 @@ class homeLoader {
 
     taino.el(".gallery-container").innerHTML = prints;
   }
+
+
 }
