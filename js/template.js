@@ -29,7 +29,7 @@ class templateLoader {
         <form  class="subscribe-form" method="POST" action="">
           <div class="subscribe-container">
               <label for="email" class="subscribe-form-label sr-only">Email</label>
-              <input class="subscribe-form-input" type="email" id="email" aria-describedby="email" placeholder="Email"/>
+              <input class="subscribe-form-input" name="email" type="email" id="email" aria-describedby="email" placeholder="Email"/>
               <span class="helper-text"></span>
           </div>
           <button class="btn-red" type="submit">Subscribe Today!</button>

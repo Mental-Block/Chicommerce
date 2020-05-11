@@ -97,12 +97,15 @@ class aboutLoader {
   }
 
   loadPageMethods() {
-    taino.changeNavColor("about");
+    taino.changeLinkColor("about");
 
     this.loadTestimonial().then(testimonialInformation => {
       this.carousel(testimonialInformation);
-      taino.cart();
     });
+
+    setTimeout(() => {
+      cart();
+    }, 0)
   }
 
   async loadTestimonial() {

@@ -37,14 +37,16 @@ class galleryLoader {
   }
 
   loadPageMethods() {
-    taino.changeNavColor("gallery");
+    taino.changeLinkColor("gallery");
 
-    taino.loadImages().then(images => {
+    taino.loadGalleryImages().then(images => {
       this.printGalleryImages(images);
       this.modalPopUp(images);
       this.slideShow(images);
-      taino.cart();
     });
+    setTimeout(() => {
+      cart();
+    }, 0)
   }
 
   printGalleryImages(images) {

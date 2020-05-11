@@ -64,11 +64,11 @@ class contactLoader {
         this.loadPageMethods();
     }
     loadPageMethods() {
-        taino.changeNavColor("contact");
+        taino.changeLinkColor("contact");
 
         setTimeout(() => {
-            taino.contactForm(taino.elid("contact"))
-            taino.cart();
+            form.contact(taino.elid("contact"));
+            cart();
         }, 0)
     }
 }

@@ -43,29 +43,24 @@ class homeLoader {
   }
 
   loadPageMethods() {
-    taino.changeNavColor("home");
+    taino.changeLinkColor("home");
 
     taino.loadProducts().then((product) => {
       if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
-      if (product.length === 0) taino.outOfProducts(taino.elid("landing-product"))
-      else {
-        taino.slider();
-        taino.printProductCards(product, taino.el(".glide__slides"));
-        taino.glide();
-        taino.getId(taino.el(".item", true));
-      }
-
-      taino.contactForm(taino.elid("landing-contact"))
-      taino.cart();
-
+      productCards(product);
     });
 
-    taino.loadImages().then((images) => {
-      this.printGalleryImages(images);
+    taino.loadGalleryImages().then((images) => {
+      this.printImages(images);
     });
+
+    setTimeout(() => {
+      form.contact(taino.elid("landing-contact"))
+      cart();
+    }, 0)
   }
 
-  printGalleryImages(images) {
+  printImages(images) {
     let prints = "";
 
     images.forEach((scr) => {
@@ -80,6 +75,4 @@ class homeLoader {
 
     taino.el(".gallery-container").innerHTML = prints;
   }
-
-
 }

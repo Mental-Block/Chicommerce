@@ -135,6 +135,22 @@
       width: 100%;
     }
 
+    &-sent{
+      display: inline-block;
+      color: var(--green);
+      padding-left: 0.8rem;
+      &-svg{
+        position: relative;
+        fill: var(--green);
+        bottom: -7.5px;
+        left: 2px;
+      }
+    }
+
+    
+
+
+
     textarea{
       height: 204px;
     }

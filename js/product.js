@@ -59,17 +59,19 @@ class productLoader {
   }
 
   loadPageMethods() {
-    taino.changeNavColor("products");
+    taino.changeLinkColor("products");
     taino.loadProducts().then(list => {
       let product = list.filter(item => item.id === site.state.tempId);
       product = product[0];
-
       this.loadProductInformation(product);
       this.loadFirstSlider(product);
       this.loadSecondSlider(product);
       this.cartAddButton(product);
-      taino.cart();
     });
+
+    setTimeout(() => {
+      cart();
+    }, 0)
   }
 
   loadProductInformation({ title, description }) {
