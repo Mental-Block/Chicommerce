@@ -1,12 +1,13 @@
 .subscribe{
   @extend .section-default-padding-p2;
   background-color: var(--red-bg-color);
-  text-align: center;
 
   &-text{
+    text-align: center;
     font-size: 1rem;
   }
   &-title{
+    text-align: center;
     margin-bottom: 1rem;
     font-size: 1.75rem;
     font-family: var(--play-fair);
@@ -15,6 +16,15 @@
     margin: 0 auto;
     max-width: 320px;
     padding: 1.25rem 0 0 0;
+
+    .helper-text {
+      line-height: 1.25rem;
+      width: 120px;
+      position: relative;
+      bottom: -13px;
+      left: 150px;
+      height: 0;
+    }
 
     &-label{
       font-weight: var(--med);
@@ -37,14 +47,33 @@
   }
 }
 
+@media only screen and (min-width: 375px) {
+  .subscribe{
+      &-form{
+      .helper-text {
+        width: fit-content;
+        line-height: 2.1rem;
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .subscribe{
     padding: 4rem 2rem;
     &-form{
+      position: relative;
       @include flex-center-center;
       flex-direction: row;
       margin: 1rem auto 0 auto;
       max-width: 700px;
+
+      .helper-text {
+        position: absolute;
+        left: 82px;
+        bottom: 0px;
+      }
+      
       &-input[type="email"]{
         width: 400px;
         margin-right: 0.8rem;

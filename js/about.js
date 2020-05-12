@@ -77,10 +77,10 @@ class aboutLoader {
             <section id="review">
               <div class="review-container">
                 <h2 class="about-title" >Add Your Own Review</h2> 
-                <form class="review-form">
+                <form id="review-form" class="review-form" method="GET" action="">
                   <div class="review-form-control">
-                    <label class="sr-only" for="reviewName">Name</label>
-                      <input class="review-form-input" type="text" id="reviewName" placeholder="Name" value=""/>
+                    <label class="sr-only" for="review-name">Name</label>
+                      <input class="review-form-input" type="text" id="reviewName" name="review-name" placeholder="Name" value=""/>
                       <span class="helper-text"></span>
                   </div>
                   <div class="review-form-control">
@@ -104,6 +104,7 @@ class aboutLoader {
     });
 
     setTimeout(() => {
+      this.addQuote();
       cart();
     }, 0)
   }
@@ -120,6 +121,13 @@ class aboutLoader {
         return test;
       });
     return testimonialInformation;
+  }
+
+  addQuote() {
+    const form = taino.elid("review-form")
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+    })
   }
 
   carousel(testimonialInformation) {

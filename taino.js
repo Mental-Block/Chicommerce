@@ -694,6 +694,8 @@ const form = (() => {
         formValidation.validateSubject(subject) === true &&
         formValidation.validateMessage(message) === true
       ) {
+        //Send the data to server
+
         const messageSent = taino.el(".contact-form-sent");
         const prints = `
         Message Sent
@@ -702,6 +704,7 @@ const form = (() => {
           </svg>
         `;
         messageSent.innerHTML = prints
+
         name.value = "";
         email.value = "";
         message.value = "";
@@ -721,10 +724,28 @@ const form = (() => {
   }
 
   const subscribe = () => {
-    const subscribe = taino.el("")
+    const form = taino.elid("subscribe-form")
+    const email = taino.elid("subscribe-email")
+
+    email.addEventListener("focusout", () => formValidation.validateEmail(email));
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (
+        formValidation.validateEmail(email) === true
+      ) {
+        email.value = "";
+        email.nextElementSibling.innerHTML = "Thanks for signing up!";
+        email.nextElementSibling.classList.add("active");
+
+        setTimeout(() => {
+          email.nextElementSibling.innerHTML = "";
+          email.nextElementSibling.classList.remove("active");
+        }, 5000);
+      } else {
+        return formValidation();
+      }
+    })
   }
-
-
 
   return {
     contact: contact,

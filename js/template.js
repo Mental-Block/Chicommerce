@@ -26,13 +26,11 @@ class templateLoader {
       <section id="subscribe" class="subscribe">
         <h2 class="subscribe-title"> Want Exclusive Deals and Updates?</h2>
         <p class="subscribe-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in justo at nisi venenatis viverra ut molestie nunc. </p>
-        <form  class="subscribe-form" method="POST" action="">
-          <div class="subscribe-container">
-              <label for="email" class="subscribe-form-label sr-only">Email</label>
-              <input class="subscribe-form-input" name="email" type="email" id="email" aria-describedby="email" placeholder="Email"/>
-              <span class="helper-text"></span>
-          </div>
-          <button class="btn-red" type="submit">Subscribe Today!</button>
+        <form id="subscribe-form" class="subscribe-form" method="POST" action="">
+            <label for="subscribe-email" class="subscribe-form-label sr-only">Email</label>
+            <input class="subscribe-form-input" name="subscribe-email" type="email" id="subscribe-email" aria-describedby="email" placeholder="Email"/>
+            <span class="helper-text"></span>
+          <button class="btn-red">Subscribe Today!</button>
         </form>
       </section>
   `;
@@ -82,6 +80,7 @@ class templateLoader {
 
 
     this.navbar();
+    this.form();
   }
   navbar() {
     setTimeout(() => {
@@ -99,5 +98,11 @@ class templateLoader {
         navContainer.classList.add("nav-add-black");
       });
     }, 0);
+  }
+
+  form() {
+    setTimeout(() => {
+      form.subscribe();
+    }, 0)
   }
 }
