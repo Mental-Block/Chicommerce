@@ -60,8 +60,8 @@ class productLoader {
 
   loadPageMethods() {
     taino.changeLinkColor("products");
-    taino.loadProducts().then(list => {
-      let product = list.filter(item => item.id === site.state.tempId);
+    taino.loadProducts().then((list) => {
+      let product = list.filter((item) => item.id === site.state.tempId);
       product = product[0];
       this.loadProductInformation(product);
       this.loadFirstSlider(product);
@@ -70,8 +70,8 @@ class productLoader {
     });
 
     setTimeout(() => {
-      cart();
-    }, 0)
+      templateLoader.cart();
+    }, 0);
   }
 
   loadProductInformation({ title, description }) {
@@ -84,7 +84,9 @@ class productLoader {
         </form>
     `;
     if (!taino.el(".info")) {
-      taino.elid("product").insertAdjacentHTML("beforeend", '<div class="info"></div>');
+      taino
+        .elid("product")
+        .insertAdjacentHTML("beforeend", '<div class="info"></div>');
       taino.el(".info").innerHTML = print;
     }
   }
@@ -156,13 +158,16 @@ class productLoader {
       if (!site.state.cartOn || site.state.cartOn === false) {
         site.state.cartOn = true;
         site.state.disableCard = [];
-        site.state.cart = []
+        site.state.cart = [];
       }
 
       if (site.state.disableCard.includes(id) !== true) {
-        site.state.disableCard.push(id)
-        site.state.cart.push({ title, id, price, mainImage, quantity: tempQuantity });
-        site.route("/products")
+        site.state.disableCard = [id, ...site.state.disableCard];
+        site.state.cart = [
+          { title, id, price, mainImage, quantity: tempQuantity },
+          ...site.state.cart,
+        ];
+        site.route("/products");
       }
     }
   }

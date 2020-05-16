@@ -1,4 +1,4 @@
-.landing{
+.landing {
   @extend .flex-center-center;
   text-align: center;
   margin-top: -80px;
@@ -7,139 +7,122 @@
   max-height: 1875px;
   padding: 30vh 0;
   background: url(/images/landing.png) no-repeat center center;
-    
-    &-container{
+
+  &-container {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px var(--black75);
+  }
+
+  &-title {
+    margin-left: 0.1rem;
+    font-family: var(--play-fair);
+    font-style: italic;
+
+    &-brown {
+      font-style: normal;
+      color: var(--egg-brown);
+    }
+
+    &-green {
+      font-style: normal;
+      color: var(--green);
+    }
+  }
+
+  &-about {
+    @extend .section-default-padding-p2;
+    background-color: var(--red-bg-color);
+
+    &-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    &-text {
+      line-height: 1.5rem;
+      margin: 1rem 0;
+    }
+  }
+
+  &-product {
+    background: url(/images/wood.png);
+    padding: 2rem 0;
+    box-shadow: inset 0 0 0 2000px var(--black50);
+  }
+}
+
+.landing::after {
+  @extend .overlay;
+  background-color: var(--black75);
+}
+
+.gallery {
+  &-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1, minmax(auto, 450px));
+    grid-template-rows: repeat(5, auto);
+
+    &-sec {
       position: relative;
-      z-index: 1;
-      font-size: 2rem;
-      text-shadow: 1px 1px 1px var(--black75);
     }
 
-    &-title{
-      margin-left: 0.1rem;
+    a:nth-child(3),
+    &-sec:nth-child(3) {
+      grid-row: auto / span 2;
+    }
+
+    &-sec::after {
+      @extend .flex-center-center;
+      @extend .overlay;
+      content: "View Gallery";
+      cursor: pointer;
+      font-weight: var(--med);
       font-family: var(--play-fair);
+      color: var(--white);
       font-style: italic;
-
-      &-brown{
-          font-style: normal;
-          color: var(--egg-brown);
-      }
-
-      &-green{
-          font-style: normal;
-          color: var(--green);
-      }
+      font-size: 1.5rem;
+      background-color: var(--black75);
+      opacity: 0;
+      transition: 250ms ease-in;
     }
 
-    &-about{
-      @extend .section-default-padding-p2;
-      background-color: var(--red-bg-color);
-
-      &-container{
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      &-text{
-        line-height: 1.5rem;
-        margin: 1rem 0;
-      }
+    &-third::after {
+      content: "View Image" !important;
     }
 
-    &-product{
-      background: url(/images/wood.png);
-      padding: 2rem 0;
-      box-shadow:inset 0 0 0 2000px var(--black50);
-    }
-  }
-
-  .landing::after{
-    @extend .overlay;
-    background-color: var(--black75);
-  }
-
-  .gallery{
-    &-container{
-      display: grid;
-      justify-content: center;
-      grid-template-columns: repeat(1, minmax(auto, 450px));
-      grid-template-rows: repeat(5, auto);
-      
-      &-sec{
-        position: relative;
-      }
-      
-      a:nth-child(3),
-      &-sec:nth-child(3){
-        grid-row: auto / span 2;
-      }
-
-      &-sec::after{
-        @extend .flex-center-center;
-        @extend .overlay;
-        content: "View Gallery";
-        cursor: pointer;
-        font-weight: var(--med);
-        font-family: var(--play-fair);
-        color: var(--white);
-        font-style: italic;
-        font-size: 1.5rem;
-        background-color: var(--black75);
-        opacity: 0;
-        transition: 250ms ease-in;
-      }
-
-      &-third::after{
-        content: "View Image" !important;
-      }
-
-      &-sec:hover::after{
+    &-sec:hover::after {
       opacity: 1;
     }
   }
 
-    &_img{
-      border-radius: 0px;
-      vertical-align: top;
-    }
+  &_img {
+    border-radius: 0px;
+    vertical-align: top;
   }
+}
 
-.gallery-main{
+.gallery-main {
   @extend .section-default-padding-p2;
   background-color: var(--darker-black-bg-color);
 }
 
-.contact{
-  &-title{
+.contact {
+  &-title {
     text-align: center;
     font-family: var(--play-fair);
     margin-bottom: 2rem;
     font-size: 1.75rem;
   }
 
-  &-form{
-    &-control{
-      margin: 1rem 0;
-      display: block;
-    }
-
-    &-input[type="text"],
-    &-input[type="email"]
-    {
-      font-family: var(--roboto);
-      padding: 0.5rem;
-      font-weight: var(--med);
-      background-color: #ffffff;
-      border: none;
-      resize: none;
-      width: 100%;
-    }
-
-    &-sent{
+  &-form {
+    &-sent {
       display: inline-block;
       color: var(--green);
       padding-left: 0.8rem;
-      &-svg{
+      &-svg {
         position: relative;
         fill: var(--green);
         bottom: -7.5px;
@@ -147,25 +130,22 @@
       }
     }
 
-    
-
-
-
-    textarea{
+    textarea {
       height: 204px;
     }
   }
 }
 
-.contact-main{
+.contact-main {
   @extend .section-default-padding-p2;
   background-color: var(--grey-bg-color);
 }
 
-.google-map, #map{
+.google-map,
+#map {
   width: 100%;
   height: 350px;
-} 
+}
 
 @media only screen and (min-width: 425px) {
   .contact-form-control-sm {
@@ -180,36 +160,36 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .landing-product{
+  .landing-product {
     padding: 4rem 0;
   }
 
   .gallery-main,
-  .landing-about{
+  .landing-about {
     padding: 4rem 2rem;
   }
 
-  .contact-main{
+  .contact-main {
     padding: 3rem 2rem 4rem 2rem;
   }
 
-  .contact{
+  .contact {
     &-title {
       margin-bottom: 3rem;
     }
 
-    &-container{
+    &-container {
       margin: 0 auto;
       @include flex-center-center;
       flex-direction: row;
       max-width: 1200px;
     }
 
-    &-form{
+    &-form {
       margin-left: 1rem;
       width: 50%;
-      &-control{
-        &-sm{
+      &-control {
+        &-sm {
           margin-top: 0px;
         }
       }
@@ -218,30 +198,29 @@
       height: 200px;
     }
   }
-  
+
   #map {
     width: 50%;
   }
 
-  #map, .google-map {
+  #map,
+  .google-map {
     height: 400px;
   }
 
-  .gallery{
-    &-container{
+  .gallery {
+    &-container {
       grid-template-columns: repeat(2, minmax(auto, 400px));
       grid-template-rows: repeat(3, auto);
     }
   }
-
-  
 }
 
 @media only screen and (min-width: 920px) {
-  .landing{
+  .landing {
     &-product {
       padding: 4rem 8rem;
-      
+
       .glide__arrow--left {
         left: -6rem;
       }
@@ -253,28 +232,25 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .landing{
-    &-about{
-      &-container{
+  .landing {
+    &-about {
+      &-container {
         max-width: 1050px;
         display: flex;
-        &-sec{
+        &-sec {
           margin: auto 1rem;
         }
       }
-      &-text{
+      &-text {
         margin-top: 0;
       }
     }
   }
 
-  .gallery{
-    &-container{
+  .gallery {
+    &-container {
       grid-template-columns: repeat(3, minmax(auto, 400px));
       grid-template-rows: repeat(2, auto);
     }
   }
 }
-  
-
-  

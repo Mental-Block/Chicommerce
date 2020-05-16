@@ -2,20 +2,20 @@
   width: auto;
   height: auto;
   cursor: pointer;
-  
+
   &-line {
-  width: 26px;
-  height: 4px;
-  background-color: var(--white);
-  margin: 0.4rem 0;
+    width: 26px;
+    height: 4px;
+    background-color: var(--white);
+    margin: 0.4rem 0;
   }
 }
 
-.logo-container{
+.logo-container {
   @extend .flex-center-center;
 }
 
-.nav{
+.nav {
   width: 100%;
   @extend .flex-center-end;
   &-container {
@@ -23,7 +23,7 @@
     top: 0px;
     position: sticky;
     z-index: 9999999;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     @extend .flex-center-space;
   }
 
@@ -40,11 +40,11 @@
     padding: 2rem 0 3rem 0;
     @extend .flex-center-center;
 
-    &-off{
+    &-off {
       display: none;
     }
 
-    &-item{
+    &-item {
       transition: 250ms ease-in;
       color: var(--white);
       font-weight: var(--med);
@@ -53,7 +53,7 @@
       line-height: 2rem;
     }
 
-    &-item:hover{
+    &-item:hover {
       color: var(--green);
     }
   }
@@ -63,16 +63,14 @@
   .burger {
     display: none;
   }
-  
-  .nav{
-      &-list {
+
+  .nav {
+    &-list {
       width: 360px;
       position: initial;
-      padding: 0 0.5rem;
+      padding: 0;
       @include flex-center-space;
       flex-direction: row;
     }
   }
 }
-  
-  

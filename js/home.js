@@ -44,10 +44,12 @@ class homeLoader {
 
   loadPageMethods() {
     taino.changeLinkColor("home");
-
-    taino.loadProducts().then((product) => {
-      if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
-      productCards(product);
+    taino.loadProducts().then((products) => {
+      if (site.state.disableCard)
+        products = products.filter(
+          (product) => !site.state.disableCard.includes(product.id)
+        );
+      templateLoader.productCards(products);
     });
 
     taino.loadGalleryImages().then((images) => {
@@ -55,9 +57,9 @@ class homeLoader {
     });
 
     setTimeout(() => {
-      form.contact(taino.elid("landing-contact"))
-      cart();
-    }, 0)
+      templateLoader.form.contact(taino.elid("landing-contact"));
+      templateLoader.cart();
+    }, 0);
   }
 
   printImages(images) {

@@ -99,22 +99,22 @@ class aboutLoader {
   loadPageMethods() {
     taino.changeLinkColor("about");
 
-    this.loadTestimonial().then(testimonialInformation => {
+    this.loadTestimonial().then((testimonialInformation) => {
       this.carousel(testimonialInformation);
     });
 
     setTimeout(() => {
       this.addQuote();
-      cart();
-    }, 0)
+      templateLoader.cart();
+    }, 0);
   }
 
   async loadTestimonial() {
     let testimonialInformation = await fetch(site.testimonalfile)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(async function (json) {
         let test = json.items;
-        test = test.map(items => {
+        test = test.map((items) => {
           const { id, name, description } = items.fields;
           return { id, description, name };
         });
@@ -124,15 +124,15 @@ class aboutLoader {
   }
 
   addQuote() {
-    const form = taino.elid("review-form")
+    const form = taino.elid("review-form");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-    })
+    });
   }
 
   carousel(testimonialInformation) {
     let prints = "";
-    testimonialInformation.forEach(test => {
+    testimonialInformation.forEach((test) => {
       prints += `
           <div class="glide__slide" data-id="${test.id}">
               <div class="testimonial-card">
@@ -157,18 +157,18 @@ class aboutLoader {
       gap: 16,
       breakpoints: {
         1720: {
-          perView: 4
+          perView: 4,
         },
         1400: {
-          perView: 3
+          perView: 3,
         },
         1080: {
-          perView: 2
+          perView: 2,
         },
         760: {
-          perView: 1
-        }
-      }
+          perView: 1,
+        },
+      },
     });
 
     glide.mount();

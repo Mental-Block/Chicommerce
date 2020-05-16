@@ -1,21 +1,44 @@
 .active {
-    color: var(--green) !important;
-  }
+  color: var(--green) !important;
+}
 
 .img {
   display: block;
   border-radius: 4px;
   max-width: 100%;
   height: auto;
-  }
+}
 
-  .sr-only{
-    display: none;
-  }
+.sr-only {
+  display: none;
+}
 
-  .helper-text{
+.form {
+  &-control {
+    margin: 1rem 0;
     display: block;
-    line-height: 2rem;
-    font-size: 0.9rem;
-    color: var(--white);
   }
+
+  &-select {
+    appearance: none;
+    border-radius: 0;
+    @extend .form-input;
+  }
+
+  &-input {
+    font-family: var(--roboto);
+    padding: 0.5rem;
+    font-weight: var(--med);
+    background-color: #ffffff;
+    border: none;
+    resize: none;
+    width: 100%;
+  }
+}
+
+.helper-text {
+  display: block;
+  line-height: 2rem;
+  font-size: 0.9rem;
+  color: var(--white);
+}

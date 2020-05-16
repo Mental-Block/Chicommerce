@@ -145,7 +145,7 @@
 /* latin */
 @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: local("Roboto Bold"), local("Roboto-Bold"), url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
-:root { --very-bold: 900; --bold: 700; --med: 500; --reg: 400; --lighter-black-bg-color: #010103; --darker-black-bg-color: #000000; --black-text: #000000; --black75: #000000b7; --black50: #00000079; --black25: #00000038; --grey-bg-color: #121111; --red-bg-color: #15090a; --white: #eeefea; --white-less: #eeefead3; --grey-text: #343a40; --straw-brown: #948468; --straw-brown25: #948468c4; --egg-brown: #a05506; --green: #5c8000; --green25: #5c8000c7; --red: rgb(153, 13, 13); --play-fair: "Playfair Display"; --roboto: "Roboto"; }
+:root { --very-bold: 900; --bold: 700; --med: 500; --reg: 400; --lighter-black-bg-color: #010103; --darker-black-bg-color: #000000; --black-text: #000000; --black75: #000000b7; --black50: #00000079; --black25: #00000038; --grey-bg-color: #121111; --red-bg-color: #15090a; --white: #eeefea; --white-less: #eeefead3; --grey-text: #343a40; --straw-brown: #948468; --straw-brown25: #948468c4; --egg-brown: #a05506; --green: #5c8000; --green25: #5c8000c7; --red: rgb(153, 13, 13); --blue: rgb(11, 11, 212); --play-fair: "Playfair Display"; --roboto: "Roboto"; }
 
 .flex-center-center, .cart-btn-container, .logo-container, .nav-list, .footer-container-sec, .landing, .gallery-container-sec::after { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-line-pack: center; align-content: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; justify-items: center; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
@@ -167,6 +167,22 @@ body { color: var(--white); font-family: var(--roboto); background-color: var(--
 
 a { text-decoration: none; }
 
+/* CHECKOUT */
+.billing-main { -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; display: -webkit-box; display: -ms-flexbox; display: flex; padding: 2rem; background-color: var(--grey-bg-color); }
+
+.billing-egg { width: 400px; }
+
+.billing-container { position: relative; }
+
+.billing .form-control { max-width: 540px; width: 100%; }
+
+.billing-summary { display: -webkit-box; display: -ms-flexbox; display: flex; position: absolute; top: 5px; right: 2px; }
+
+@media only screen and (min-width: 768px) { .billing-egg { position: relative; width: 756px; height: auto; background-color: var(--straw-brown); border: 4px solid var(--black25); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+  .billing-container { width: 50%; margin: 7rem auto; }
+  .billing-main { padding: 4rem 2rem; } }
+
+/* CHECKOUT */
 .glide { position: relative; width: 100%; z-index: 1; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 .glide * { -webkit-box-sizing: inherit; box-sizing: inherit; }
@@ -212,7 +228,7 @@ a { text-decoration: none; }
 
 @media only screen and (max-width: 550px) { .glide__arrows { display: none; } }
 
-.btn-base, .btn-red, .btn-brown, .btn-green, .btn-checkOut, .btn-clear-cart, .btn-clear-item, .btn-main { display: inline-block; -webkit-transition: 250ms ease-in; transition: 250ms ease-in; cursor: pointer; border-radius: 4px; outline: none; }
+.btn-base, .btn-red, .btn-brown, .btn-green, .btn-checkOut, .btn-white-link, .btn-clear-cart, .btn-clear-item, .btn-main { display: inline-block; -webkit-transition: 250ms ease-in; transition: 250ms ease-in; cursor: pointer; border-radius: 4px; outline: none; }
 
 .btn-normal, .btn-brown, .btn-green, .btn-checkOut, .btn-clear-cart { font-weight: var(--reg); padding: 0.5rem; font-size: 1.15rem; color: var(--white); }
 
@@ -224,17 +240,25 @@ a { text-decoration: none; }
 
 .btn-brown:hover { background-color: var(--straw-brown25); }
 
-.btn-green { background-color: var(--green); border: 4px solid var(--green25); }
+.btn-green, .btn-checkOut { background-color: var(--green); border: 4px solid var(--green25); }
 
-.btn-green:hover { background-color: var(--green25); }
+.btn-green:hover, .btn-checkOut:hover { background-color: var(--green25); }
 
-.btn-checkOut { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; background-color: var(--green); border: 4px solid var(--green25); color: var(--black-text); -webkit-transition: 250ms ease-in; transition: 250ms ease-in; }
+.btn-checkOut { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; color: var(--black-text); }
 
 .btn-checkOut .cart-svg { -webkit-transition: fill 250ms ease-in; transition: fill 250ms ease-in; fill: var(--black-text); }
 
 .btn-checkOut:hover { color: var(--white); background-color: var(--green25); }
 
 .btn-checkOut:hover .cart-svg { fill: var(--white); }
+
+.btn-white-link { color: var(--white-less); font-size: 0.8rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; background: none; border: none; }
+
+.btn-white-link .cart-svg { -webkit-transition: fill 250ms ease-in; transition: fill 250ms ease-in; fill: var(--white-less); }
+
+.btn-white-link:hover { color: var(--green25); }
+
+.btn-white-link:hover .cart-svg { fill: var(--green25); }
 
 .btn-clear-cart { color: var(--white-less); background: none; }
 
@@ -253,6 +277,12 @@ a { text-decoration: none; }
 .img { display: block; border-radius: 4px; max-width: 100%; height: auto; }
 
 .sr-only { display: none; }
+
+.form-control { margin: 1rem 0; display: block; }
+
+.form-select { -webkit-appearance: none; -moz-appearance: none; appearance: none; border-radius: 0; }
+
+.form-input, .form-select { font-family: var(--roboto); padding: 0.5rem; font-weight: var(--med); background-color: #ffffff; border: none; resize: none; width: 100%; }
 
 .helper-text { display: block; line-height: 2rem; font-size: 0.9rem; color: var(--white); }
 
@@ -314,7 +344,7 @@ a { text-decoration: none; }
 
 .nav { width: 100%; }
 
-.nav-container { width: 100%; top: 0px; position: -webkit-sticky; position: sticky; z-index: 9999999; padding: 0.5rem 1rem; }
+.nav-container { width: 100%; top: 0px; position: -webkit-sticky; position: sticky; z-index: 9999999; padding: 0.5rem 2rem; }
 
 .nav-add-black { border-bottom: 3px solid var(--black25); background-color: var(--lighter-black-bg-color); }
 
@@ -327,7 +357,7 @@ a { text-decoration: none; }
 .nav-list-item:hover { color: var(--green); }
 
 @media only screen and (min-width: 768px) { .burger { display: none; }
-  .nav-list { width: 360px; position: initial; padding: 0 0.5rem; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; } }
+  .nav-list { width: 360px; position: initial; padding: 0; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; } }
 
 .subscribe { background-color: var(--red-bg-color); }
 
@@ -415,10 +445,6 @@ run time but we'll cache the home page as it's the default*/
 .gallery-main { background-color: var(--darker-black-bg-color); }
 
 .contact-title { text-align: center; font-family: var(--play-fair); margin-bottom: 2rem; font-size: 1.75rem; }
-
-.contact-form-control { margin: 1rem 0; display: block; }
-
-.contact-form-input[type="text"], .contact-form-input[type="email"] { font-family: var(--roboto); padding: 0.5rem; font-weight: var(--med); background-color: #ffffff; border: none; resize: none; width: 100%; }
 
 .contact-form-sent { display: inline-block; color: var(--green); padding-left: 0.8rem; }
 

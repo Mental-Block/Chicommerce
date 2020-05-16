@@ -1,9 +1,9 @@
 class contactLoader {
-    constructor(site) {
-        this.title = "Contact";
-        this.meta_desc = "Contact us for more information or questions";
+  constructor(site) {
+    this.title = "Contact";
+    this.meta_desc = "Contact us for more information or questions";
 
-        this.styling = `
+    this.styling = `
         .information { color: var(--white); background-color: var(--red-bg-color); padding: 2rem; }
         .information .about-title {font-size: 1.5rem; text-align: center; }
 
@@ -19,7 +19,7 @@ class contactLoader {
         @media only screen and (min-width: 1024px) { .information-container-sec { width: 25%; } }
     `;
 
-        this.starthtml = `
+    this.starthtml = `
         <section id="information" class="information">
             <h2 class="about-title">Have any questions or need to get in touch?</h2>
         <div class="information-container">
@@ -61,14 +61,13 @@ class contactLoader {
     </section>
         `;
 
-        this.loadPageMethods();
-    }
-    loadPageMethods() {
-        taino.changeLinkColor("contact");
-
-        setTimeout(() => {
-            form.contact(taino.elid("contact"));
-            cart();
-        }, 0)
-    }
+    this.loadPageMethods();
+  }
+  loadPageMethods() {
+    taino.changeLinkColor("contact");
+    setTimeout(() => {
+      templateLoader.form.contact(taino.elid("contact"));
+      templateLoader.cart();
+    }, 0);
+  }
 }

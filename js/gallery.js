@@ -39,20 +39,21 @@ class galleryLoader {
   loadPageMethods() {
     taino.changeLinkColor("gallery");
 
-    taino.loadGalleryImages().then(images => {
+    taino.loadGalleryImages().then((images) => {
       this.printGalleryImages(images);
       this.modalPopUp(images);
       this.slideShow(images);
     });
+
     setTimeout(() => {
-      cart();
-    }, 0)
+      templateLoader.cart();
+    }, 0);
   }
 
   printGalleryImages(images) {
     let prints = "";
 
-    images.forEach(scr => {
+    images.forEach((scr) => {
       prints += `
         <div class="gallery-container-sec gallery-container-third">
           <img class="img gallery-img" src="${scr}"/>
@@ -66,7 +67,7 @@ class galleryLoader {
   slideShow(images) {
     let prints = "";
 
-    images.forEach(scr => {
+    images.forEach((scr) => {
       prints += `
           <div class="glide__slide">
               <img class="img img-slideshow" src="${scr}"/>
@@ -83,7 +84,7 @@ class galleryLoader {
       startAt: 0,
       perView: 1,
       animationDuration: 500,
-      gap: 16
+      gap: 16,
     });
     glide.mount();
   }

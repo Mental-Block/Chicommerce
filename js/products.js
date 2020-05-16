@@ -19,18 +19,22 @@ class productsLoader {
     this.starthtml = `
             <section id="products" class="products-main"></section>
         `;
-    this.loadPageMethods();
-  }
 
-  loadPageMethods() {
+    this.loadMethods();
+  }
+  loadMethods() {
     taino.changeLinkColor("products");
-    taino.loadProducts().then(product => {
-      if (site.state.disableCard) product = product.filter(item => !site.state.disableCard.includes(item.id))
-      productCards(product);
+
+    taino.loadProducts().then((products) => {
+      if (site.state.disableCard)
+        products = products.filter(
+          (product) => !site.state.disableCard.includes(product.id)
+        );
+      templateLoader.productCards(products);
     });
 
     setTimeout(() => {
-      cart();
-    }, 0)
+      templateLoader.cart();
+    }, 0);
   }
 }
