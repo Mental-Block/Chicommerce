@@ -147,12 +147,12 @@ class templateLoader {
 
   loadPage() {
     setTimeout(() => {
-      this.header();
+      templateLoader.header();
       templateLoader.form.subscribe();
     }, 0);
   }
 
-  header() {
+  static header() {
     const navContainer = taino.elid("navigation");
     const burger = taino.elid("burger");
     const navList = taino.elid("nav-list");

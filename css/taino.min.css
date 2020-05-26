@@ -408,7 +408,7 @@ a { text-decoration: none; }
 
 /* All other pages css will be loaded with javascript page to have a faster 
 run time but we'll cache the home page as it's the default*/
-.landing { text-align: center; margin-top: -80px; width: 100%; height: 100vh; max-height: 1875px; padding: 30vh 0; background: url(/images/landing.png) no-repeat center center; }
+.landing { text-align: center; margin-top: -80px; width: 100%; height: 100vh; max-height: 1440px; padding: 30vh 0; background: url(/images/landing.png) no-repeat center center; }
 
 .landing-container { position: relative; z-index: 1; font-size: 2rem; text-shadow: 1px 1px 1px var(--black75); }
 
