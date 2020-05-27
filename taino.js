@@ -210,7 +210,7 @@ class taino {
     this.currentpage = this.getcurrent(path);
     this.loadScript(this.jspath + this.currentpage + ".js").then(() => {
       this.loadcontent();
-      //window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
     });
   }
 

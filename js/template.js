@@ -209,6 +209,20 @@ class templateLoader {
         site.state.cartOn = false;
         slide.parentNode.removeChild(slide);
         icon.parentNode.removeChild(icon);
+
+        if (
+          site.currentpage === "/products" ||
+          site.currentpage === "/" ||
+          site.currentpage === "/home"
+        ) {
+          taino.loadProducts().then((products) => {
+            if (site.state.disableCard)
+              products = products.filter(
+                (item) => !site.state.disableCard.includes(item.id)
+              );
+            templateLoader.productCards(products);
+          });
+        }
       };
       const removeItem = (event, id) => {
         id = parseInt(id);
