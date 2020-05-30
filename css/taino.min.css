@@ -260,11 +260,11 @@ a { text-decoration: none; }
 
 .btn-white-link:hover .cart-svg { fill: var(--green25); }
 
-.btn-clear-cart { color: var(--white-less); background: none; }
+.btn-clear-cart { color: var(--white-less); background: none; border: 1px solid; }
 
 .btn-clear-cart:hover { border: 1px solid var(--red); color: var(--red); }
 
-.btn-clear-item { color: var(--white-less); background: none; padding: 0.25rem; font-size: 0.9rem; line-height: 1.25rem; margin: 0.25rem 0; }
+.btn-clear-item { color: var(--white-less); background: none; padding: 0.25rem; font-size: 0.9rem; line-height: 1.25rem; margin: 0.25rem 0; border: 1px solid; }
 
 .btn-clear-item:hover { border: 1px solid var(--red); color: var(--red); }
 
