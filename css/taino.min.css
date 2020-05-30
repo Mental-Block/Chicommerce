@@ -232,7 +232,7 @@ a { text-decoration: none; }
 
 .btn-normal, .btn-brown, .btn-green, .btn-checkOut, .btn-clear-cart { font-weight: var(--reg); padding: 0.5rem; font-size: 1.15rem; color: var(--white); }
 
-.btn-red { background: none; margin-top: 0.8rem; margin-left: 4px; padding: 0.4rem 0.75rem; font-size: 0.8rem; font-weight: var(--med); color: var(--white); display: block; }
+.btn-red { background: none; margin-top: 0.8rem; margin-left: 4px; padding: 0.4rem 0.75rem; font-size: 0.8rem; font-weight: var(--med); color: var(--white); display: block; border: 1px solid; }
 
 .btn-red:hover { background: var(--white); color: var(--red-bg-color); }
 
