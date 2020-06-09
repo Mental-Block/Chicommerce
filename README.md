@@ -1,8 +1,6 @@
 # Chicommerce
 
-An e commerce website for egg farmers
-
-## To Start
+## Run locally
 
 - Before you start app run (npm install) for all the packages
 
