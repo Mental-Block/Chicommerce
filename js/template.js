@@ -73,7 +73,7 @@ class templateLoader {
           </div>
         </div>
         <div class="footer-bottom">
-          <p class="footer-bottom-text">Website made and designed by <a class="footer-bottom-link" target="_blank" rel="noopener noreferrer" href="https://aarontibben.netlify.com">Aaron Tibben</a></p>
+          <p class="footer-bottom-text">Website made and designed by <a class="footer-bottom-link" target="_blank" rel="noopener noreferrer" href="https://aarontibben.com">Aaron Tibben</a></p>
         </div>
     </footer>
         `;
