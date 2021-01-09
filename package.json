@@ -4,9 +4,9 @@
   "description": "Building Single-Page e commerce site",
   "main": "taino.js",
   "scripts": {
-    "start": "npm i && taino.js",
+    "start": "live-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i && taino.js"
+    "build": "npm i"
   },
   "repository": {
     "type": "git",
