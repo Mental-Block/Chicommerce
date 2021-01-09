@@ -2,11 +2,11 @@
   "name": "chicommerce",
   "version": "1.0.0",
   "description": "Building Single-Page e commerce site",
-  "main": "home.js",
+  "main": "taino.js",
   "scripts": {
     "start": "npm i && taino.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i"
+    "build": "npm i && taino.js"
   },
   "repository": {
     "type": "git",
